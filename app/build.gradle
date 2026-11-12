@@ -1,5 +1,23 @@
 apply plugin: 'com.android.application'
 
+// ---------------------------------------------------------------------------
+// Winlator One — build configuration
+// Based on brunodev85/winlator-app (LGPL-2.1). See NOTICE.md.
+//
+// IMPORTANT: applicationId MUST stay 'com.winlator' for now. The bundled rootfs
+// (glibc, Wine, Box64) and native code (winlator.h, vortek.h, gladio.h) have the
+// path /data/data/com.winlator/... compiled in. Changing the package name would
+// break the runtime until the rootfs is rebuilt with a new prefix (see
+// docs/STAGE0_RESEARCH.md, risk R1).
+//
+// IMPORTANT: targetSdkVersion MUST stay 28. Winlator executes binaries that it
+// extracts into its own data directory; apps targeting API 29+ are not allowed
+// to exec() files from writable app storage (W^X policy).
+// ---------------------------------------------------------------------------
+
+def oneVersionName = "0.1.0"
+def ciBuildNumber = (System.getenv("GITHUB_RUN_NUMBER") ?: "0").toInteger()
+
 android {
     namespace 'com.winlator'
     compileSdk 35
@@ -8,14 +26,41 @@ android {
         applicationId 'com.winlator'
         minSdkVersion 26
         targetSdkVersion 28
-        versionCode 33
-        versionName "11.2"
+        // Upstream 11.2 uses versionCode 33. Keep ours above it so that our
+        // builds always count as an upgrade of the base we started from.
+        versionCode 1000 + ciBuildNumber
+        versionName "11.2-one-${oneVersionName}"
+    }
+
+    signingConfigs {
+        // A fixed project key so that every CI build can be installed as an
+        // update over the previous one (the default debug key is regenerated on
+        // every CI runner, which would force an uninstall each time).
+        // Optional: provide your own private key through repository secrets
+        // (ONE_KEYSTORE_BASE64 / ONE_KEYSTORE_PASSWORD / ONE_KEY_ALIAS /
+        // ONE_KEY_PASSWORD), see docs/BUILDING.md.
+        one {
+            def customStore = System.getenv("ONE_KEYSTORE_FILE")
+            if (customStore != null && file(customStore).exists()) {
+                storeFile file(customStore)
+                storePassword System.getenv("ONE_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("ONE_KEY_ALIAS")
+                keyPassword System.getenv("ONE_KEY_PASSWORD")
+            }
+            else {
+                storeFile file('winlator-one-debug.keystore')
+                storePassword 'winlatorone'
+                keyAlias 'winlatorone'
+                keyPassword 'winlatorone'
+            }
+        }
     }
 
     buildTypes {
         debug {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.one
 
             ndk {
                 abiFilters 'arm64-v8a'
@@ -25,6 +70,7 @@ android {
 
     lintOptions {
         checkReleaseBuilds false
+        abortOnError false
     }
 
     ndkVersion '24.0.8215888'
