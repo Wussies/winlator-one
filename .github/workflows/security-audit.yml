@@ -1,0 +1,201 @@
+# NEXORA Stage 0 — security audit of candidate source projects.
+# Runs on an ephemeral GitHub runner. Target repositories are only READ and
+# scanned: none of their build scripts, Gradle files, shell scripts or binaries
+# are executed. Results are committed to the `audit/results` branch.
+name: Security audit (Stage 0)
+
+on:
+  push:
+    branches: [ 'audit/nexora-stage0' ]
+    paths: [ 'audit/**', '.github/workflows/security-audit.yml' ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Scan ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: gamenative
+            repo: utkarshdalal/GameNative
+            ref: f627ee074cd3712097db5641be22358394f0d854
+          - name: winnative
+            repo: WinNative-Emu/WinNative
+            ref: 72d145bccff348f71b1c8baf90a180ccaa474464
+          - name: winlator-app
+            repo: brunodev85/winlator-app
+            ref: 2c33741d50c5daab0521a098be5c969f63b9e887
+          - name: winlator
+            repo: brunodev85/winlator
+            ref: 30aafbdb9eea47b92669201621e03cd2cf04540d
+    steps:
+      - name: Checkout audit scripts
+        uses: actions/checkout@v4
+        with:
+          path: tools
+
+      - name: Checkout target (read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.repo }}
+          ref: ${{ matrix.ref }}
+          path: target
+          fetch-depth: 1
+          submodules: false
+          persist-credentials: false
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android || true
+          df -h /
+
+      - name: Prepare output
+        run: mkdir -p out && echo "${{ matrix.repo }}@${{ matrix.ref }}" > out/TARGET.txt
+
+      - name: Static checks + binary inventory + archive extraction
+        run: python3 tools/audit/static_checks.py target out "$RUNNER_TEMP/extracted"
+
+      - name: OSV.dev (declared Maven deps)
+        continue-on-error: true
+        run: python3 tools/audit/osv_query.py out/deps.txt out/osv-maven.md
+
+      - name: OSV-Scanner (lockfiles in tree)
+        continue-on-error: true
+        run: |
+          docker run --rm -v "$PWD/target:/src:ro" ghcr.io/google/osv-scanner:latest \
+            scan source -r --format markdown /src > out/osv-scanner.md 2> out/osv-scanner.err || true
+          tail -n 5 out/osv-scanner.err || true
+
+      - name: Gitleaks (secrets, working tree)
+        continue-on-error: true
+        run: |
+          docker run --rm -v "$PWD/target:/src:ro" -v "$PWD/out:/out" ghcr.io/gitleaks/gitleaks:latest \
+            dir /src --report-format json --report-path /out/gitleaks.json --redact --exit-code 0 --no-banner
+          python3 - <<'EOF'
+          import json, collections
+          d = json.load(open("out/gitleaks.json"))
+          c = collections.Counter(x["RuleID"] for x in d)
+          lines = [f"## Gitleaks: {len(d)} findings (values redacted)", ""]
+          lines += [f"- {k}: {v}" for k, v in c.most_common()]
+          lines += ["", "| rule | file:line |", "|---|---|"]
+          lines += [f"| {x['RuleID']} | {x['File'].replace('/src/','')}:{x['StartLine']} |" for x in d[:80]]
+          open("out/gitleaks.md", "w").write("\n".join(lines) + "\n")
+          EOF
+
+      - name: Trivy (vuln, secret, misconfig, license)
+        continue-on-error: true
+        run: |
+          docker run --rm -v "$PWD/target:/src:ro" -v "$PWD/out:/out" aquasec/trivy:latest \
+            fs --scanners vuln,secret,misconfig,license --format table --output /out/trivy.txt /src || true
+          head -c 200000 out/trivy.txt > out/trivy-head.txt || true
+
+      - name: Semgrep (registry rulesets)
+        continue-on-error: true
+        run: |
+          pip install --quiet semgrep
+          semgrep scan --metrics off --timeout 60 --max-target-bytes 2000000 \
+            --config p/java --config p/kotlin --config p/c --config p/secrets \
+            --config p/github-actions --config p/bash --config p/insecure-transport \
+            --json --output out/semgrep.json target > /dev/null 2> out/semgrep.err || true
+          python3 - <<'EOF'
+          import json, collections
+          d = json.load(open("out/semgrep.json"))
+          r = d.get("results", [])
+          sev = collections.Counter(x["extra"].get("severity", "?") for x in r)
+          rules = collections.Counter(x["check_id"].split(".")[-1] for x in r)
+          lines = [f"## Semgrep: {len(r)} findings, by severity {dict(sev)}", "", "### Top rules"]
+          lines += [f"- {k}: {v}" for k, v in rules.most_common(30)]
+          lines += ["", "### ERROR-severity findings"]
+          lines += [f"- `{x['path'].replace('target/','')}:{x['start']['line']}` {x['check_id'].split('.')[-1]}" for x in r if x['extra'].get('severity') == 'ERROR'][:80]
+          open("out/semgrep.md", "w").write("\n".join(lines) + "\n")
+          EOF
+          rm -f out/semgrep.json
+
+      - name: ClamAV (source tree + extracted archives)
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq clamav > /dev/null
+          sudo systemctl stop clamav-freshclam 2>/dev/null || true
+          sudo freshclam --quiet || sudo freshclam
+          clamscan --version > out/clamav.txt
+          clamscan -r -i --max-filesize=500M --max-scansize=2000M target "$RUNNER_TEMP/extracted" >> out/clamav.txt 2>&1 || true
+          tail -n 15 out/clamav.txt
+
+      - name: CodeQL init (build-mode none, target build scripts not executed)
+        continue-on-error: true
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java-kotlin, c-cpp
+          build-mode: none
+          source-root: target
+
+      - name: CodeQL analyze
+        continue-on-error: true
+        uses: github/codeql-action/analyze@v3
+        with:
+          upload: never
+          output: codeql-sarif
+
+      - name: Summarize CodeQL
+        continue-on-error: true
+        run: |
+          python3 - <<'EOF'
+          import json, glob, collections
+          lines = ["## CodeQL (build-mode none)", ""]
+          for f in glob.glob("codeql-sarif/*.sarif"):
+              d = json.load(open(f))
+              for run in d["runs"]:
+                  rules = {r["id"]: r for r in run["tool"]["driver"].get("rules", [])}
+                  res = run.get("results", [])
+                  lvl = collections.Counter(r.get("level", "warning") for r in res)
+                  lines.append(f"### {f.split('/')[-1]}: {len(res)} results {dict(lvl)}")
+                  c = collections.Counter(r["ruleId"] for r in res)
+                  for k, v in c.most_common(25):
+                      sev = rules.get(k, {}).get("properties", {}).get("security-severity", "")
+                      lines.append(f"- {k}: {v}" + (f" (security-severity {sev})" if sev else ""))
+                  lines.append("")
+          open("out/codeql.md", "w").write("\n".join(lines) + "\n")
+          EOF
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-${{ matrix.name }}
+          path: out/
+
+  publish:
+    name: Commit results to audit/results
+    needs: scan
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: results
+      - name: Push results branch
+        run: |
+          cd results
+          for d in */; do
+            n=${d%/}
+            {
+              echo "# Audit results: $(cat $n/TARGET.txt)"
+              for f in static.md osv-maven.md gitleaks.md semgrep.md codeql.md; do
+                [ -f "$n/$f" ] && cat "$n/$f" && echo
+              done
+              echo "## ClamAV"; echo '```'; cat "$n/clamav.txt" 2>/dev/null; echo '```'
+            } > "$n/SUMMARY.md"
+          done
+          git init -q -b audit/results
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Stage 0 audit results (run ${{ github.run_id }})"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" audit/results
