@@ -5,9 +5,7 @@
 name: Security audit (Stage 0)
 
 on:
-  push:
-    branches: [ 'audit/nexora-stage0' ]
-    paths: [ 'audit/**', '.github/workflows/security-audit.yml' ]
+  # Manual only: an automatic run re-creates the audit/results branch.
   workflow_dispatch:
 
 permissions:
