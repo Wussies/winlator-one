@@ -1,0 +1,105 @@
+# NEXORA — SECURITY_AUDIT.md (Этап 0)
+
+Дата: 13.11.2026 · Статус: **аудит исходников и бинарных файлов завершён; на устройстве ничего не запускалось.**
+Сырые отчёты сканеров: ветка [`audit/results`](../../tree/audit/results) этого репозитория. Скрипты и workflow аудита: ветка `audit/nexora-stage0` (`audit/`, `.github/workflows/security-audit.yml`, `semgrep-audit.yml`).
+
+## 1. Что проверялось
+
+| Проект | Коммит | Лицензия |
+|---|---|---|
+| utkarshdalal/GameNative | `f627ee074cd3712097db5641be22358394f0d854` (12.11.2026) | GPL-3.0 + проприетарные компоненты |
+| WinNative-Emu/WinNative | `72d145bccff348f71b1c8baf90a180ccaa474464` (25.10.2026) | GPL-3.0 (WFG — MIT) |
+| brunodev85/winlator-app | `2c33741d50c5daab0521a098be5c969f63b9e887` (02.11.2026) | LGPL-2.1 |
+| brunodev85/winlator | `30aafbdb9eea47b92669201621e03cd2cf04540d` (02.11.2026) | LGPL-2.1 |
+
+**Принцип изоляции:** код проектов только читался. Их Gradle-скрипты, shell-скрипты, бинарники и GitHub Actions **не выполнялись** — ни локально, ни на раннере. Сканирование шло на одноразовом раннере GitHub без секретов.
+
+## 2. Инструменты — что реально выполнено
+
+| Инструмент | Статус | Ограничения (честно) |
+|---|---|---|
+| **ClamAV 1.5.4** (базы 12.11.2026, 3,6 млн сигнатур) | ✅ выполнен по исходникам **и распакованным** `.tzst/.txz/.zip` архивам (GameNative: 18 471 файл / 2,7 ГБ; WinNative: 4 093 / 2,25 ГБ; winlator-app: 4 533 / 1,3 ГБ) | Сигнатурный сканер: «0 заражений» ≠ доказательство отсутствия вредоносного кода |
+| **Gitleaks** (latest, docker) | ✅ рабочее дерево | История git не сканировалась |
+| **Trivy** (latest, docker) — vuln/secret/misconfig/license | ✅ | Нашёл только Cargo.lock; у Gradle-проектов нет lockfile → **Maven-зависимости Trivy не покрыл** |
+| **OSV-Scanner** (latest, docker) | ✅ | То же: покрыты только Cargo.lock |
+| **OSV.dev API** — свой скрипт по объявленным Maven-координатам | ✅ GameNative 69, WinNative 51, winlator-app 8 зависимостей | **Только прямые зависимости.** Транзитивные не разрешались, т.к. для этого пришлось бы выполнить их Gradle-скрипты. NDK prefab-пакеты (OpenSSL/curl) в базе OSV не находятся — проверены вручную |
+| **Semgrep 1.185** (p/java, p/kotlin, p/c, p/secrets, p/github-actions, p/insecure-transport, p/default) | ✅ со 2-й попытки | Первый запуск молча упал (код 7) — **не засчитан**. Во 2-м часть файлов не распарсилась (новый синтаксис Kotlin, макросы C) → покрытие частичное |
+| **CodeQL** (java-kotlin, c-cpp, `build-mode: none`) | ✅ выполнен | Без сборки: **Kotlin-код не анализируется**, C/C++ — частично. Полный CodeQL требует сборки → будет в CI самой NEXORA |
+| Собственные статические проверки (`audit/static_checks.py`) | ✅ | Regex-поиск: exec, dlopen, LD_PRELOAD, WebView, TLS-обходы, телеметрия, подмена package name, эмуляторы Steam API; разрешения манифеста; ревизия CI; инвентаризация бинарников с SHA-256 |
+| Ручной анализ кода | ✅ авторизация, сеть, загрузка компонентов, обновления, хранение токенов | Выборочный (по рискам), не построчный аудит ~1 000 000 строк |
+| Проверка контрольных сумм бинарников по данным авторов | ⚠️ **невозможна**: ни один из проектов не публикует SHA-256 для своих `.so/.tzst/.dll` | SHA-256 всех файлов зафиксированы в `binaries.json` для будущей сверки |
+
+## 3. Результаты сканеров (сводка)
+
+| | GameNative | WinNative | winlator-app |
+|---|---|---|---|
+| ClamAV | 0 заражённых | 0 | 0 |
+| Gitleaks | 4 (публичные client ID GOG/EA, ложное срабатывание в virglrenderer, тестовые данные) | 36 (35 — хэши/ID в каталоге ретро-ядер, 1 тестовый JWT-заглушка) | 1 (ложное) |
+| Known CVE (Rust, Cargo.lock) | 13 уязв. в 7 пакетах: `quinn-proto` (CVSS 7.5), `ruzstd` (7.5), `rustls`, `rsa`, `tokio`… | 14 уязв. в 7 пакетах: `quinn-proto` (7.5, HIGH), `ruzstd` (7.5), `rustls`… | — |
+| Known CVE (Maven, прямые) | `commons-lang3 3.17.0`, `org.json 20231013` | 0 найдено; **вручную:** OpenSSL **1.1.1q** (ветка EOL с 09.2023), curl **7.85.0** | `commons-compress 1.20` (5 advisories) |
+| Semgrep ERROR | 6 (2 shell-injection в CI, секреты-константы, ProcessBuilder) | 10 (1 shell-injection в CI, ProcessBuilder ×2, `shell=True` в справочных скриптах, tar traversal в build-скрипте) | 1 (ProcessBuilder) |
+| CodeQL | Java: zipslip ×3; C/C++: 29 предупреждений (TOCTOU ×2) | Java: unsafe content URI ×2, zipslip, path-injection; C/C++: TOCTOU ×7, overflowing snprintf | Java: path-injection ×10, zipslip ×3 |
+
+Ни один сканер не нашёл известного вредоносного ПО, скрытых загрузчиков DEX, обходов TLS (trust-all) или обфусцированного кода в исходниках.
+
+## 4. Найденные проблемы и уровень риска
+
+### GameNative
+
+| ID | Риск | Проблема |
+|---|---|---|
+| GN-1 | 🔴 **Критический** | **Закрытые бинарники в ключевом пути выполнения** (по собственному `THIRD_PARTY_NOTICES`): `libredirect.so` — через `LD_PRELOAD` внедряется во **все** процессы Wine/Proton; `libsteambootstrap.so` — получает **refresh-токен Steam** пользователя; `libgamenative_drm.so`. Исходники намеренно не публикуются → проверить невозможно. Авторы сами пишут, что без `libredirect.so` на Android 15+ большинство игр не запустится |
+| GN-2 | 🟠 Высокий | Телеметрия PostHog: `PersonProfiles.ALWAYS`, профиль устройства и GPU; часть событий отправляется **вне** проверки согласия (`app_foregrounded/backgrounded`). Активно, если при сборке задан ключ |
+| GN-3 | 🟠 Высокий | Удалённая доставка: «AI support» присылает с `api.gamenative.app` компоненты и **патчи файлов игр**; хэш приходит с того же сервера (целостность, но не подлинность) |
+| GN-4 | 🟠 Высокий | 168 загружаемых компонентов (драйверы, Proton, Box64, DXVK, VKD3D) в `manifest.json` — **без контрольных сумм**, только TLS; самообновление APK с собственного сервера |
+| GN-5 | 🟠 Высокий (политика ТЗ) | Обход DRM: подмена `steam_api.dll` эмулятором **gbe_fork (Goldberg)**, запуск **Steamless** (снятие SteamStub DRM) |
+| GN-6 | 🟡 Средний | Форма ввода **пароля Steam** (кроме QR) — противоречит ТЗ |
+| GN-7 | 🟡 Средний | Проприетарные драйверы Qualcomm (`SD8Elite_800.35.zip`, `800.51`, `Adreno_819.2_adpkg.zip`…) в assets — права на распространение не подтверждены |
+| GN-8 | 🟡 Средний | JavaSteam — изменяемый **SNAPSHOT** из личного форка; `spongycastle 1.58` (2017) |
+| GN-9 | 🟡 Средний | Разрешения: `READ_PHONE_STATE`, `READ_LOGS`, `RECORD_AUDIO`, `MANAGE_EXTERNAL_STORAGE`, `REQUEST_INSTALL_PACKAGES`; биллинг RevenueCat, Play Integrity, аккаунты `api.gamenative.app` |
+| GN-10 | 🟢 Низкий | CI: shell-injection в `adhoc-signed-build.yml`, 27 неприбитых к SHA actions |
+| ✅ | — | Токены Steam шифруются AES-ключом Android Keystore; есть вход по QR |
+
+### WinNative
+
+| ID | Риск | Проблема |
+|---|---|---|
+| WN-1 | 🟠 Высокий | **Подмена чужих package name**: сборки `com.tencent.ig` (PUBG), `com.antutu.ABenchMark`, `com.ludashi.benchmark` — чтобы OEM-прошивка включала режимы максимальных частот. Это выдача себя за другие приложения и принудительный разгон — запрещено ТЗ |
+| WN-2 | 🟠 Высокий (политика ТЗ) | Обход DRM: **ColdClient (gbe_fork)** и **Steamless** |
+| WN-3 | 🟠 Высокий | В APK зашиты **проприетарные бинарники Valve** (`valve-steam-x86_64.tzst`, `steam-androidarm64.tzst`, `original_steam_api64.dll`) — права на распространение не подтверждены |
+| WN-4 | 🟠 Высокий | Каталоги компонентов/профилей берутся из `main`-ветки **личного** GitHub-аккаунта (`nicholasx417/WinNative-Components`) — изменяемо, без подписи, MD5 |
+| WN-5 | 🟡 Средний | OpenSSL 1.1.1q (EOL) и curl 7.85.0 в native-коде Steam; Rust: `quinn-proto` (HIGH), `ruzstd`, `rustls` |
+| WN-6 | 🟡 Средний | Разрешения `WRITE_SECURE_SETTINGS`, `SYSTEM_ALERT_WINDOW`, `MANAGE_EXTERNAL_STORAGE`, `REQUEST_INSTALL_PACKAGES`; репозитории jitpack + 2 snapshot |
+| WN-7 | 🟡 Средний | Форма ввода пароля Steam (кроме QR) |
+| WN-8 | 🟢 Низкий | CI: shell-injection в `release.yml:340`; 22 неприбитых actions; огромный объём (PS2/Dolphin/ретро), не нужный NEXORA |
+| ✅ | — | Телеметрии не найдено; кроме стандартных библиотек (PulseAudio, libffi, wayland — 8 `.so`) **весь native-код собирается из исходников в репозитории**, включая Steam-клиент (`wn-steam-*`, Rust); обновлятор проверяет подпись нового APK; native-код собирается с 16 KB выравниванием |
+
+### Winlator (brunodev85)
+🟢 Низкий риск: нет телеметрии и магазинов; `commons-compress 1.20` (5 advisories); предупреждения path-injection/zipslip; предсобранные `.so` и rootfs от автора без опубликованных хэшей.
+
+### Текущий winlator-one (наш)
+🟡 В репозитории лежит **публичный** ключ подписи `app/winlator-one-debug.keystore`. Для NEXORA — только приватный ключ в GitHub Secrets.
+
+## 5. Бинарные файлы
+
+| | Проверено | Не проверено (происхождение не подтверждается хэшами автора) |
+|---|---|---|
+| Все проекты | ClamAV по всем файлам и содержимому архивов; SHA-256 записаны (`binaries.json`) | Ни один проект не публикует контрольные суммы → **все предсобранные бинарники считаются непроверенными по происхождению** |
+| GameNative | 63 ELF, 16 PE, 85 zstd, 10 zip на верхнем уровне; внутри архивов 776 PE, 146 ELF, 4 DEX (DEX — внутри Google bundletool, безопасно) | 3 закрытых `.so` (GN-1) — **неверифицируемы в принципе** |
+| WinNative | 36 ELF, 20 PE, 36 zstd, 11 zip; внутри архивов 620 PE, 65 ELF | Бинарники Valve, gbe_fork DLL, Steamless.exe, rootfs/контейнеры |
+
+## 6. Решение
+
+| Проект | Решение |
+|---|---|
+| **GameNative** | ⛔ **Не использовать как основу.** Критический риск GN-1: закрытый код внедряется в каждый процесс игры и получает токен Steam. Без него, по словам самих авторов, проект на Android 15+ не работает. Перенос допускается только отдельных **открытых** Kotlin-модулей (интеграция Amazon Games) после построчной проверки |
+| **WinNative** | ✅ **Использовать как основу — условно**, только после удаления/изоляции: WN-1 (подменные сборки), WN-2 (gbe_fork, Steamless), WN-3 (бинарники Valve), WN-4 (удалённые каталоги), WN-7 (форма пароля), ретро/PS2/Dolphin; обновление OpenSSL/curl и Rust-зависимостей |
+| **Winlator** | ✅ Справочная база; компонент Vortek (LGPL-2.1) можно переносить |
+
+**Основная разработка не начинается**, пока карантинный список WinNative не удалён в ветке Этапа 1 и не прогнан повторный аудит (те же сканеры + CodeQL со сборкой в CI NEXORA).
+
+### Неустранённые на сегодня риски
+1. Транзитивные Maven-зависимости не проверены (будет: Gradle lockfile + OSV-Scanner в CI NEXORA).
+2. Kotlin-код не проверен CodeQL (будет: CodeQL со сборкой в CI).
+3. Происхождение предсобранных бинарников (rootfs, Wine, Box64, драйверы) не подтверждено — план: пересборка из исходников в CI или фиксация SHA-256 и источника каждого файла в `THIRD_PARTY_BINARIES.md`.
+4. Без gbe_fork/Steamless игры с Steamworks DRM запускаются **только через официальный клиент Steam** — работоспособность этого пути на телефоне не проверена.
