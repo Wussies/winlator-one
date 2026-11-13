@@ -1,0 +1,12 @@
+# Components the upstream setup wizard downloads (WinNative SetupWizardActivity, 72d145b).
+# <file name> <upstream url>
+Dxvk-2.7.1-gplasync.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-Dxvk/Dxvk-2.7.1-gplasync.wcp
+Dxvk-2.7.1-arm64ec-gplasync.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-Arm64ec-Dxvk/Dxvk-2.7.1-arm64ec-gplasync.wcp
+Vkd3d-proton-3.0.1.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-VKD3D/Vkd3d-proton-3.0.1.wcp
+Vkd3d-arm64ec-3.0.1.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-arm64ec-VKD3D/Vkd3d-arm64ec-3.0.1.wcp
+Dxvk-2.4.1-pre-reg.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-Dxvk/Dxvk-2.4.1-pre-reg.wcp
+FEX-2605.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-FEX/FEX-2605.wcp
+Box64-0.4.2.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-Box64/Box64-0.4.2.wcp
+Wowbox64-0.4.2.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-wowbox64/Wowbox64-0.4.2.wcp
+wine-9.20-x86_64.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Wine/wine-9.20-x86_64.wcp
+Proton-10-arm64ec-coffincolors.wcp https://github.com/nicholasx417/WinNative-Components/releases/download/Proton/Proton-10-arm64ec-coffincolors.wcp

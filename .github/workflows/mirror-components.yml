@@ -1,0 +1,85 @@
+# Downloads the runtime components the upstream setup wizard pulls from a
+# personal GitHub account, records SHA-256, scans them (ClamAV), inventories
+# their contents and mirrors them into release "nexora-components-2".
+# Nothing is executed.
+name: Mirror runtime components (Stage 1)
+
+on:
+  push:
+    branches: [ 'audit/nexora-stage0' ]
+    paths: [ 'audit/runtime-components.txt', '.github/workflows/mirror-components.yml' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download
+        run: |
+          mkdir -p dist report
+          grep -v '^\s*#' audit/runtime-components.txt | grep -v '^\s*$' | while read -r name url; do
+            curl -fL --retry 3 --proto '=https' -o "dist/$name" "$url"
+          done
+          (cd dist && sha256sum *.wcp > SHA256SUMS && stat -c '%n %s' *.wcp > SIZES)
+          cat dist/SHA256SUMS
+      - name: Inspect format and contents (read-only)
+        run: |
+          pip install --quiet zstandard
+          python3 - <<'PY'
+          import os, zipfile, tarfile, zstandard, io, hashlib
+          out = ["# Runtime component inventory", ""]
+          for f in sorted(os.listdir("dist")):
+              if not f.endswith(".wcp"): continue
+              p = f"dist/{f}"; head = open(p, "rb").read(4)
+              names = []
+              try:
+                  if head.startswith(b"PK"):
+                      names = zipfile.ZipFile(p).namelist(); kind = "zip"
+                  elif head.startswith(b"\x28\xb5\x2f\xfd"):
+                      with open(p, "rb") as fh:
+                          t = tarfile.open(fileobj=zstandard.ZstdDecompressor().stream_reader(fh), mode="r|")
+                          names = [m.name for m in t]
+                      kind = "tar.zst"
+                  else:
+                      t = tarfile.open(p); names = t.getnames(); kind = "tar"
+              except Exception as e:
+                  kind = f"unreadable: {e}"
+              exes = [n for n in names if n.lower().endswith((".exe", ".msi", ".bat", ".cmd", ".ps1"))]
+              out += [f"## {f}", f"- format: {kind}, entries: {len(names)}", f"- executables (.exe/.msi/.bat/.cmd/.ps1): {len(exes)}"]
+              out += [f"  - {n}" for n in exes[:40]]
+              prof = [n for n in names if n.endswith("profile.json")]
+              out += [f"- profile: {prof[:2]}", ""]
+          open("report/inventory.md", "w").write("\n".join(out) + "\n")
+          PY
+          mkdir -p x
+          for f in dist/*.wcp; do d="x/$(basename $f)"; mkdir -p "$d"; (tar --zstd -xf "$f" -C "$d" 2>/dev/null || tar -xf "$f" -C "$d" 2>/dev/null || unzip -q "$f" -d "$d" 2>/dev/null) || true; done
+          du -sh x/* | tee report/sizes.txt
+      - name: ClamAV
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq clamav > /dev/null
+          sudo systemctl stop clamav-freshclam 2>/dev/null || true
+          sudo freshclam --quiet || sudo freshclam
+          clamscan --version > report/clamav.txt
+          clamscan -r -i --max-filesize=500M --max-scansize=4000M dist x >> report/clamav.txt 2>&1 || true
+          tail -n 12 report/clamav.txt
+      - name: Publish release nexora-components-2 (only if missing)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp report/* dist/
+          if gh release view nexora-components-2 -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then echo "exists"; exit 0; fi
+          gh release create nexora-components-2 -R "$GITHUB_REPOSITORY" --prerelease --target "$GITHUB_SHA" \
+            --title "NEXORA runtime components 2" \
+            --notes "Mirror of the components the upstream WinNative setup wizard downloads from github.com/nicholasx417/WinNative-Components (fetched $(date -u +%F)). SHA-256 pinned in NEXORA; ClamAV report and inventory attached. Not executed during CI." \
+            dist/*
+      - name: Store report on audit/results
+        run: |
+          git clone -q --depth 1 -b audit/results "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" results
+          mkdir -p results/runtime-components && cp report/* dist/SHA256SUMS dist/SIZES results/runtime-components/
+          cd results && git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "Runtime component mirror audit (run ${{ github.run_id }})" && git push -q origin audit/results
