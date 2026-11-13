@@ -1,0 +1,52 @@
+{
+ "dynamic native: System.load / dlopen": [
+  "app/src/main/java/com/winlator/xserver/Drawable.java:28: System.loadLibrary(\"winlator\");",
+  "app/src/main/java/com/winlator/xserver/extensions/GLXExtension.java:41: System.loadLibrary(\"gladiorenderer\");",
+  "app/src/main/java/com/winlator/core/GPUHelper.java:34: System.loadLibrary(\"winlator\");",
+  "app/src/main/java/com/winlator/core/WineRegistryEditor.java:30: System.loadLibrary(\"winlator\");",
+  "app/src/main/java/com/winlator/winhandler/MIDIHandler.java:57: System.loadLibrary(\"midihandler\");",
+  "app/src/main/java/com/winlator/renderer/GPUImage.java:19: System.loadLibrary(\"winlator\");",
+  "app/src/main/java/com/winlator/xconnector/XOutputStream.java:16: System.loadLibrary(\"winlator\");",
+  "app/src/main/java/com/winlator/xconnector/XInputStream.java:13: System.loadLibrary(\"winlator\");",
+  "app/src/main/java/com/winlator/xconnector/XConnectorEpoll.java:23: System.loadLibrary(\"winlator\");",
+  "app/src/main/java/com/winlator/sysvshm/SysVSharedMemory.java:14: System.loadLibrary(\"winlator\");",
+  "app/src/main/java/com/winlator/xenvironment/components/VirGLRendererComponent.java:25: System.loadLibrary(\"virglrenderer\");",
+  "app/src/main/java/com/winlator/xenvironment/components/VortekRendererComponent.java:36: System.loadLibrary(\"vortekrenderer\");",
+  "app/src/main/cpp/vortekrenderer/src/main.c:36: else libvulkan = dlopen(LIBVULKAN_PATH, RTLD_NOW | RTLD_LOCAL);",
+  "app/src/main/cpp/libadrenotools/include/adrenotools/driver.h:26: * Otherwise you will get permission denied because dlopen() can't be done on *.so libraries that any random user or application can manipulate (which would be a security risk).",
+  "app/src/main/cpp/libadrenotools/tools/qtimapper-shim/shim.cpp:79: dlopen(\"vendor.qti.hardware.display.mapper@4.0.so\", RTLD_LAZY | RTLD_LOCAL);",
+  "app/src/main/cpp/libadrenotools/tools/qtimapper-shim/shim.cpp:81: void* mapper40Hnd = dlopen(\"android.hardware.graphics.mapper@4.0.so\", RTLD_LAZY | RTLD_LOCAL);",
+  "app/src/main/cpp/libadrenotools/tools/qtimapper-shim/shim.cpp:97: dlopen(\"vendor.qti.hardware.display.mapper@3.0.so\", RTLD_LAZY | RTLD_LOCAL);",
+  "app/src/main/cpp/libadrenotools/tools/qtimapper-shim/shim.cpp:99: void* mapper30Hnd = dlopen(\"android.hardware.graphics.mapper@3.0.so\", RTLD_LAZY | RTLD_LOCAL);",
+  "app/src/main/cpp/libadrenotools/tools/qtimapper-shim/shim.cpp:114: dlopen(\"vendor.qti.hardware.display.mapper@2.0.so\", RTLD_LAZY | RTLD_LOCAL);",
+  "app/src/main/cpp/libadrenotools/tools/qtimapper-shim/shim.cpp:116: void* mapper20Hnd = dlopen(\"android.hardware.graphics.mapper@2.0.so\", RTLD_LAZY | RTLD_LOCAL);",
+  "app/src/main/cpp/libadrenotools/tools/qtimapper-shim/shim.cpp:131: dlopen(\"vendor.qti.hardware.display.mapperextensions@1.1.so\", RTLD_LAZY | RTLD_LOCAL);",
+  "app/src/main/cpp/libadrenotools/tools/qtimapper-shim/ext/gr_adreno_info.cpp:59: libadreno_utils_ = ::dlopen(\"libadreno_utils.so\", RTLD_NOW);",
+  "app/src/main/cpp/libadrenotools/tools/acc-shim/vk_acc_shim.cpp:96: void *hnd = dlopen(\"notreal-glnext.so\", RTLD_NOW);",
+  "app/src/main/cpp/winlator/src/gpu_helper.c:26: void* libvulkan = dlopen(LIBVULKAN_PATH, RTLD_NOW | RTLD_LOCAL);",
+  "app/src/main/cpp/winlator/src/gpu_helper.c:78: void* libvulkan = dlopen(LIBVULKAN_PATH, RTLD_NOW | RTLD_LOCAL);"
+ ],
+ "exec: Runtime.exec / ProcessBuilder": [
+  "app/src/main/java/com/winlator/core/ProcessHelper.java:73: ProcessBuilder processBuilder = (new ProcessBuilder(splitCommand(command))).directory(workingDir);"
+ ],
+ "chmod / setExecutable": [
+  "app/src/main/java/com/winlator/core/ZipUtils.java:95: FileUtils.chmod(file, 0771);",
+  "app/src/main/java/com/winlator/core/ZipUtils.java:122: FileUtils.chmod(file, 0771);",
+  "app/src/main/java/com/winlator/core/FileUtils.java:261: public static void chmod(File file, int mode) {",
+  "app/src/main/java/com/winlator/core/FileUtils.java:263: Os.chmod(file.getAbsolutePath(), mode);",
+  "app/src/main/java/com/winlator/core/WineUtils.java:36: FileUtils.chmod(driveX, 0771);",
+  "app/src/main/java/com/winlator/core/WineUtils.java:49: FileUtils.chmod(linkTarget, 0771);",
+  "app/src/main/java/com/winlator/core/TarCompressorUtils.java:176: FileUtils.chmod(file, 0771);",
+  "app/src/main/java/com/winlator/container/ContainerManager.java:133: if (!FileUtils.copy(srcContainer.getRootDir(), dstDir, (file) -> FileUtils.chmod(file, 0771))) {",
+  "app/src/main/java/com/winlator/xenvironment/XEnvironment.java:50: FileUtils.chmod(tmpDir, 0771);",
+  "app/src/main/java/com/winlator/xenvironment/components/PulseAudioComponent.java:66: FileUtils.chmod(workingDir, 0771);"
+ ],
+ "analytics/telemetry SDK": [
+  "app/src/main/java/com/winlator/inputcontrols/GamepadVibration.java:72: private short parseAmplitude(int motorSpeed) {",
+  "app/src/main/java/com/winlator/inputcontrols/GamepadVibration.java:88: short speedX = parseAmplitude(leftMotorSpeed);",
+  "app/src/main/java/com/winlator/inputcontrols/GamepadVibration.java:89: short speedY = parseAmplitude(rightMotorSpeed);"
+ ],
+ "LD_PRELOAD / library injection": [
+  "app/src/main/cpp/libadrenotools/lib/linkernsbypass/android_linker_ns.h:63: * @note IMPORTANT: If `filename` is compiled with the '-z global' linker flag and RTLD_GLOBAL is supplied in `flags` the library will be added to the namespace's LD_PRELOAD list"
+ ]
+}

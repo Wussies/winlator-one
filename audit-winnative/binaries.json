@@ -1,0 +1,667 @@
+[
+ {
+  "path": "tools/StubDRM64.dll",
+  "type": "PE",
+  "size": 101864,
+  "sha256": "b3c69278e405c84cf4f1b264bae028707cddb6009da9df2f4979b1b3d2d30852"
+ },
+ {
+  "path": "app/libs/MidiSynth/MidiSynth.jar",
+  "type": "ZIP",
+  "size": 345659,
+  "sha256": "d00423610e59335e1445656c3398bc5bb0fd55b022e11b7381c405ea22d27d30",
+  "extracted": true
+ },
+ {
+  "path": "app/src/debug/jniLibs/arm64-v8a/libVkLayer_khronos_validation.so",
+  "type": "ELF",
+  "size": 24616200,
+  "sha256": "a11e2d33f8473fdc50cde07d50c330c23de88223a2c5f566ccabe62f0ffe2308"
+ },
+ {
+  "path": "app/src/main/assets/container_pattern_common.tzst",
+  "type": "ZSTD",
+  "size": 41560300,
+  "sha256": "6f5a7b011f2ab79d8be60c4783de97f635289fd901fb624b26c2a3725fc8f479",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/extras.tzst",
+  "type": "ZSTD",
+  "size": 2388310,
+  "sha256": "46217601a80e16caa74a5cdb5b83597c6f57bce99ff9de6bcd260fb330da1fbe",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/proton-9.0-arm64ec_container_pattern.tzst",
+  "type": "ZSTD",
+  "size": 10309411,
+  "sha256": "9826ac61405f641ca8326335208c3e1ed5cec107f4b0354f813825ec398b841b",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/pulseaudio.tzst",
+  "type": "ZSTD",
+  "size": 78340,
+  "sha256": "357bb53fbcf91ab2adcd2e6a4b7fc3f2cb95f1555610681b08dbf6d412ac4bd8",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/experimental-drm.tzst",
+  "type": "ZSTD",
+  "size": 15525139,
+  "sha256": "cc95e069d6221d9fa7f92c8311574131d6fda277b65c587a771cc10cad898736",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/container_pattern.tzst",
+  "type": "ZSTD",
+  "size": 8254079,
+  "sha256": "4043fa27127c663461d45e953f9023bdcacf31b21f611d954d5b4e872ebb32e6",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/layers.tzst",
+  "type": "ZSTD",
+  "size": 4447187,
+  "sha256": "9beac20c3e2c7f2c224f2c18cc6dc253b0f70450006fc986970992c7a8814ffa",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/ffmpeg8.tzst",
+  "type": "ZSTD",
+  "size": 8782034,
+  "sha256": "e19acae70b1e18901521691a376f4d444839b6712f600e5a6e55a4220408eb64",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/proton-9.0-x86_64_container_pattern.tzst",
+  "type": "ZSTD",
+  "size": 8698674,
+  "sha256": "fa25987a3ba4f1b951bd1161f9a65a9450f0b72b87583fd3d9971d92c63a9608",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/linuxfs/usr/lib/libvulkan_freedreno.so",
+  "type": "ELF",
+  "size": 15679624,
+  "sha256": "007d008631275f66ddbcad6372026e69edefd793b4f548fc0e6277066a3a4111"
+ },
+ {
+  "path": "app/src/main/assets/linuxfs/usr/local/bin/gamescope",
+  "type": "ELF",
+  "size": 4206376,
+  "sha256": "9618408a1a8fad741309a7c7e89652b13a2bdb21323e97af8ff4bdd893a340dd"
+ },
+ {
+  "path": "app/src/main/assets/linuxfs/usr/local/lib/libwnfastpath.so",
+  "type": "ELF",
+  "size": 67936,
+  "sha256": "93ed53a16c3444911462f2942b7f562317b8e6aa6c45d92cf90126e277081213"
+ },
+ {
+  "path": "app/src/main/assets/linuxfs/usr/local/lib/libwninput.so",
+  "type": "ELF",
+  "size": 68280,
+  "sha256": "3b006eb2dc5ac061d2eda6dfcc8af0954b5961866d7333c983008fe434bce539"
+ },
+ {
+  "path": "app/src/main/assets/linuxfs/usr/local/lib/libwnsession.so",
+  "type": "ELF",
+  "size": 133848,
+  "sha256": "b06968435a65e14ef0f1766d073ad7cb18670360a3b8a2077f89215ffce88ec7"
+ },
+ {
+  "path": "app/src/main/assets/linuxfs/usr/local/lib/libwnaudit.so",
+  "type": "ELF",
+  "size": 66672,
+  "sha256": "6c6abe89baf5d7309babee0c3372a4b00c2b689e2a63de38c5e9a660626509b5"
+ },
+ {
+  "path": "app/src/main/assets/dxwrapper/d8vk-1.0.tzst",
+  "type": "ZSTD",
+  "size": 1851455,
+  "sha256": "da30a104f83f619214a3bc67c971434837e1a11ca30703d0f79041a93f2be246",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/dxwrapper/cnc-ddraw-6.6/ddraw.tzst",
+  "type": "ZSTD",
+  "size": 166133,
+  "sha256": "eabb2d59ce7060767996d0c9597ee8772059126a3af01698e59a5e7905e49867",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/xkbcomp",
+  "type": "ELF",
+  "size": 205456,
+  "sha256": "bb001ddc4851935aad62d6ed15541c3d230d35e10f76548454640630843b7098"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/libxkbfile.so.1.0.2",
+  "type": "ELF",
+  "size": 155632,
+  "sha256": "8d8462b7082bd7eaf1ac03e0ea195e81c2bcd52d16db7a7bcd1a258c7322ad58"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/libunwind.so.8.0.1",
+  "type": "ELF",
+  "size": 55640,
+  "sha256": "a6f1a0cb272655f942ae2f92334bd6b16469d0653ba533a91a7b2fe9005efe24"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/libwinnative-steamwebhelper-preload.so",
+  "type": "ELF",
+  "size": 72128,
+  "sha256": "adc7371649d2bc27cf4872795400e3d049670fd8a089f6efba7023037b86e8d8"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/libapparmor.so.1.6.3",
+  "type": "ELF",
+  "size": 76376,
+  "sha256": "bedf95282b1fca7a40593d555b25bf73c335183c23f78a4286ca18e2ba496210"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/winnative-driverquery-noop",
+  "type": "ELF",
+  "size": 928072,
+  "sha256": "bbedfe5e93b424025ad0b92351d172790a05354b0f878da8f962c7730154b7a5"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/Xvfb",
+  "type": "ELF",
+  "size": 2057184,
+  "sha256": "1aaaefd376c73197460a7b1c62e0380657fa55bc7a7183fa821b5b27e6aaa1be"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/libwinnative-setxid-noop.so",
+  "type": "ELF",
+  "size": 67408,
+  "sha256": "7ad09849847abdfc25b249cd1795eff118d3b1f6d0a8509dea08d08ac5cecc72"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/libfontenc.so.1.0.0",
+  "type": "ELF",
+  "size": 30176,
+  "sha256": "70d9bc8d141ed7ce1ffbcb5f8e396a7173b8709ab5dbe96b4c584a06ad5448c1"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/libpixman-1.so.0.40.0",
+  "type": "ELF",
+  "size": 403408,
+  "sha256": "e1dfb301bdc6b510d71a581f7cec1547def276fb3b50670147e89c1e42d3c0bc"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/libXfont2.so.2.0.0",
+  "type": "ELF",
+  "size": 173648,
+  "sha256": "9d75b5331f13968169ebc73e2b1c8ee8753142eb3524340e64afd8e4eedfbd06"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/winnative-steamwebhelper-wrapper",
+  "type": "ELF",
+  "size": 928072,
+  "sha256": "654b9a4f2d8f3035d181f5f1f3787bf0af567e0698d9552ddb5bb4b0215019ed"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/dbus/dbus-daemon",
+  "type": "ELF",
+  "size": 240720,
+  "sha256": "2f50d490d9ce4e707b2253669e6f353da785a1b944bd9f10cbb98a6314dd8796"
+ },
+ {
+  "path": "app/src/main/assets/xvfb-arm64/dbus/dbus-uuidgen",
+  "type": "ELF",
+  "size": 10312,
+  "sha256": "e35b5c45f75d58c0fe6d77981810858ca4988cc34d3726be893d5496b6ece45a"
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/directmusic.tzst",
+  "type": "ZSTD",
+  "size": 337109,
+  "sha256": "eb906732d14766641edfae0b2d722c36f4632de7fa321a5844037115b513b77e",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/xaudio.tzst",
+  "type": "ZSTD",
+  "size": 2681573,
+  "sha256": "128ab3f25a74ff371d381cc0e028e8e2101f72e434ff46b85f629921ee0e2683",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/directshow.tzst",
+  "type": "ZSTD",
+  "size": 2209278,
+  "sha256": "aa682b7ee6e5903e4571bfe5a8dc9b05d0a9f05cd860cfdc810f2ddd3745e9b4",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/direct3d.tzst",
+  "type": "ZSTD",
+  "size": 31207067,
+  "sha256": "149d55436e050bfa3fe8caf650cb97ddb2bc9fa99cd96869bd2bc4977b708fb5",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/wmdecoder.tzst",
+  "type": "ZSTD",
+  "size": 1717472,
+  "sha256": "a2ca365cc43265680ee71a7b13a4626ed02368feec135571fb841c7b4abf62d1",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/ddraw.tzst",
+  "type": "ZSTD",
+  "size": 166133,
+  "sha256": "eabb2d59ce7060767996d0c9597ee8772059126a3af01698e59a5e7905e49867",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/vcrun2010.tzst",
+  "type": "ZSTD",
+  "size": 1038731,
+  "sha256": "9def7b4b5c31c839d155f05e372e0e9ce4968b57f815c1abf93b7735e7d0ceb7",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/directplay.tzst",
+  "type": "ZSTD",
+  "size": 429728,
+  "sha256": "70eb81449230af66286f5b4d5922dca13057600c35d4cdfe91930e966c2386d9",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wincomponents/directsound.tzst",
+  "type": "ZSTD",
+  "size": 434853,
+  "sha256": "72f0e880eef1387a55602ac02b07ef26778d23c2f70d931bd2d13e92f8dc99d4",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/winnative/refactorsize.exe",
+  "type": "PE",
+  "size": 17408,
+  "sha256": "1cf3cc833915a600e396ec91680971b9614327111ea5ee97a4e41f0cb23aa051"
+ },
+ {
+  "path": "app/src/main/assets/winnative/InputControl64.exe",
+  "type": "PE",
+  "size": 280952,
+  "sha256": "0c9221eab06356297dc3f22cc9e55e496158e713408e539271c9ea922a8ceff2"
+ },
+ {
+  "path": "app/src/main/assets/winnative/Graphics-Test-64bit.exe",
+  "type": "PE",
+  "size": 2361407,
+  "sha256": "3aecfa2c3adadae86fef0d92950dc5bfb7cb83030036a0115ac35811884d67a3"
+ },
+ {
+  "path": "app/src/main/assets/winnative/InputControl32.exe",
+  "type": "PE",
+  "size": 289656,
+  "sha256": "e84e202232d05681f67b6b19e8f659b51e8488c41e2cbda5954c908f73ac6c1f"
+ },
+ {
+  "path": "app/src/main/assets/winnative/Graphics-Test-32bit.exe",
+  "type": "PE",
+  "size": 2333245,
+  "sha256": "e721234b7bcf1d60713b99267b00e0893eb3d7f05a3d1de9a3a47776c46a3c89"
+ },
+ {
+  "path": "app/src/main/assets/graphics_driver/virgl-23.1.9.tzst",
+  "type": "ZSTD",
+  "size": 6395804,
+  "sha256": "c42f22641079f678d501ca920a5b2e549add2b34d8d18e1e10f19ddb838eeed0",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/graphics_driver/wrapper.tzst",
+  "type": "ZSTD",
+  "size": 3815368,
+  "sha256": "718b6b22647d1246da5cd524c4b1c41933b44a71cbe41e5ab19f43ad22850ce9",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/graphics_driver/extra_libs.tzst",
+  "type": "ZSTD",
+  "size": 18863005,
+  "sha256": "91cfbfb3366baafdbcc7e344fd0fd67d7e1b92cc02b10156512a7d6fdd7bd9eb",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/graphics_driver/wrapper-gamenative.tzst",
+  "type": "ZSTD",
+  "size": 759382,
+  "sha256": "e38683ac1d382dc875d97fcae763f56d411655e56c1d1f43c743f57a58b605bc",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/graphics_driver/zink-22.2.5.tzst",
+  "type": "ZSTD",
+  "size": 7129431,
+  "sha256": "8a1de929cda4699d36a27448cd4d8065103475d1238aac03a71e76b72dcb433c",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/graphics_driver/wrapper-leegao.tzst",
+  "type": "ZSTD",
+  "size": 3057352,
+  "sha256": "3eabf6fc53f3b738eb80e7f80e3b28f761a8cebaa62b7e6c1f05e0e1228a969d",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/graphics_driver/zink_dlls.tzst",
+  "type": "ZSTD",
+  "size": 8170693,
+  "sha256": "efe27f0de6a55bfb6c2e9eab79b6baaae64b35af81ce49c097de6b720f258cbb",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/steampipe/steamclient.dll",
+  "type": "PE",
+  "size": 92072,
+  "sha256": "b8f5b8ef1869c772301a9d936baaf6630c621b74a7bc4a3f1deea9ccc275c572"
+ },
+ {
+  "path": "app/src/main/assets/steampipe/steam_api64.dll",
+  "type": "PE",
+  "size": 18140072,
+  "sha256": "b06a34b865d532a9586a1ee39817a1206e385ac4b2e141429a2732cb8db13067"
+ },
+ {
+  "path": "app/src/main/assets/steampipe/steam_api.dll",
+  "type": "PE",
+  "size": 16236968,
+  "sha256": "6439aa6b3574de7c2f5279547f8ca244211c83bd131e85430b38ea8a7bd08edb"
+ },
+ {
+  "path": "app/src/main/assets/steampipe/steamclient64.dll",
+  "type": "PE",
+  "size": 111016,
+  "sha256": "5b9f6df91806ea115f539dc85f855cb1e2184d110aab5e7d789ea37f4d313a0d"
+ },
+ {
+  "path": "app/src/main/assets/ddrawrapper/cnc-ddraw.tzst",
+  "type": "ZSTD",
+  "size": 173333,
+  "sha256": "d2aea34321200dd07a979a83c329da207d67af8e72fa182c307a39257d5e1d5b",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/ddrawrapper/ddraw-4.21.tzst",
+  "type": "ZSTD",
+  "size": 738841,
+  "sha256": "06d073dc65ab89d1b6bb3023d5d2a7b9f7b7d7dc883ecaf4eb342093431c376a",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/ddrawrapper/nglide.tzst",
+  "type": "ZSTD",
+  "size": 1205148,
+  "sha256": "3f5eb40810376cdb5bb2d18ea374bbd08177053b4aa9f923b9b440ebefe0d554",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/ddrawrapper/ddraw-11.8.tzst",
+  "type": "ZSTD",
+  "size": 1578983,
+  "sha256": "92e6a19232dd39085584f73114a34a5ee0a49a90a440342b75493c310f53a43e",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/ddrawrapper/dd7to9.tzst",
+  "type": "ZSTD",
+  "size": 3007672,
+  "sha256": "a35490ac6acb63c72a76cbc851b186e97d533ea722ea868e8288f10cb6d45d86",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/directaudio/directaudio-wine11-arm64ec-sdk28.zip",
+  "type": "ZIP",
+  "size": 23061,
+  "sha256": "2a353160857da8af4bc5e65b3a58d8aaf3b3e0c05d28a94636885e45a24be314",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/directaudio/directaudio-wine10-arm64ec-sdk28.zip",
+  "type": "ZIP",
+  "size": 36309,
+  "sha256": "61ad4c8eb772fe90b2c7afcb8bf2e03307e36f42a1d3ee0bf1d59af00adfa48d",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/directaudio/directaudio-wine11-arm64ec-sdk35.zip",
+  "type": "ZIP",
+  "size": 23065,
+  "sha256": "2c1c26e08162c433ba72542c5a60a1a0bafdb596be671b332c2cc65170ebbbcd",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/directaudio/directaudio-wine11-systhread-arm64ec-sdk35.zip",
+  "type": "ZIP",
+  "size": 23263,
+  "sha256": "6c7550ab656b65a6bc5902387e6f55ff809080a9c3228d7458609f045f78fb64",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/directaudio/directaudio-wine10-arm64ec-sdk35.zip",
+  "type": "ZIP",
+  "size": 36311,
+  "sha256": "5690824f562cbeb398d22a6542bcda14636bbc28d92c61ed6e6576375ebf40e3",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/directaudio/directaudio-wine11-systhread-arm64ec-sdk28.zip",
+  "type": "ZIP",
+  "size": 23261,
+  "sha256": "30382cadbabc7e5d926db08166140f16e7e74eddbd2eb6d2baab0a8fae56099b",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/directaudio/linux/winedirectaudio.so",
+  "type": "ELF",
+  "size": 68040,
+  "sha256": "089b83f2d099c4e7d20c1e556676174ff2a5a883a58e60093f09b07516059fd5"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/lsteamclient-x86_64.tzst",
+  "type": "ZSTD",
+  "size": 4087944,
+  "sha256": "e998f6c950606d639c4beb06802e81f70cada8fbf6f198271058a3bd4b7b9b39",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/lsteamclient-arm64ec.tzst",
+  "type": "ZSTD",
+  "size": 5834660,
+  "sha256": "b34d9ffdc8d8845105c247f9e8229004fc63e235d2ed784ebe041891e70756fb",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/steam-androidarm64.tzst",
+  "type": "ZSTD",
+  "size": 12805003,
+  "sha256": "3bc6825d9ea95f9353ebc3fcd3380c3015fe772ba25b4ef630a9f5aa583736f6",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/bionic/valve-steam-x86_64.tzst",
+  "type": "ZSTD",
+  "size": 15979710,
+  "sha256": "b827a4cedc5f27ac5aaf2ee742adf867bb327c2c7b1da4af34924ef12167ac01",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/bionic/steamservice.exe",
+  "type": "PE",
+  "size": 2952856,
+  "sha256": "eeed0d75b1e5f4bd1370d1a046a59830809f942ea923c3c6661636bfbddb0c19"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/bionic/wn-iface-probe32.exe",
+  "type": "PE",
+  "size": 54286,
+  "sha256": "0f1dbcdc5ce81299641ed6d9c999bcdb637c046a25dd8dff47ef6b3aab791989"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/bionic/steam32.exe",
+  "type": "PE",
+  "size": 1324558,
+  "sha256": "8b1aba7f8e5dd82e08c6e4b2e8e17ef3d765de31875d9e1452c23885ddc0918b"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/bionic/wn-iface-probe.exe",
+  "type": "PE",
+  "size": 52224,
+  "sha256": "ef2ae490fcab61f3e2e5cec283084edb94f9a9b5285a963633b6cfa36075eec6"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/bionic/steam.exe",
+  "type": "PE",
+  "size": 1168896,
+  "sha256": "c454075e89dfdff07bda23288bd7b3f4bd5ab97ae9f09ebe43922682a831881a"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/bionic/steamservice.dll",
+  "type": "PE",
+  "size": 3717272,
+  "sha256": "7b6730263a0ee9fef1e1bd9a0a05a7f952f843af0412151e5f2cda835819fcca"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/bionic/wn-steam-helper.exe",
+  "type": "PE",
+  "size": 176128,
+  "sha256": "e90759850d86657ab12252e1af0bae0345b8f13e0aa6fbe0bfef9678867d595d"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/steampipe/steam_api64.dll",
+  "type": "PE",
+  "size": 493494,
+  "sha256": "d4e3a74fbec39bde7108d2d2db5bb046a1baa35865b99e659453f8c9fd607f10"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/steampipe/steam_api.dll",
+  "type": "PE",
+  "size": 5888936,
+  "sha256": "4cc9dfcab8b4df0db507fa91d0acec6e58693fd4edd78dc80d39bda8072d08ed"
+ },
+ {
+  "path": "app/src/main/assets/wnsteam/steampipe/original_steam_api64.dll",
+  "type": "PE",
+  "size": 7305128,
+  "sha256": "513430ac8b869b0eed258d9e5feba5176a35446b3b61a63d01ab1d87683cdd1b"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libpulseaudio.so",
+  "type": "ELF",
+  "size": 67040,
+  "sha256": "c70622e9dadb31aba51b36ca6313a944e0febd8beabea5ace4b9f42ce951d350"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libwayland-server.so",
+  "type": "ELF",
+  "size": 79632,
+  "sha256": "2daff7500b6acee55291567d786653ba75f5aecf5a5e648fce4c10fe6bc7a8ea"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libpulsecore-13.0.so",
+  "type": "ELF",
+  "size": 643224,
+  "sha256": "1bbfb039b159da9b6c0090e3309e6f686b1468e8a4d77b8a61612fa3af3e576a"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libltdl.so",
+  "type": "ELF",
+  "size": 38192,
+  "sha256": "bc12038c8cedb7ba405b6621b579ad6b643e018b12f5f1d01e6cb78169e49907"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libpulse.so",
+  "type": "ELF",
+  "size": 331072,
+  "sha256": "061a0479989dd406924c837d7a09a59f086aec122d8b636b518da1658f225052"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libsndfile.so",
+  "type": "ELF",
+  "size": 476976,
+  "sha256": "d6b61f5dddedce3cd29c5db9b58b5dd16a4b3faebfcbe925bc9432e2993831ee"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libpulsecommon-13.0.so",
+  "type": "ELF",
+  "size": 473432,
+  "sha256": "febdaa6fb344775f0c980c100e33046b27c9701d24346a45890b640380147a26"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libffi.so",
+  "type": "ELF",
+  "size": 85912,
+  "sha256": "8855ba6dc12e9abf40729481a7a99aa391ac7b2e77bad4fbe0bb51cd66216c0e"
+ },
+ {
+  "path": "app/src/main/cpp/waylandcomp/prebuilt/lib/libwayland-server.so",
+  "type": "ELF",
+  "size": 79632,
+  "sha256": "2daff7500b6acee55291567d786653ba75f5aecf5a5e648fce4c10fe6bc7a8ea"
+ },
+ {
+  "path": "vendor/maven/org/libsdl/android/SDL3/3.4.16-winnative.2/SDL3-3.4.16-winnative.2.aar",
+  "type": "ZIP",
+  "size": 4820195,
+  "sha256": "4a2c8bf5f3913991bdc110de3f4ff2e943f41403c8ea26e7e88bfa9b0f928b59",
+  "extracted": true
+ },
+ {
+  "path": "vendor/maven/org/libsdl/android/SDL3/3.4.16-winnative.1/SDL3-3.4.16-winnative.1.aar",
+  "type": "ZIP",
+  "size": 4819511,
+  "sha256": "b7cb9d22b91e188834747a7189316c31e543f824516600c1a046c21f31cfdf7e",
+  "extracted": true
+ },
+ {
+  "path": "vendor/maven/org/libsdl/android/SDL3/3.4.16/SDL3-3.4.16.aar",
+  "type": "ZIP",
+  "size": 16881733,
+  "sha256": "03710fc7b49cc070551446841a843840fabf2aaaaa3043cd5739292a55e4e61c",
+  "extracted": true
+ },
+ {
+  "path": "armsx2/src/main/jniLibs/arm64-v8a/libEGL_angle.so",
+  "type": "ELF",
+  "size": 311960,
+  "sha256": "0638fd7d03631a65659e2af51c997ac966f082d3e189ba7137382952daa334c2"
+ },
+ {
+  "path": "armsx2/src/main/jniLibs/arm64-v8a/liblibrashader_capi.so",
+  "type": "ELF",
+  "size": 10032976,
+  "sha256": "6575c8594932dc88087956414c5d45c529870bcb4d07624d0ecac25447775eb4"
+ },
+ {
+  "path": "armsx2/src/main/jniLibs/arm64-v8a/libGLESv2_angle.so",
+  "type": "ELF",
+  "size": 6288024,
+  "sha256": "def0973783d540aa1a888e9c3bc34849afcfb04d7487a823184a52c390e361c5"
+ },
+ {
+  "path": "armsx2/src/main/jniLibs/arm64-v8a/libSPIRV-Tools-shared.so",
+  "type": "ELF",
+  "size": 2602856,
+  "sha256": "e0137464504ed91c9c972910334970548e90248a85d4764f87590c13b10ee391"
+ },
+ {
+  "path": "armsx2/src/main/jniLibs/arm64-v8a/libshaderc_shared.so",
+  "type": "ELF",
+  "size": 6626216,
+  "sha256": "e9c9d2799e9588d9100bd67ec36a00ad6ece303025a55ec47f649ccc00a53450"
+ },
+ {
+  "path": "gradle/wrapper/gradle-wrapper.jar",
+  "type": "ZIP",
+  "size": 59203,
+  "sha256": "e996d452d2645e70c01c11143ca2d3742734a28da2bf61f25c82bdc288c9e637",
+  "extracted": true
+ }
+]

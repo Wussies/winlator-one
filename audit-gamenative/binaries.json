@@ -1,0 +1,1146 @@
+[
+ {
+  "path": "tools/bundletool-all-1.17.2.jar",
+  "type": "ZIP",
+  "size": 32519278,
+  "sha256": "2d4ad908faea64047c1cc9cb747e6aa667c6ab192e09607bd16b67246a8cd6ae",
+  "extracted": true
+ },
+ {
+  "path": "app/src/modern/assets/libredirect-bionic-wx-minimal.so",
+  "type": "ELF",
+  "size": 42144,
+  "sha256": "3ae7afe43bd4e10d3ab4d07b66530cc4c472381f6c4a20c879d4d330ef52d85d"
+ },
+ {
+  "path": "app/src/modern/assets/libredirect-bionic-wx.so",
+  "type": "ELF",
+  "size": 71080,
+  "sha256": "8f50d8af131dbf1eb008b8a9e48aca110f7cbc02e787959771317dd5c5c56e26"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libvirglrenderer.so",
+  "type": "ELF",
+  "size": 443800,
+  "sha256": "aac67504457eaeaefaf2577be31bc8a63338a31be0c0dfe4e0d77645e4b4d673"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libwinlator_11.so",
+  "type": "ELF",
+  "size": 67752,
+  "sha256": "ea1e6eac0aa4144e4780de210cc4618efafe541ebb4a3f8acc7a7fa97080bf9e"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libextras.so",
+  "type": "ELF",
+  "size": 354448,
+  "sha256": "dfb788b7af8a6611a7dc3bb11a539803092425b0b7617ea9a65a6f95cff7fcc8"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libmain_hook.so",
+  "type": "ELF",
+  "size": 4216,
+  "sha256": "d6fb6b5cfc1c7b2e6bca4a82a9152545b91ff84f6b3575c75f83fcafe19100fb"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libhook_impl.so",
+  "type": "ELF",
+  "size": 277928,
+  "sha256": "5a4569644df5d151df192f53c96ff9c1eb499dffe555e2c20c00395cc806e081"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libpatchelf.so",
+  "type": "ELF",
+  "size": 1147320,
+  "sha256": "d230db3cac238250d514198ce318bdfa64f5ecb60aec84b79d0538c0f2dc5fa2"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libvortekrenderer.so",
+  "type": "ELF",
+  "size": 2228984,
+  "sha256": "d9d18ed58c410f9481c3661de188c68238be389b0cceaf0572163ada7fe8adad"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libwinlator.so",
+  "type": "ELF",
+  "size": 26264,
+  "sha256": "80c2cb220dc4e0f17d5bd21e7d92bd1ab81b13c6244ac205e821dcc6e47514f9"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libvulkan_renderer.so",
+  "type": "ELF",
+  "size": 1524120,
+  "sha256": "0ff7663cf76c98fc7745dd6e3c47ccc3df6a0c75b334cfcfb9f199cda95e132c"
+ },
+ {
+  "path": "app/src/modern/jniLibs/arm64-v8a/libxconnectorpatch.so",
+  "type": "ELF",
+  "size": 10784,
+  "sha256": "5a49939227efde3192a8453bb8357427779a2247f24a568defd698963b9a6a76"
+ },
+ {
+  "path": "app/src/legacyXr/assets/opencomposite_x86.dll",
+  "type": "PE",
+  "size": 2747904,
+  "sha256": "86a77b58c817ed0b14f4e7963c1364d47f86b53cc75fed0ba6d04e87d1040059"
+ },
+ {
+  "path": "app/src/legacyXr/assets/gamenative_openxr_runtime64.dll",
+  "type": "PE",
+  "size": 78848,
+  "sha256": "19b3e2eecab643cb5e4a3a53cc580a8e2156655a2e217d1a7ddebb38981dbb8a"
+ },
+ {
+  "path": "app/src/legacyXr/assets/gamenative_openxr_runtime32.dll",
+  "type": "PE",
+  "size": 79360,
+  "sha256": "180015c93134498935b11b5a06d24b6306032c6d5331c48d2eb34e1db2cd4bfa"
+ },
+ {
+  "path": "app/src/legacyXr/assets/opencomposite_x64.dll",
+  "type": "PE",
+  "size": 2564608,
+  "sha256": "0d395d267734bba3efa514edb836e728ac8c94ae2228c5ea31fca51a2d2819d8"
+ },
+ {
+  "path": "app/src/legacyXr/assets/gamenative_xr_unixbridge.dll",
+  "type": "PE",
+  "size": 1048576,
+  "sha256": "669db5bc31a3437693925b07a897594b4f2b40a57c2ea169a5f9c4fbf0d78abe"
+ },
+ {
+  "path": "app/src/legacyXr/assets/gamenative_xr_unixbridge32.dll",
+  "type": "PE",
+  "size": 41706,
+  "sha256": "31bfc6815873e513991563bd781dc3a3272b8c13b78a66e9f9b8d7eb7509875e"
+ },
+ {
+  "path": "app/src/legacyXr/assets/gamenative_xr_unixbridge.so",
+  "type": "ELF",
+  "size": 340104,
+  "sha256": "fb14fdcfe1ab1ccf3b6482186697d8d81f3560265459b6688b7f493dfe4cfea4"
+ },
+ {
+  "path": "app/src/legacyXr/jniLibs/arm64-v8a/libxrimmersive.so",
+  "type": "ELF",
+  "size": 1831936,
+  "sha256": "a59d1fa231a3190e93e84855e237888abba924e77af80ec859be2bec406e4ac7"
+ },
+ {
+  "path": "app/src/modernXr/assets/opencomposite_x86.dll",
+  "type": "PE",
+  "size": 2747904,
+  "sha256": "86a77b58c817ed0b14f4e7963c1364d47f86b53cc75fed0ba6d04e87d1040059"
+ },
+ {
+  "path": "app/src/modernXr/assets/gamenative_openxr_runtime64.dll",
+  "type": "PE",
+  "size": 78848,
+  "sha256": "19b3e2eecab643cb5e4a3a53cc580a8e2156655a2e217d1a7ddebb38981dbb8a"
+ },
+ {
+  "path": "app/src/modernXr/assets/gamenative_openxr_runtime32.dll",
+  "type": "PE",
+  "size": 79360,
+  "sha256": "180015c93134498935b11b5a06d24b6306032c6d5331c48d2eb34e1db2cd4bfa"
+ },
+ {
+  "path": "app/src/modernXr/assets/opencomposite_x64.dll",
+  "type": "PE",
+  "size": 2564608,
+  "sha256": "0d395d267734bba3efa514edb836e728ac8c94ae2228c5ea31fca51a2d2819d8"
+ },
+ {
+  "path": "app/src/modernXr/assets/gamenative_xr_unixbridge.dll",
+  "type": "PE",
+  "size": 1048576,
+  "sha256": "669db5bc31a3437693925b07a897594b4f2b40a57c2ea169a5f9c4fbf0d78abe"
+ },
+ {
+  "path": "app/src/modernXr/assets/gamenative_xr_unixbridge32.dll",
+  "type": "PE",
+  "size": 41706,
+  "sha256": "31bfc6815873e513991563bd781dc3a3272b8c13b78a66e9f9b8d7eb7509875e"
+ },
+ {
+  "path": "app/src/modernXr/assets/gamenative_xr_unixbridge.so",
+  "type": "ELF",
+  "size": 340104,
+  "sha256": "fb14fdcfe1ab1ccf3b6482186697d8d81f3560265459b6688b7f493dfe4cfea4"
+ },
+ {
+  "path": "app/src/modernXr/jniLibs/arm64-v8a/libxrimmersive.so",
+  "type": "ELF",
+  "size": 1831936,
+  "sha256": "a59d1fa231a3190e93e84855e237888abba924e77af80ec859be2bec406e4ac7"
+ },
+ {
+  "path": "app/src/main/assets/x86_64_input_dlls.tzst",
+  "type": "ZSTD",
+  "size": 415584,
+  "sha256": "b877ae67f6df33dd5a5a0ef2d7078be515cf8078a5dc49db51fc9395834c11ee",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/pulseaudio-gamenative-20260919.tzst",
+  "type": "ZSTD",
+  "size": 68926,
+  "sha256": "e64090772d8def3347f307a1b308713664ce027532137e6afb774931f2160259",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/redirect.tzst",
+  "type": "ZSTD",
+  "size": 33179,
+  "sha256": "99e578bff9884ad59ef8eec89b0df78d55103979eff8333ab4041bc3f11390ab",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/arm64ec_input_dlls.tzst",
+  "type": "ZSTD",
+  "size": 558954,
+  "sha256": "a60e381bbac0c1565449fb03b948e8ec4075f39b9fe1bab859a9f150b43ebce9",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.3.4.tzst",
+  "type": "ZSTD",
+  "size": 4008431,
+  "sha256": "a60addf559d2284da1007c55894dd793aaf498316450ef9a568fbbe1b6f5e13c",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.3.7-bionic.tzst",
+  "type": "ZSTD",
+  "size": 2971992,
+  "sha256": "ce95d5b352eaceaa31143bebf453c838ff49be4c7ee7ecb51c15af593af7862f",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.3.6-bionic.tzst",
+  "type": "ZSTD",
+  "size": 3123675,
+  "sha256": "3ba2cb63473b3a659f362d21bc4fa4eb74b77bc7df15c2b13e3866dd10fbc513",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.3.6.tzst",
+  "type": "ZSTD",
+  "size": 4591893,
+  "sha256": "6daf984e45f399abeb7b37a3b0252bd0882760c6923613b39ea20ccead7a4528",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.3.8.tzst",
+  "type": "ZSTD",
+  "size": 4234635,
+  "sha256": "aeee651f759abcffd79d8ddbcfd1df15bfd5e4a2f45cbd94d71e64acede6d763",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.4.2-bionic.tzst",
+  "type": "ZSTD",
+  "size": 3519079,
+  "sha256": "fcd10730ff899bad829a5e91780d8aae6350a7e152069ff2c90e93922ecad192",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.4.0-bionic.tzst",
+  "type": "ZSTD",
+  "size": 4179699,
+  "sha256": "6c8fbe61b322f06d8a7c4cac538cd24bf8930202af94e61d40e0982c53aa3d51",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.3.8-bionic.tzst",
+  "type": "ZSTD",
+  "size": 3646823,
+  "sha256": "e254bff766fa61c5a8c5c4550a3a03529e64f689e02429292ce70d6b26c4460a",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/box86_64/box64-0.3.2-bionic.tzst",
+  "type": "ZSTD",
+  "size": 2961195,
+  "sha256": "a93c1cd4a050a1688ef248f2a642b2ec9265b58ce85e9cc53417c6fd68ab7998",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/fexcore/fexcore-2603.tzst",
+  "type": "ZSTD",
+  "size": 1532911,
+  "sha256": "852dadddcfa6e76ed1feaeb2ab0aec4bb2b867c087a2606929ff6a430e0febce",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/fexcore/fexcore-2605.tzst",
+  "type": "ZSTD",
+  "size": 1544380,
+  "sha256": "2de0a0502190bfc96e62f1f9a252dec9cd81b59c3fbda763dfc5bea812afd437",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/fexcore/fexcore-2511.tzst",
+  "type": "ZSTD",
+  "size": 3444135,
+  "sha256": "9ee55e7d6570146db1d987bbabab47adb875297fe6c7780fdd87a6e9ed710965",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/fexcore/fexcore-2512.tzst",
+  "type": "ZSTD",
+  "size": 3468615,
+  "sha256": "171466bb8eef6b494222b12037ac36e9a5c1778965113e3628aa76c9a57787d6",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/fexcore/fexcore-2507.tzst",
+  "type": "ZSTD",
+  "size": 1467636,
+  "sha256": "fd3319aede179f5e71545805426a22b39a4c2db208752a1afc8f892589aa3443",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/fexcore/fexcore-2508.tzst",
+  "type": "ZSTD",
+  "size": 3143123,
+  "sha256": "49bbd4effd80a7150182970974fc93e56772b3d8ee1467050fc9767a1c25015f",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/fexcore/fexcore-2604.tzst",
+  "type": "ZSTD",
+  "size": 1549507,
+  "sha256": "19dd444fe3f58ad1738a8202711624970ab0706b60c7a92cb3f856219e065446",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/fexcore/fexcore-2601.tzst",
+  "type": "ZSTD",
+  "size": 3483343,
+  "sha256": "418a30180d7272e18e4205143c05c4a968c79f7860f30ce637fca51f1c6db7d8",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/gog/GalaxyCommunication.exe",
+  "type": "PE",
+  "size": 15360,
+  "sha256": "bf80ad644973ee6c2f950711075f2c0f2ad868d55f0183015f12f16806e4d463"
+ },
+ {
+  "path": "app/src/main/assets/dxwrapper/dxvk-2.4.1-gplasync.tzst",
+  "type": "ZSTD",
+  "size": 9131308,
+  "sha256": "7684a19e733310f9e3613a5ecd3443edb97c2d8c8a0e5db0d682887153e5058d",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/dxwrapper/vkd3d-2.14.1.tzst",
+  "type": "ZSTD",
+  "size": 2352920,
+  "sha256": "b17d32de8178201f15a49ac5cd137778f8477c7fe75343963e2158b86a8159ba",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/dxwrapper/dxvk-1.11.1-sarek.tzst",
+  "type": "ZSTD",
+  "size": 3645431,
+  "sha256": "ce37f7d779e1f9ec51bc01997a7bedc31ad5e5c16f96c26840f9389f034fe3f2",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/dxwrapper/dxvk-2.6.1-gplasync.tzst",
+  "type": "ZSTD",
+  "size": 4740600,
+  "sha256": "b397293f0018a063fde5ec67030d44461e67606c645e9b81bfd845c5177fe158",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/dxwrapper/dxvk-async-1.10.3.tzst",
+  "type": "ZSTD",
+  "size": 10075341,
+  "sha256": "6c60805d22386b623eb87255e9f7b97759e3df69924f707cd8516f27945bab6e",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/dxwrapper/cnc-ddraw-6.6/ddraw.tzst",
+  "type": "ZSTD",
+  "size": 166133,
+  "sha256": "eabb2d59ce7060767996d0c9597ee8772059126a3af01698e59a5e7905e49867",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wowbox64/wowbox64-0.3.7.tzst",
+  "type": "ZSTD",
+  "size": 1031045,
+  "sha256": "543c0f9f5dca14d962364465024fd43ffec54f364d7d9ab7154bc275d800063f",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wowbox64/wowbox64-0.4.2.tzst",
+  "type": "ZSTD",
+  "size": 1030182,
+  "sha256": "90e6fefea2c9189c2556d6e0661ec4325dfc41fa82413a44a2485ae223e38efd",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wowbox64/wowbox64-0.4.0.tzst",
+  "type": "ZSTD",
+  "size": 1194148,
+  "sha256": "f005cf0cf33cd1a4868aaa788a5680fcab26977fd822cbc0321473073bdb8c08",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wowbox64/wowbox64-0.3.6.tzst",
+  "type": "ZSTD",
+  "size": 1031045,
+  "sha256": "543c0f9f5dca14d962364465024fd43ffec54f364d7d9ab7154bc275d800063f",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/wowbox64/wowbox64-0.3.4.tzst",
+  "type": "ZSTD",
+  "size": 1056369,
+  "sha256": "04a2db96f28fdc1b32715776a58220b5e2e128fb9cc12774bf3e217c52835f16",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/assets/steampipe/steam_api64.dll",
+  "type": "PE",
+  "size": 7305128,
+  "sha256": "513430ac8b869b0eed258d9e5feba5176a35446b3b61a63d01ab1d87683cdd1b"
+ },
+ {
+  "path": "app/src/main/assets/steampipe/steam_api.dll",
+  "type": "PE",
+  "size": 5888936,
+  "sha256": "4cc9dfcab8b4df0db507fa91d0acec6e58693fd4edd78dc80d39bda8072d08ed"
+ },
+ {
+  "path": "app/src/main/windows/openxr_runtime/builtin/gamenative_xr_unixbridge32.dll",
+  "type": "PE",
+  "size": 41706,
+  "sha256": "31bfc6815873e513991563bd781dc3a3272b8c13b78a66e9f9b8d7eb7509875e"
+ },
+ {
+  "path": "app/src/main/lib/perfsdk-v1.0.0.jar",
+  "type": "ZIP",
+  "size": 17551,
+  "sha256": "00da6f276641fddb6c1da117b6bef8dcddcb7b41926c4e4859d5997569fd45dc",
+  "extracted": true
+ },
+ {
+  "path": "app/src/main/jniLibs/armeabi-v7a/libgndownload.so",
+  "type": "ELF",
+  "size": 2562440,
+  "sha256": "66f399c31406db4bbf9f669d96a0f137e0eb8fc639ecc5024684f2cfbcccff06"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libc++_shared.so",
+  "type": "ELF",
+  "size": 1292896,
+  "sha256": "4e2dcc0b0beae5c9dcbf25d90400a4de203cbffbfae6526d4be7befa88a77c09"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libpulseaudio.so",
+  "type": "ELF",
+  "size": 67040,
+  "sha256": "c70622e9dadb31aba51b36ca6313a944e0febd8beabea5ace4b9f42ce951d350"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libcomet.so",
+  "type": "ELF",
+  "size": 11478112,
+  "sha256": "c88517b8cd893b2c22850f6da4a57ba595bd3a0b98bc426374a4aea663e3ec78"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libpulsecore-13.0.so",
+  "type": "ELF",
+  "size": 643224,
+  "sha256": "1bbfb039b159da9b6c0090e3309e6f686b1468e8a4d77b8a61612fa3af3e576a"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libgnaffinity.so",
+  "type": "ELF",
+  "size": 4096,
+  "sha256": "61272eb70f568de532333ebc6574866eb23b7bd88119975aba2cc16c526650b9"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libgnoverlay.so",
+  "type": "ELF",
+  "size": 68216,
+  "sha256": "34deaf0ca03bf33b7a25e6820beaa8cee5d2a609ff4c74ab1a59aedfcc96f0e0"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libfossilize_replay.so",
+  "type": "ELF",
+  "size": 2982008,
+  "sha256": "2e0396eca90a40c375b847ed795345ae8d603ac659ac254872a5c6cdddb60be0"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libgncounters.so",
+  "type": "ELF",
+  "size": 1187456,
+  "sha256": "f4355e4a2e22c6f41a61df8dc2cf15d3e67e320ec67d74bacf53ab136f5a9f65"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libasurface_renderer.so",
+  "type": "ELF",
+  "size": 525256,
+  "sha256": "4323ea6909dd70eb49a0c4f6950f1113f01a9618c3ef82087f9e8ab3e13af9e3"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libsteambootstrap.so",
+  "type": "ELF",
+  "size": 32776,
+  "sha256": "58a7473135e1960366146004ffe04f0e42d61e70e6a8122648318d87275f7f7e"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libltdl.so",
+  "type": "ELF",
+  "size": 38192,
+  "sha256": "bc12038c8cedb7ba405b6621b579ad6b643e018b12f5f1d01e6cb78169e49907"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libgndownload.so",
+  "type": "ELF",
+  "size": 3865288,
+  "sha256": "b66f8689b624bd0f14921b20b5de72320487cd39311766f8d6972ab65bcbccbe"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libpulse.so",
+  "type": "ELF",
+  "size": 331072,
+  "sha256": "061a0479989dd406924c837d7a09a59f086aec122d8b636b518da1658f225052"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libgamenative_drm.so",
+  "type": "ELF",
+  "size": 1050712,
+  "sha256": "08d6276c268ed9ff169a0cc76f059bf7e30dec2288f13617bfa64c6f4ff407f6"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/lib7zx.so",
+  "type": "ELF",
+  "size": 58312,
+  "sha256": "a535e3fc9b2564b8cca670e2af7b11baeb7a101cf2cc80ec44cfd2f314ee6783"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libsndfile.so",
+  "type": "ELF",
+  "size": 476976,
+  "sha256": "d6b61f5dddedce3cd29c5db9b58b5dd16a4b3faebfcbe925bc9432e2993831ee"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libpulsecommon-13.0.so",
+  "type": "ELF",
+  "size": 473432,
+  "sha256": "febdaa6fb344775f0c980c100e33046b27c9701d24346a45890b640380147a26"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/liblsfg-vk-layer.so",
+  "type": "ELF",
+  "size": 2624768,
+  "sha256": "09b085213732ff415dc428973e0c1396853377f3d13cb6c1c2d01643cc13735b"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libevshim.so",
+  "type": "ELF",
+  "size": 20504,
+  "sha256": "64d67ac6dc356ae8c1a121331b78dbab60ea9efd516fd747e157e9325e17f490"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libopenxr_loader.so",
+  "type": "ELF",
+  "size": 1826968,
+  "sha256": "cd6c054dbc2c75d7d94d62c15267fb78d04cbdeeb4b8899fca01816f04620501"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libfossilize_layer.so",
+  "type": "ELF",
+  "size": 870592,
+  "sha256": "2b8848da38f8ea5c57ee9cf431f89d100248958f44d1c7fccef9f5895ac45065"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libkgslshim.so",
+  "type": "ELF",
+  "size": 7520,
+  "sha256": "a0616b1e7847b104783298c84d93a1d880e3513016115ae75fb512de53bab034"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libahbimage.so",
+  "type": "ELF",
+  "size": 13776,
+  "sha256": "c3aa2dd78785250d2cdfcb739ddcf1bfce48e3aed3cdb792d3c890db211ac8fa"
+ },
+ {
+  "path": "app/src/main/jniLibs/arm64-v8a/libgamenative_dns_v4mapped.so",
+  "type": "ELF",
+  "size": 13288,
+  "sha256": "7d779c013afd9e630867390ec669b3675586b81557c99014fb8accef52a3373e"
+ },
+ {
+  "path": "app/src/legacy/assets/container_pattern_common.tzst",
+  "type": "ZSTD",
+  "size": 41592095,
+  "sha256": "c62311ac7a10a149f33cd1b2fcdf9f79c8a6b35d8b46066b33108c003b7e85c6",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/SD8Elite_800.51.zip",
+  "type": "ZIP",
+  "size": 15935994,
+  "sha256": "774af41a2d993f5e6f8095952a94ddb13f66eee3be6e801e3c707b8146297fd0",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/extras.tzst",
+  "type": "ZSTD",
+  "size": 85987690,
+  "sha256": "d47d2c0e12f4f59beb3e4a80ed9e7373a15fc7cc796d406fd6f18d0f58249184",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/proton-9.0-arm64ec_container_pattern.tzst",
+  "type": "ZSTD",
+  "size": 10309411,
+  "sha256": "9826ac61405f641ca8326335208c3e1ed5cec107f4b0354f813825ec398b841b",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/SD8Elite_800.35.zip",
+  "type": "ZIP",
+  "size": 16559176,
+  "sha256": "1852a2655da8dce7018fa4a208decd565a130b392ddabdee62f9b75229e1f64f",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/Adreno_819.2_adpkg.zip",
+  "type": "ZIP",
+  "size": 13082749,
+  "sha256": "d0c3ea86f4b681bd53a940a0fd8c2220345c5140c525d1e1af6cdcfe25f4d3e1",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/Adreno_805_adpkg.zip",
+  "type": "ZIP",
+  "size": 12757906,
+  "sha256": "7eebc20b44f10d84f68d2ebd0eaa27e29750640308a51472ea9c7797edf0d823",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/SD8Elite_2-842.6.zip",
+  "type": "ZIP",
+  "size": 13253104,
+  "sha256": "4b6ee8eeac109800cea5cc05ae73e9f6a03acbd99c029c328c34faa9b44ae430",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/container_pattern_gamenative.tzst",
+  "type": "ZSTD",
+  "size": 9932192,
+  "sha256": "f19a9e7280df753c0ea197ca8aaee46aa31de9ee2d7e59de3a5870132d0001fd",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/proton-9.0-x86_64_container_pattern.tzst",
+  "type": "ZSTD",
+  "size": 8698674,
+  "sha256": "fa25987a3ba4f1b951bd1161f9a65a9450f0b72b87583fd3d9971d92c63a9608",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/dxvk-1.10.1.tzst",
+  "type": "ZSTD",
+  "size": 6724726,
+  "sha256": "a1de22b82bdec1a0dabb9d52084b3d542d305327059300aa01073f43ebd24ecc",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/dxvk-1.9.2.tzst",
+  "type": "ZSTD",
+  "size": 3338221,
+  "sha256": "c535a7376e404267011bb633f8c32c4b76ba9866fed72090a71ebd08bd2177e9",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/dxvk-2.4.1.tzst",
+  "type": "ZSTD",
+  "size": 9121924,
+  "sha256": "f827bf18ef42d90be4637a987226453e392386a1a6ff160c13d3df52a62f2522",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/dxvk-1.10.3.tzst",
+  "type": "ZSTD",
+  "size": 7544894,
+  "sha256": "b337191462864958fab9d9bff2b1760a263ee330ce98b81aa59c478e795c2394",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/vkd3d-2.6.tzst",
+  "type": "ZSTD",
+  "size": 1805143,
+  "sha256": "664a463df6ac8bf433f8ef6030dbf31de33b760fc722bb9666b79c22b5e64f25",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/vkd3d-2.12.tzst",
+  "type": "ZSTD",
+  "size": 2140490,
+  "sha256": "ea1411f26b529cd4c6f3322ede1ab753273c8321258605dbf94789785c081946",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/dxvk-2.7.1.tzst",
+  "type": "ZSTD",
+  "size": 4768366,
+  "sha256": "0255396bbedeec6d39e2192e2a3f8b2b9c1aa7efdfb5e445782bf10698bc0652",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/d8vk-1.0.tzst",
+  "type": "ZSTD",
+  "size": 1128672,
+  "sha256": "5e18deb3deedc937dad9974013c2039f8110f9baf6a520c4310ec888d8a59511",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/vkd3d-2.13.tzst",
+  "type": "ZSTD",
+  "size": 2134905,
+  "sha256": "cd2862aadb58371954c35465d5005b5fcd55b8c96c75a79bbc58d44d54edada1",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/dxvk-1.10.9-sarek.tzst",
+  "type": "ZSTD",
+  "size": 3696389,
+  "sha256": "1fdcb03b08eacb2852b4c8bb2345f47b61228f05017d5dff4287431b703aab59",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/dxwrapper/vkd3d-3.0b.tzst",
+  "type": "ZSTD",
+  "size": 3978975,
+  "sha256": "fdace3d5894af70f119e17baad44c96885387a0e333c419b94157efedd78185d",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/directmusic.tzst",
+  "type": "ZSTD",
+  "size": 337109,
+  "sha256": "eb906732d14766641edfae0b2d722c36f4632de7fa321a5844037115b513b77e",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/xaudio.tzst",
+  "type": "ZSTD",
+  "size": 2329991,
+  "sha256": "2f80fd6242136b543ee2e1c8fb7daa9c0bcd0c318886ca502f84f456c83bbc43",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/opengl.tzst",
+  "type": "ZSTD",
+  "size": 8170693,
+  "sha256": "efe27f0de6a55bfb6c2e9eab79b6baaae64b35af81ce49c097de6b720f258cbb",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/directshow.tzst",
+  "type": "ZSTD",
+  "size": 2209278,
+  "sha256": "aa682b7ee6e5903e4571bfe5a8dc9b05d0a9f05cd860cfdc810f2ddd3745e9b4",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/direct3d.tzst",
+  "type": "ZSTD",
+  "size": 31207067,
+  "sha256": "149d55436e050bfa3fe8caf650cb97ddb2bc9fa99cd96869bd2bc4977b708fb5",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/openal.tzst",
+  "type": "ZSTD",
+  "size": 6272189,
+  "sha256": "5e849dd182eb7361624804d508b52713dcbf8f203355e062a5928b843b3b4a47",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/wmdecoder.tzst",
+  "type": "ZSTD",
+  "size": 2717456,
+  "sha256": "49a9f29fa099d4568b6c43a0f710e6f5e0dba3c1eb401325bbda9c82c8937b9b",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/ddraw.tzst",
+  "type": "ZSTD",
+  "size": 166133,
+  "sha256": "eabb2d59ce7060767996d0c9597ee8772059126a3af01698e59a5e7905e49867",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/vcrun2010.tzst",
+  "type": "ZSTD",
+  "size": 1038731,
+  "sha256": "9def7b4b5c31c839d155f05e372e0e9ce4968b57f815c1abf93b7735e7d0ceb7",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/directplay.tzst",
+  "type": "ZSTD",
+  "size": 429728,
+  "sha256": "70eb81449230af66286f5b4d5922dca13057600c35d4cdfe91930e966c2386d9",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/wincomponents/directsound.tzst",
+  "type": "ZSTD",
+  "size": 434853,
+  "sha256": "72f0e880eef1387a55602ac02b07ef26778d23c2f70d931bd2d13e92f8dc99d4",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/virgl-23.1.9.tzst",
+  "type": "ZSTD",
+  "size": 3324475,
+  "sha256": "6ed76575a24894432fa43e03e98ca1273bd1d1e393587bc53f7d8ca5bf36311f",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/turnip-25.1.0.tzst",
+  "type": "ZSTD",
+  "size": 1948462,
+  "sha256": "e4cfac45d4064da80c5a0c501d5237e85c2492a9da39e404c0cb31e1a609939b",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-turnip25.3.0_R6_Gmem.tzst",
+  "type": "ZSTD",
+  "size": 2402808,
+  "sha256": "56977970269fc06149d44f542b36ec3d2c55b1594dffa968a4facc35d25dea8c",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-turnip25.3.0_R3_Auto.tzst",
+  "type": "ZSTD",
+  "size": 2394849,
+  "sha256": "b27993507f70cac00cbc9c266f8574c0f47d74642eaaa0a22ac0ad5c3ea2a594",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-turnip26.0.0_R4.tzst",
+  "type": "ZSTD",
+  "size": 3211505,
+  "sha256": "ed1104cbf4387e28638c52959c651f6302fc515761289e104ab2953977bd1ba4",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/wrapper.tzst",
+  "type": "ZSTD",
+  "size": 3795109,
+  "sha256": "2005169d30ab7558b0c404ff8a3d781cddfde2f012531e097ccc95c423a706a5",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/wrapper-v2.tzst",
+  "type": "ZSTD",
+  "size": 5435191,
+  "sha256": "68bfa91d88d374b67a7dbc2079afbf243f42f1c7d5dffd0c84a7a276c94f4526",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-turnip25.3.0_R3_Gmem.tzst",
+  "type": "ZSTD",
+  "size": 2392378,
+  "sha256": "1d759224be7a2666f12e2f0d0491224507e484bbda26122ee1c213db8dd3b0dd",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/wrapper-legacy.tzst",
+  "type": "ZSTD",
+  "size": 5725821,
+  "sha256": "9e5b2539c1b86afdfd8c144a165cfa03b9c500fe0d82ae6216a6859c00bf460f",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/extra_libs.tzst",
+  "type": "ZSTD",
+  "size": 10637392,
+  "sha256": "5808942d2426630aad644ccde78491991d035815c689a79f0300879a3285bb20",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/turnip-25.3.0.tzst",
+  "type": "ZSTD",
+  "size": 2221157,
+  "sha256": "aafacd43656d43908510516c7fbc1fb343dfb9fb77e87113749550fb5e51ffb6",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/turnip-24.1.0.tzst",
+  "type": "ZSTD",
+  "size": 1656806,
+  "sha256": "4ffe69bc9071871ee7719911b0ecb2f7ba4f3e43d0f80db77cd39d2bfaf76334",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/wrapper-gamenative.tzst",
+  "type": "ZSTD",
+  "size": 774855,
+  "sha256": "2f584bf314d9857546a634209f80a75f7046f350431d1bb5c1b98516ec82028b",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-Turnip_Gen8_V25.tzst",
+  "type": "ZSTD",
+  "size": 2529392,
+  "sha256": "b8c33c0feae648c0c73533000ed17efdcb653d7dce06a0a5c8d7d0f58b9a0e44",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-turnip25.1.0.tzst",
+  "type": "ZSTD",
+  "size": 2593869,
+  "sha256": "b3824227a3bcac367352bae86a34ed95add9b99fae50c16b7c7f48506d7ce197",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/vortek-2.1.tzst",
+  "type": "ZSTD",
+  "size": 120123,
+  "sha256": "b81e4751b093a4bdb8963cbc8210e89b5b627907c3500e2b2dc3de7d002fb251",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/zink-22.2.5.tzst",
+  "type": "ZSTD",
+  "size": 3701982,
+  "sha256": "5231f32412a9d9737f90b464cf098d84e9d93283ba513d8ff30a84f26a3da669",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-turnip25.3.0_R11.tzst",
+  "type": "ZSTD",
+  "size": 3137612,
+  "sha256": "2af295136d29ee40cd3b6e3584d4b0036f9fd091c039a14656bb4bd11cb76cd5",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/libvulkan_wrapper.tar.xz",
+  "type": "XZ",
+  "size": 3103336,
+  "sha256": "e634370220234bdd3c1f89c34cf3bca514c5c38d8784e64e4ce07d90da686e58",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/wrapper-leegao.tzst",
+  "type": "ZSTD",
+  "size": 2365265,
+  "sha256": "e0345e81db8893aa7882869583cd970d532cf3e92c0a1e87a9aba366b46a5da9",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/turnip-25.0.0.tzst",
+  "type": "ZSTD",
+  "size": 1923236,
+  "sha256": "783cb1f0ae481fa79afaefd4c421d68ca13f8ce46a34367e93c678cc2befe696",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/zink_dlls.tzst",
+  "type": "ZSTD",
+  "size": 8170693,
+  "sha256": "efe27f0de6a55bfb6c2e9eab79b6baaae64b35af81ce49c097de6b720f258cbb",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-turnip26.0.0_R8.tzst",
+  "type": "ZSTD",
+  "size": 2618849,
+  "sha256": "a79e67a397f94e8e809676c7753580db77b390b7f7631368256af33d0654cd11",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/turnip-25.2.0.tzst",
+  "type": "ZSTD",
+  "size": 2184899,
+  "sha256": "d4b4762beda16be7dbd9f29f0bb0770e736465faf158435a003937d25081fca8",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/vortek-2.0.tzst",
+  "type": "ZSTD",
+  "size": 115516,
+  "sha256": "e32dc285600dfb30f3682cc29603348ddb231f45247f93ecf799939778ee292a",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-v805.tzst",
+  "type": "ZSTD",
+  "size": 12237321,
+  "sha256": "81ff78581eb9acc3d6f10c1688ea30a05bec07e17627497232dd60a215c5ba37",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/assets/graphics_driver/adrenotools-v762.tzst",
+  "type": "ZSTD",
+  "size": 16492574,
+  "sha256": "c786b45d7f02310c7c348e55f151cc822b0468a14110ec6c0abfaa493f323e08",
+  "extracted": true
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libvirglrenderer.so",
+  "type": "ELF",
+  "size": 387080,
+  "sha256": "4a2dafbb4bfeb6bd86cb7cdeb8f0dcef09bf5a4f8226307f703ae2a694931425"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libpulseaudio.so",
+  "type": "ELF",
+  "size": 74000,
+  "sha256": "7150891c0771e1fd0de2820c2aa568f1cd04239539621f6149082449daefa726"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libpulsecore-13.0.so",
+  "type": "ELF",
+  "size": 704712,
+  "sha256": "49527e036b5c91baf78d050cafc3e726313b0110cd8b19e0f2eb63d3a57efa0f"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libproot-loader.so",
+  "type": "ELF",
+  "size": 3936,
+  "sha256": "3007fd5bf6d92f84854836ae537b843e90a80763be525f3e084aa3bf358333f1"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libltdl.so",
+  "type": "ELF",
+  "size": 55232,
+  "sha256": "6fd0960abe050e16dd12149d570b5b896de8a44507f1368220e34faedff4a4db"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libpulse.so",
+  "type": "ELF",
+  "size": 362936,
+  "sha256": "c6d905ab7e1e703b56886280878725acca5624f8216e28d6b92b3af86d4ad16c"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libproot.so",
+  "type": "ELF",
+  "size": 117248,
+  "sha256": "71e470d78bb05ca77fc07a60cf4e351bb64ff3356a170a218d323830120a6b90"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libsndfile.so",
+  "type": "ELF",
+  "size": 592776,
+  "sha256": "b000ca695e55884a86293e5cddddbe994199c33be07d51364789f1f7cda277fc"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libpulsecommon-13.0.so",
+  "type": "ELF",
+  "size": 519416,
+  "sha256": "7796654fa41ce8c99a295fd3c1d764e3b23a3f32ef763fea509b584501211eaa"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libwinlator.so",
+  "type": "ELF",
+  "size": 20868,
+  "sha256": "2a1e3c07d8198ec02f74c4bf6c9a7b2b460a8c15eaf8a6aaad6772e1e207307c"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/armeabi-v7a/libxconnectorpatch.so",
+  "type": "ELF",
+  "size": 7316,
+  "sha256": "b5892d2e54cb52b6ba568bbb8de01b39a056fc81086c62936688732feb169db0"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libvirglrenderer.so",
+  "type": "ELF",
+  "size": 422984,
+  "sha256": "5d5624c823f0c676078272ab72a73844c8a883d59bbe4bb71864f4ba5231e81b"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libwinlator_11.so",
+  "type": "ELF",
+  "size": 37800,
+  "sha256": "ef0872b3b1ec159bdc4d52df72e26941fb8272856ef6ca060bc9538879709752"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libextras.so",
+  "type": "ELF",
+  "size": 812928,
+  "sha256": "98905bde3340955bb28b9f8dde2ce56f646ab1796852905dd9ae273ca5d248f7"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libmain_hook.so",
+  "type": "ELF",
+  "size": 8152,
+  "sha256": "661ed2bb87c38bb00774c64e96de512bc709c260264193e2bb3e2a240b76b325"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libhook_impl.so",
+  "type": "ELF",
+  "size": 2181616,
+  "sha256": "4c26f1528ca2049e4d2398a314178f89042e10e35917456d5e578d077c4c4872"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libdummyvk.so",
+  "type": "ELF",
+  "size": 1813296,
+  "sha256": "173c8c4927bed81148874cbb700585f931ee833823545f5f2a64381db445c5e6"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libpatchelf.so",
+  "type": "ELF",
+  "size": 8995040,
+  "sha256": "8888caf11b0515fab08aeb5cb42d64a27ce0c138c8f02b0de6b3c1f27e969cc0"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libvortekrenderer.so",
+  "type": "ELF",
+  "size": 775937,
+  "sha256": "b23415f3730a75b0be04e4b6006e053f8f2f9c9e7b9c843aa8bcdccddca1d97c"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libwinlator.so",
+  "type": "ELF",
+  "size": 29624,
+  "sha256": "36f8266494eb2208faab90a8d3063bb087d6f819ad1c20d283f5731445d97246"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libvulkan_renderer.so",
+  "type": "ELF",
+  "size": 1524120,
+  "sha256": "0ff7663cf76c98fc7745dd6e3c47ccc3df6a0c75b334cfcfb9f199cda95e132c"
+ },
+ {
+  "path": "app/src/legacy/jniLibs/arm64-v8a/libxconnectorpatch.so",
+  "type": "ELF",
+  "size": 9800,
+  "sha256": "02f200fc6f5a929d222cb984e4f8e08e6c7621d950d8c003f10533e8a00e1b0a"
+ },
+ {
+  "path": "app/release-signed/baselineProfiles/0/app-release-signed.dm",
+  "type": "ZIP",
+  "size": 8993,
+  "sha256": "cc670732f7c170b323538757c46d8ae3826114619bd3f14d36caa9576bb6f674"
+ },
+ {
+  "path": "app/release-signed/baselineProfiles/1/app-release-signed.dm",
+  "type": "ZIP",
+  "size": 8916,
+  "sha256": "36f0c4ff733a0de8332a316738c1aff153a2d11e87d6e4a9b00d2b7682f8c235"
+ },
+ {
+  "path": "gradle/wrapper/gradle-wrapper.jar",
+  "type": "ZIP",
+  "size": 43583,
+  "sha256": "2db75c40782f5e8ba1fc278a5574bab070adccb2d21ca5a6e5ed840888448046",
+  "extracted": true
+ }
+]

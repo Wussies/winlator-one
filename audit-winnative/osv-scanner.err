@@ -1,0 +1,41 @@
+Unable to find image 'ghcr.io/google/osv-scanner:latest' locally
+latest: Pulling from google/osv-scanner
+d0c1d894c237: Pulling fs layer
+7bf235870820: Pulling fs layer
+82e0bb27ae78: Pulling fs layer
+ec1e6ef01269: Pulling fs layer
+4f4fb700ef54: Pulling fs layer
+6f5345963677: Pulling fs layer
+147c67fc2980: Pulling fs layer
+4b451c5f9166: Pulling fs layer
+ec1e6ef01269: Waiting
+4f4fb700ef54: Waiting
+4b451c5f9166: Waiting
+147c67fc2980: Waiting
+6f5345963677: Waiting
+7bf235870820: Verifying Checksum
+7bf235870820: Download complete
+d0c1d894c237: Verifying Checksum
+d0c1d894c237: Download complete
+ec1e6ef01269: Verifying Checksum
+ec1e6ef01269: Download complete
+4f4fb700ef54: Verifying Checksum
+4f4fb700ef54: Download complete
+6f5345963677: Verifying Checksum
+6f5345963677: Download complete
+d0c1d894c237: Pull complete
+147c67fc2980: Verifying Checksum
+147c67fc2980: Download complete
+82e0bb27ae78: Verifying Checksum
+82e0bb27ae78: Download complete
+4b451c5f9166: Verifying Checksum
+4b451c5f9166: Download complete
+7bf235870820: Pull complete
+82e0bb27ae78: Pull complete
+ec1e6ef01269: Pull complete
+4f4fb700ef54: Pull complete
+6f5345963677: Pull complete
+147c67fc2980: Pull complete
+4b451c5f9166: Pull complete
+Digest: sha256:a70ffffc2bfd33482953e5d6b64c6fcdb30239717a07b0f0d3ab2859ce3e4cde
+Status: Downloaded newer image for ghcr.io/google/osv-scanner:latest

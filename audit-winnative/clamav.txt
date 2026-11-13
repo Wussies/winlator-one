@@ -1,0 +1,13 @@
+ClamAV 1.5.4/28181/Thu Nov 12 06:27:14 2026
+
+----------- SCAN SUMMARY -----------
+Known viruses: 3628258
+Engine version: 1.5.4
+Scanned directories: 1236
+Scanned files: 4093
+Infected files: 0
+Data scanned: 2.25 GiB
+Data read: 1.85 GiB (ratio 1.22:1)
+Time: 681.903 sec (11 m 21 s)
+Start Date: 2026:11:13 02:07:43
+End Date:   2026:11:13 02:19:05

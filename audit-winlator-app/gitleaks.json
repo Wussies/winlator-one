@@ -1,0 +1,22 @@
+[
+ {
+  "RuleID": "generic-api-key",
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 2326,
+  "EndLine": 2326,
+  "StartColumn": 5,
+  "EndColumn": 30,
+  "Match": "key-\u003eREDACTED ",
+  "Secret": "REDACTED",
+  "File": "/src/app/src/main/cpp/virglrenderer/src/vrend_renderer.c",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.6464393,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "Fingerprint": "/src/app/src/main/cpp/virglrenderer/src/vrend_renderer.c:generic-api-key:2326"
+ }
+]

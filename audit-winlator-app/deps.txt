@@ -1,0 +1,8 @@
+androidx.appcompat:appcompat:1.4.0
+androidx.lifecycle:lifecycle-process:2.5.1
+androidx.preference:preference:1.2.1
+com.android.tools.build:gradle:8.4.2
+com.github.luben:zstd-jni:1.5.2-3
+com.google.android.material:material:1.4.0
+org.apache.commons:commons-compress:1.20
+org.tukaani:xz:1.7
