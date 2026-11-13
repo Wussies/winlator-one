@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="nexora_steam_launch_info">Игры Steam запускаются напрямую. Играм, которым нужен клиент Steam или защита Steam DRM, требуют официальный клиент Steam — в NEXORA его пока нет. NEXORA не использует эмуляторы Steam и средства снятия DRM.</string>
-    <string name="nexora_steam_qr_only">Войдите, отсканировав QR-код в официальном приложении Steam. NEXORA никогда не запрашивает пароль Steam.</string>
-    <string name="nexora_remote_catalogs_disabled">Онлайн-каталоги компонентов отключены, пока у NEXORA нет подписанного каталога. Файл компонента можно импортировать с устройства.</string>
-</resources>
