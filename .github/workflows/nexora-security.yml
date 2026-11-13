@@ -1,0 +1,158 @@
+# Continuous security checks for NEXORA itself.
+# - CodeQL with a real build (Java + Kotlin + C/C++), results uploaded to the
+#   repository's Code scanning tab and summarised in audit/results.
+# - Gitleaks, OSV-Scanner, Trivy, Semgrep on the repository tree.
+name: NEXORA security
+
+on:
+  push:
+    branches: [ 'nexora/main', main ]
+    paths-ignore: [ '**.md', 'docs/**' ]
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scanners:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Gitleaks
+        run: |
+          mkdir -p out
+          docker run --rm -v "$PWD:/src:ro" -v "$PWD/out:/out" ghcr.io/gitleaks/gitleaks:latest \
+            dir /src --report-format json --report-path /out/gitleaks.json --redact --exit-code 0 --no-banner
+          python3 -c "import json,collections;d=json.load(open('out/gitleaks.json'));print('Gitleaks findings:',len(d),dict(collections.Counter(x['RuleID'] for x in d)))" | tee -a out/summary.md
+      - name: OSV-Scanner
+        run: |
+          docker run --rm -v "$PWD:/src:ro" ghcr.io/google/osv-scanner:latest scan source -r --format markdown /src > out/osv.md 2>/dev/null || true
+          grep -m1 "known vulnerabilities\|No issues found" out/osv.md | tee -a out/summary.md || true
+      - name: Trivy
+        run: |
+          docker run --rm -v "$PWD:/src:ro" -v "$PWD/out:/out" aquasec/trivy:latest fs --scanners vuln,secret,misconfig \
+            --format table --output /out/trivy.txt /src || true
+          grep -E "Total:" out/trivy.txt | sed 's/^/Trivy /' | tee -a out/summary.md || true
+      - name: Semgrep
+        run: |
+          pip install --quiet semgrep
+          semgrep scan --timeout 60 --max-target-bytes 2000000 --config p/default --config p/kotlin --config p/java \
+            --exclude 'app/src/main/cpp/proot' --json --output out/semgrep.json . > /dev/null 2>&1 || true
+          python3 -c "
+          import json,collections
+          r=json.load(open('out/semgrep.json')).get('results',[])
+          print('Semgrep findings:',len(r),dict(collections.Counter(x['extra'].get('severity') for x in r)))
+          for x in r:
+              if x['extra'].get('severity')=='ERROR': print('  ERROR', x['path']+':'+str(x['start']['line']), x['check_id'].split('.')[-1])
+          " | tee -a out/summary.md
+          rm -f out/semgrep.json
+      - run: cat out/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexora-scanners
+          path: out/
+
+  codeql:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup || true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Android SDK packages
+        run: |
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" --install "platforms;android-35" "build-tools;35.0.0" "ndk;27.3.13750724" "cmake;3.22.1" > /dev/null
+          rustup target add aarch64-linux-android
+      - name: Runtime components
+        run: bash tools/fetch-components.sh
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: java-kotlin, c-cpp
+          build-mode: manual
+          queries: security-extended
+      - name: Build for CodeQL
+        env:
+          GRADLE_OPTS: -Xmx4g
+        run: |
+          keytool -genkeypair -keystore "$RUNNER_TEMP/ci.jks" -storetype PKCS12 -alias ci -keyalg RSA -keysize 2048 \
+            -validity 1 -storepass cipass1 -keypass cipass1 -dname "CN=CI" > /dev/null
+          export KEYSTORE_FILE="$RUNNER_TEMP/ci.jks" KEYSTORE_PASSWORD=cipass1 KEY_ALIAS=ci KEY_PASSWORD=cipass1
+          ./gradlew --no-daemon --no-build-cache --no-configuration-cache :app:assembleStandardDebug -x lint
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: nexora
+          output: codeql-sarif
+      - name: Summarize
+        run: |
+          python3 - <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
+          import json, glob, collections
+          for f in glob.glob("codeql-sarif/*.sarif"):
+              d = json.load(open(f))
+              for run in d["runs"]:
+                  rules = {r["id"]: r for r in run["tool"]["driver"].get("rules", [])}
+                  res = run.get("results", [])
+                  files = {a["location"]["uri"] for a in run.get("artifacts", []) if "location" in a}
+                  print(f"### {f.split('/')[-1]}: {len(res)} results, {len(files)} files analysed")
+                  c = collections.Counter(r["ruleId"] for r in res)
+                  for k, v in c.most_common(30):
+                      sev = rules.get(k, {}).get("properties", {}).get("security-severity", "")
+                      print(f"- {k}: {v}" + (f" (security-severity {sev})" if sev else ""))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexora-codeql-sarif
+          path: codeql-sarif/
+
+  publish:
+    needs: [ scanners, codeql ]
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: r
+      - name: Commit summary to audit/results
+        run: |
+          git clone -q --depth 1 -b audit/results "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" results
+          D="results/nexora/${GITHUB_SHA::7}"; mkdir -p "$D"
+          cp -r r/nexora-scanners/* "$D/" 2>/dev/null || true
+          python3 - "$D" <<'PY'
+          import json, glob, collections, sys
+          out = []
+          for f in glob.glob("r/nexora-codeql-sarif/*.sarif"):
+              d = json.load(open(f))
+              for run in d["runs"]:
+                  res = run.get("results", [])
+                  rules = {r["id"]: r for r in run["tool"]["driver"].get("rules", [])}
+                  out.append(f"## CodeQL {f.split('/')[-1]}: {len(res)} results")
+                  for r in res:
+                      sev = rules.get(r["ruleId"], {}).get("properties", {}).get("security-severity", "")
+                      loc = r["locations"][0]["physicalLocation"]
+                      out.append(f"- [{sev or r.get('level','')}] {r['ruleId']} `{loc['artifactLocation']['uri']}:{loc.get('region',{}).get('startLine','')}`")
+          open(sys.argv[1] + "/codeql.md", "w").write("\n".join(out) + "\n")
+          PY
+          cd results && git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "NEXORA security scan ${GITHUB_SHA::7}" && git push -q origin audit/results
