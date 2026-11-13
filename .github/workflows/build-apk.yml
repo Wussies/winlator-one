@@ -1,0 +1,128 @@
+name: Build NEXORA APK
+
+on:
+  push:
+    branches: [ 'nexora/**', main ]
+    paths-ignore: [ '**.md', 'docs/**' ]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write   # only used to publish a pre-release from main / nexora/main
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup || true
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Android SDK packages (NDK 27.3, CMake, API 35)
+        run: |
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" --install "platforms;android-35" "build-tools;35.0.0" "ndk;27.3.13750724" "cmake;3.22.1" > /dev/null
+
+      - name: Rust target
+        run: rustup target add aarch64-linux-android
+
+      - name: Fetch pinned runtime components (SHA-256 verified)
+        run: |
+          # On the very first push the bootstrap workflow may still be publishing
+          # the release; wait for it (max ~40 min) instead of failing.
+          for i in $(seq 1 40); do
+            if bash tools/fetch-components.sh; then exit 0; fi
+            echo "components not available yet, retry $i/40"; sleep 60
+          done
+          exit 1
+
+      - uses: gradle/actions/setup-gradle@v4   # also validates the wrapper JAR
+
+      - name: Signing key
+        id: key
+        env:
+          NEXORA_KEYSTORE_BASE64: ${{ secrets.NEXORA_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$NEXORA_KEYSTORE_BASE64" ]; then
+            echo "$NEXORA_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            echo "mode=secret" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=cached-debug" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Restore persistent debug key (used only when no secret is configured)
+        if: steps.key.outputs.mode == 'cached-debug'
+        uses: actions/cache@v4
+        with:
+          path: ~/.nexora-debug-key
+          key: nexora-debug-keystore-v1
+
+      - name: Build (standard debug)
+        env:
+          GRADLE_OPTS: -Xmx4g -XX:+UseG1GC
+          VERSION_NAME: 0.1.0-stage1
+          NEXORA_MODE: ${{ steps.key.outputs.mode }}
+          SECRET_PASSWORD: ${{ secrets.NEXORA_KEYSTORE_PASSWORD }}
+          SECRET_ALIAS: ${{ secrets.NEXORA_KEY_ALIAS }}
+          SECRET_KEY_PASSWORD: ${{ secrets.NEXORA_KEY_PASSWORD }}
+        run: |
+          if [ "$NEXORA_MODE" = "secret" ]; then
+            export KEYSTORE_FILE="$RUNNER_TEMP/release.jks"
+            export KEYSTORE_PASSWORD="$SECRET_PASSWORD" KEY_ALIAS="$SECRET_ALIAS" KEY_PASSWORD="$SECRET_KEY_PASSWORD"
+          else
+            mkdir -p ~/.nexora-debug-key
+            if [ ! -f ~/.nexora-debug-key/debug.jks ]; then
+              keytool -genkeypair -keystore ~/.nexora-debug-key/debug.jks -storetype PKCS12 \
+                -alias nexora-debug -keyalg RSA -keysize 3072 -validity 10000 \
+                -storepass nexora-debug -keypass nexora-debug -dname "CN=NEXORA debug, O=NEXORA"
+            fi
+            export KEYSTORE_FILE="$HOME/.nexora-debug-key/debug.jks"
+            export KEYSTORE_PASSWORD=nexora-debug KEY_ALIAS=nexora-debug KEY_PASSWORD=nexora-debug
+          fi
+          ./gradlew --no-daemon --stacktrace :app:assembleStandardDebug -x lint
+
+      - name: Collect APK
+        id: apk
+        run: |
+          SRC=$(ls app/build/outputs/apk/standard/debug/*.apk | head -n1)
+          NAME="NEXORA-0.1.0-stage1-build${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}.apk"
+          mkdir -p dist && cp "$SRC" "dist/$NAME"
+          (cd dist && sha256sum "$NAME" > "$NAME.sha256")
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "### APK" >> "$GITHUB_STEP_SUMMARY"
+          ls -lh dist >> "$GITHUB_STEP_SUMMARY"
+          echo "Signing: ${{ steps.key.outputs.mode }}" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.apk.outputs.name }}
+          path: dist/*
+          retention-days: 30
+
+      - name: Publish pre-release
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nexora-0.1.0-stage1-build.${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          name: NEXORA 0.1.0 Stage 1 (build ${{ github.run_number }})
+          body: |
+            Automatic build of `${{ github.sha }}` (${{ github.ref_name }}).
+            Stage 1 base — NOT tested on a device. Signing: ${{ steps.key.outputs.mode }}.
+          files: dist/*
+          prerelease: true

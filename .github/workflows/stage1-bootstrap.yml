@@ -1,0 +1,112 @@
+# One-time Stage 1 bootstrap:
+#  1. creates the backup tag of the old Winlator One project;
+#  2. fetches the two Git LFS archives NEXORA inherits from WinNative, verifies
+#     them against their LFS SHA-256, scans them with ClamAV, inventories their
+#     contents and publishes them as release "nexora-components-1".
+# Nothing from the archives is executed.
+name: Stage 1 bootstrap
+
+on:
+  push:
+    branches: [ 'nexora/main' ]
+    paths: [ '.github/workflows/stage1-bootstrap.yml', 'tools/components.lock' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  backup-tag:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create backup tag (idempotent)
+        run: |
+          TAG=backup-winlator-one-0.1.0
+          SHA=7673223ea6719798f4f4ebe9f7a5221f7d2aa041
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null; then
+            echo "tag exists"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" "$SHA" -m "Backup of Winlator One 0.1.0 before the NEXORA rewrite"
+          git push origin "refs/tags/$TAG"
+
+  components:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: nexora
+      - name: Fetch LFS archives from upstream (sparse, pinned commit)
+        uses: actions/checkout@v4
+        with:
+          repository: WinNative-Emu/WinNative
+          ref: 72d145bccff348f71b1c8baf90a180ccaa474464
+          path: upstream
+          lfs: true
+          sparse-checkout: |
+            app/src/main/assets/imagefs.tzst
+            app/src/main/assets/proton-9.0-arm64ec.txz
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Verify SHA-256 and size against tools/components.lock
+        run: |
+          mkdir -p dist
+          grep -v '^\s*#' nexora/tools/components.lock | grep -v '^\s*$' | while read -r name sha size dest; do
+            f="upstream/app/src/main/assets/$name"
+            test "$(stat -c %s "$f")" = "$size"
+            echo "$sha  $f" | sha256sum -c
+            cp "$f" "dist/$name"
+          done
+          (cd dist && sha256sum * > SHA256SUMS)
+      - name: Extract (read-only) and inventory
+        run: |
+          mkdir -p x/imagefs x/proton report
+          tar --zstd -xf dist/imagefs.tzst -C x/imagefs --no-same-owner --no-same-permissions
+          tar -xJf dist/proton-9.0-arm64ec.txz -C x/proton --no-same-owner --no-same-permissions
+          for d in imagefs proton; do
+            {
+              echo "## $d"
+              echo; echo "Files: $(find x/$d -type f | wc -l)  Size: $(du -sh x/$d | cut -f1)"
+              echo; echo "### Top-level layout"; echo '```'; find x/$d -maxdepth 3 -type d | sed "s|x/$d||" | sort | head -80; echo '```'
+              echo; echo "### Executables outside Wine's system dirs (ELF/PE, first 200)"; echo '```'
+              find x/$d -type f \( -name '*.exe' -o -perm -u+x \) | grep -v -E '/(lib|lib64|lib32)/wine/|/syswow64/|/system32/' | head -200 | sed "s|x/$d||"
+              echo '```'
+              echo; echo "### Version hints"; echo '```'
+              find x/$d -maxdepth 4 \( -iname 'VERSION*' -o -iname '*release*' -o -name 'wine*' \) | head -40 | sed "s|x/$d||"
+              echo '```'
+            } > report/$d.md
+          done
+      - name: ClamAV
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq clamav > /dev/null
+          sudo systemctl stop clamav-freshclam 2>/dev/null || true
+          sudo freshclam --quiet || sudo freshclam
+          clamscan --version > report/clamav.txt
+          clamscan -r -i --max-filesize=500M --max-scansize=4000M dist x >> report/clamav.txt 2>&1 || true
+          tail -n 12 report/clamav.txt
+      - name: Publish release nexora-components-1 (only if missing)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp report/*.md report/clamav.txt dist/
+          if gh release view nexora-components-1 -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "release exists, not modified"; exit 0
+          fi
+          gh release create nexora-components-1 -R "$GITHUB_REPOSITORY" --prerelease \
+            --target "$GITHUB_SHA" \
+            --title "NEXORA runtime components 1" \
+            --notes "Runtime archives inherited from WinNative-Emu/WinNative@72d145b (Git LFS). SHA-256 verified against the upstream LFS object ids; ClamAV report and content inventory attached. Not executed during CI." \
+            dist/*
+      - name: Store report on audit/results
+        run: |
+          git clone -q --depth 1 -b audit/results "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" results
+          mkdir -p results/lfs-components && cp report/* dist/SHA256SUMS results/lfs-components/
+          cd results
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "LFS component audit (run ${{ github.run_id }})" && git push -q origin audit/results

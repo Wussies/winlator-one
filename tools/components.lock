@@ -1,0 +1,6 @@
+# NEXORA runtime archives that are too large for git.
+# Format: <file> <sha256> <size-bytes> <destination relative to repo root>
+# SHA-256 values equal the Git LFS object ids in WinNative-Emu/WinNative@72d145b.
+# Source of truth for downloads: release "nexora-components-1" of this repository.
+imagefs.tzst 0902e324b60a5c234aa29fcf457f6475a38ef8f61ac2be2118daaef4f236499a 199788876 app/src/main/assets/imagefs.tzst
+proton-9.0-arm64ec.txz e9df3e74c4a4a17660902092e30b7ceaa5a91cb465f05f28035704808512e180 64654348 app/src/main/assets/proton-9.0-arm64ec.txz

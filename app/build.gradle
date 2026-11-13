@@ -180,11 +180,6 @@ def appPullRequest = providers.gradleProperty("PR_NUMBER")
         .map { it.trim().replaceAll("[^0-9]", "") }
         .getOrElse("")
 
-def playUnreachableVersionCodeBase = 2100000000
-def brandedVersionCode = playUnreachableVersionCodeBase + appVersionCode
-if (brandedVersionCode < playUnreachableVersionCodeBase || brandedVersionCode > 2147483647) {
-    throw new GradleException("VERSION_CODE ${appVersionCode} pushes the branded versionCode past the 32-bit limit")
-}
 
 def coldClientVersionFile = rootProject.file("tools/gbe_fork.version")
 def coldClientVersion = coldClientVersionFile.exists() ? coldClientVersionFile.text.trim() : "unknown"
@@ -280,21 +275,10 @@ android {
             dimension "branding"
             applicationId "com.winnative.cmod"
         }
-        ludashi {
-            dimension "branding"
-            applicationId "com.ludashi.benchmark"
-            versionCode brandedVersionCode
-        }
-        pubg {
-            dimension "branding"
-            applicationId "com.tencent.ig"
-            versionCode brandedVersionCode
-        }
-        antutu {
-            dimension "branding"
-            applicationId "com.antutu.ABenchMark"
-            versionCode brandedVersionCode
-        }
+        // NEXORA: the upstream "ludashi", "pubg" and "antutu" flavors were removed.
+        // They reused other vendors' package names (com.ludashi.benchmark,
+        // com.tencent.ig, com.antutu.ABenchMark) to make OEM firmware force
+        // maximum CPU/GPU clocks. See SECURITY_AUDIT.md (WN-1).
     }
 
     applicationVariants.configureEach { variant ->

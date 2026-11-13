@@ -62,7 +62,7 @@ add_custom_command(
         "CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER=${WNSTEAM_RUST_LINKER}"
         "CC_aarch64_linux_android=${WNSTEAM_RUST_LINKER}"
         "AR_aarch64_linux_android=${ANDROID_NDK}/toolchains/llvm/prebuilt/${WNSTEAM_NDK_HOST_TAG}/bin/llvm-ar${WNSTEAM_AR_SUFFIX}"
-        "${CARGO_EXECUTABLE}" rustc --release --target "${WNSTEAM_RUST_TARGET}" --lib --
+        "${CARGO_EXECUTABLE}" rustc --locked --release --target "${WNSTEAM_RUST_TARGET}" --lib --
         -Clink-arg=-Wl,-soname,libwnsteam.so
     COMMAND "${CMAKE_COMMAND}" -E copy_if_different
         "${WNSTEAM_RUST_LIB}"

@@ -12,8 +12,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 FetchContent_Declare(
     zstd
     GIT_REPOSITORY https://github.com/facebook/zstd.git
-    GIT_TAG        v1.5.6
-    GIT_SHALLOW    TRUE
+    # NEXORA: pinned to the commit of tag v1.5.6 (tags are mutable).
+    GIT_TAG        794ea1b0afca0f020f4e57b6732332231fb23c70
     SOURCE_SUBDIR  build/cmake
 )
 set(ZSTD_BUILD_STATIC    ON  CACHE BOOL "" FORCE)
@@ -27,8 +27,10 @@ FetchContent_MakeAvailable(zstd)
 FetchContent_Declare(
     xz
     GIT_REPOSITORY https://github.com/tukaani-project/xz.git
-    GIT_TAG        v5.4.6
-    GIT_SHALLOW    TRUE
+    # NEXORA: pinned to the commit of tag v5.4.6 (tags are mutable).
+    # 5.4.x predates the 5.6.0/5.6.1 backdoor (CVE-2024-3094); planned upgrade
+    # to a current 5.8.x release is tracked in SECURITY_AUDIT.md.
+    GIT_TAG        6e8732c5a317a349986a4078718f1d95b67072c5
 )
 FetchContent_GetProperties(xz)
 if(NOT xz_POPULATED)

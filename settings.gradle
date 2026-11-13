@@ -10,9 +10,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://central.sonatype.com/repository/maven-snapshots/' }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url 'https://jitpack.io' }
+        // NEXORA: snapshot repositories and JitPack removed (no dependency needs
+        // them; mutable artifacts are a supply-chain risk).
         exclusiveContent {
             forRepository {
                 maven { url = uri("${rootDir}/vendor/maven") }
