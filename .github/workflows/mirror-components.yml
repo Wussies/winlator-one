@@ -77,20 +77,28 @@ jobs:
           clamscan --version > report/clamav.txt
           clamscan -r -i --max-filesize=500M --max-scansize=4000M dist x >> report/clamav.txt 2>&1 || true
           tail -n 12 report/clamav.txt
-      - name: Publish release nexora-components-2 (only if missing)
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          cp report/* dist/
-          if [ -s report/download-failures.txt ]; then echo "Not publishing: some downloads failed"; exit 0; fi
-          if gh release view nexora-components-2 -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then echo "exists"; exit 0; fi
-          gh release create nexora-components-2 -R "$GITHUB_REPOSITORY" --prerelease --target "$GITHUB_SHA" \
-            --title "NEXORA runtime components 2" \
-            --notes "Mirror of the components the upstream WinNative setup wizard downloads from github.com/nicholasx417/WinNative-Components (fetched $(date -u +%F)). SHA-256 pinned in NEXORA; ClamAV report and inventory attached. Not executed during CI." \
-            dist/*
       - name: Store report on audit/results
         run: |
           git clone -q --depth 1 -b audit/results "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" results
           mkdir -p results/runtime-components && cp report/* dist/SHA256SUMS dist/SIZES results/runtime-components/
           cd results && git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A && git commit -q -m "Runtime component mirror audit (run ${{ github.run_id }})" && git push -q origin audit/results
+      - name: Publish release nexora-components-2
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s report/download-failures.txt ]; then echo "Not publishing: some downloads failed"; exit 1; fi
+          find report -type f -empty -delete
+          cp report/* dist/
+          R=nexora-components-2
+          if gh release view $R -R "$GITHUB_REPOSITORY" --json isDraft,assets -q '.isDraft' 2>/dev/null | grep -q true; then
+            echo "removing incomplete draft"; gh release delete $R -R "$GITHUB_REPOSITORY" --yes --cleanup-tag || true
+          fi
+          if gh release view $R -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload $R -R "$GITHUB_REPOSITORY" --clobber dist/*
+          else
+            gh release create $R -R "$GITHUB_REPOSITORY" --prerelease --target "$GITHUB_SHA" \
+              --title "NEXORA runtime components 2" \
+              --notes "Mirror of the component set the upstream WinNative setup wizard installs (default.json of github.com/nicholasx417/WinNative-Components, fetched 2026-11-13). SHA-256 pinned in NEXORA (NexoraComponentPins); ClamAV report and inventory attached. Not executed during CI." \
+              dist/*
+          fi
