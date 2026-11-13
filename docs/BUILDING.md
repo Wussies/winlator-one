@@ -5,7 +5,7 @@
 1. Любой push в `main` (или ветки `dev/**`, `feature/**`) запускает workflow **Build APK**.
 2. Вручную: вкладка **Actions → Build APK → Run workflow**.
 3. Готовый APK: открыть завершённый запуск → блок **Artifacts** → скачать zip → внутри `WinlatorOne-<версия>-build<N>-<commit>.apk` и `.sha256`.
-4. Релиз: создать тег `v0.1.0` (например, через *Releases → Draft a new release*). APK автоматически прикрепится к релизу (pre-release).
+4. Релиз: каждая успешная сборка `main` автоматически публикуется как pre-release `v<версия>-build.<N>` во вкладке **Releases** — APK можно скачать прямо с телефона. Push тега `v*` создаёт обычный релиз.
 
 Сборка занимает ~10–20 минут (основное время — CMake/NDK).
 
