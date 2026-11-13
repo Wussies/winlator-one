@@ -1,0 +1,4 @@
+# NEXORA does not use Git LFS. Large runtime archives (imagefs, Proton) are
+# published as pinned GitHub Release assets and verified by SHA-256 at build
+# time (see tools/components.lock and tools/fetch-components.sh).
+tools/sdl/*.patch whitespace=-blank-at-eol

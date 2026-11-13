@@ -1,0 +1,28 @@
+DirectAudio — native Wine → Android AAudio mmdevapi driver
+==========================================================
+
+Original author / maintainer:
+    The412Banner  <205237651+The412Banner@users.noreply.github.com>
+
+Provenance:
+    winedirectaudio.drv is an original driver. Wine has no AAudio backend
+    upstream; this is a new native Wine mmdevapi driver written from scratch.
+    Its structure and mmdevapi ring-buffer bookkeeping are modelled on Wine's
+    own winecoreaudio.drv (the macOS CoreAudio backend), with the CoreAudio
+    device layer replaced by Android AAudio — no PulseAudio daemon and no ALSA
+    server in the path. Because it derives from and links Wine's LGPL-licensed
+    mmdevapi internals, it is licensed LGPL-2.1 (see COPYING).
+
+Contributions:
+    Contributors retain copyright to their changes and agree to license them
+    under LGPL-2.1-or-later. Add yourself below when you land a change.
+
+    MaxsTechReview (Max, @maxjivi05)  —  2026-10-06
+        The relay helper's field fixes (Droid-Deck/DroidDeck#338 "Fix Audio
+        Crackling on Pulse & DirectAudio"): prime the ring before playing,
+        fade out and re-prime on an underrun instead of zero-padding, one
+        consumer per ring during a reopen, a 40 ms starting target kept
+        across reopens, a device buffer of at least two bursts; and the
+        PulseAudio sink's non-blocking half-burst servicing at audio
+        priority. Carried into directaudio-relay.c and
+        pulse/module-directaudio-sink.c in v1.4.0 / linux-v1.0.0.
