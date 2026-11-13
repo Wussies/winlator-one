@@ -9,6 +9,7 @@ object RetroRomScanner {
     data class Result(val added: Int, val removed: Int)
 
     fun scanConfiguredFolder(context: Context): Result {
+        if (!com.winlator.cmod.app.NexoraPolicy.RETRO_CONSOLES_ENABLED) return Result(0, 0) // NEXORA
         val dir = RetroDefaults.romsDir(context)?.let(::File) ?: return Result(0, 0)
         if (!dir.isDirectory) return Result(0, 0)
         return scan(context, dir)

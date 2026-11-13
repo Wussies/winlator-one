@@ -149,7 +149,8 @@ object RetroSystems {
     private const val PS2_SIZE_THRESHOLD = 900L * 1024 * 1024
     private const val WII_SIZE_THRESHOLD = 1500L * 1024 * 1024
 
-    val allExtensions: Set<String> = ALL.flatMap { it.extensions }.toSet() - "exe"
+    val allExtensions: Set<String> =
+        if (!com.winlator.cmod.app.NexoraPolicy.RETRO_CONSOLES_ENABLED) emptySet() else ALL.flatMap { it.extensions }.toSet() - "exe"
 
     fun fromId(id: String?): RetroSystem? {
         if (id.isNullOrBlank()) return null
@@ -176,6 +177,7 @@ object RetroSystems {
     }
 
     fun detectForFile(path: String): RetroSystem? {
+        if (!com.winlator.cmod.app.NexoraPolicy.RETRO_CONSOLES_ENABLED) return null // NEXORA
         val ext = path.substringAfterLast('.', "").lowercase(Locale.US)
         if (RetroRomArchive.isArchive(path)) return RetroRomArchive.detect(path)
         if (ext in WII_ONLY_EXTENSIONS) return WII
@@ -193,6 +195,7 @@ object RetroSystems {
     }
 
     fun isRetroRom(path: String?): Boolean {
+        if (!com.winlator.cmod.app.NexoraPolicy.RETRO_CONSOLES_ENABLED) return false // NEXORA
         if (path.isNullOrBlank()) return false
         val ext = path.substringAfterLast('.', "").lowercase(Locale.US)
         if (RetroRomArchive.isArchive(path)) return RetroRomArchive.detect(path) != null

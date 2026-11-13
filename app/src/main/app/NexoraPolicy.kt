@@ -33,4 +33,11 @@ object NexoraPolicy {
 
     /** The upstream self-updater targets WinNative releases, not NEXORA. */
     const val UPSTREAM_UPDATER_ENABLED = false
+
+    /**
+     * Retro console emulation (libretro, ARMSX2/PS2, Dolphin, "Gen1" engine)
+     * is outside NEXORA's scope and contained a DRM bypass (PS2 DNAS). Entry
+     * points are hidden; the modules are scheduled for removal in Stage 2.
+     */
+    const val RETRO_CONSOLES_ENABLED = false
 }

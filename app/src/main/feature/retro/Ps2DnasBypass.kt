@@ -53,8 +53,9 @@ object Ps2DnasBypass {
     fun hasBypass(ctx: Context, serial: String?): Boolean =
         serial != null && loadDb(ctx).containsKey(serial.trim().uppercase())
 
+    // NEXORA: DNAS bypass (DRM circumvention) disabled; its database is not shipped.
     fun isEnabled(ctx: Context): Boolean =
-        ctx.getSharedPreferences("ARMSX2", Context.MODE_PRIVATE).getBoolean(PREF, true)
+        com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED && ctx.getSharedPreferences("ARMSX2", Context.MODE_PRIVATE).getBoolean(PREF, true)
 
     fun setEnabled(ctx: Context, on: Boolean) {
         ctx.getSharedPreferences("ARMSX2", Context.MODE_PRIVATE).edit().putBoolean(PREF, on).apply()
