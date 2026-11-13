@@ -232,11 +232,14 @@ fun OtherSettingsScreen(
         ) {
             SectionLabel(stringResource(R.string.common_ui_application))
 
-            UpdatesCard(
-                checked = state.checkForUpdates,
-                onCheckedChange = onCheckForUpdatesChanged,
-                onCheckNow = onCheckForUpdatesNow,
-            )
+            // NEXORA: upstream updater disabled; no update controls are shown.
+            if (com.winlator.cmod.app.NexoraPolicy.UPSTREAM_UPDATER_ENABLED) {
+                UpdatesCard(
+                    checked = state.checkForUpdates,
+                    onCheckedChange = onCheckForUpdatesChanged,
+                    onCheckNow = onCheckForUpdatesNow,
+                )
+            }
 
             if (state.updateSource.isNotEmpty()) {
                 UpdateSourceCard(source = state.updateSource)

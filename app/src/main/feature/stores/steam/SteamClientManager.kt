@@ -29,6 +29,7 @@ object SteamClientManager {
 
     @JvmStatic
     fun isColdClientInstalled(context: Context): Boolean {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return false // NEXORA
         val imageFs = ImageFs.find(context)
         val loaderExe = File(imageFs.rootDir, "${ImageFs.WINEPREFIX}/drive_c/Program Files (x86)/Steam/steamclient_loader_x64.exe")
         val extraDll = File(imageFs.rootDir, "${ImageFs.WINEPREFIX}/drive_c/Program Files (x86)/Steam/extra_dlls/StubDRM64.dll")
@@ -123,6 +124,7 @@ object SteamClientManager {
 
     @JvmStatic
     fun extractColdClientSupport(context: Context): Boolean {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return false // NEXORA: ColdClient not shipped
         val imageFs = ImageFs.find(context)
         val expFile = File(context.filesDir, "experimental-drm.tzst")
         val stampFile = File(context.filesDir, "experimental-drm.version")
@@ -180,6 +182,7 @@ object SteamClientManager {
 
     @JvmStatic
     fun ensureSteamlessSupportReady(context: Context): Boolean {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return false // NEXORA: Steamless not shipped
         val rootDir = ImageFs.find(context).rootDir
         val steamlessCli = File(rootDir, "Steamless/Steamless.CLI.exe")
         val generateInterfacesExe = File(rootDir, "generate_interfaces_file.exe")
@@ -214,6 +217,7 @@ object SteamClientManager {
         exePath: String,
         shellRunner: ShellCommandRunner,
     ): Boolean {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return false // NEXORA
         val rootDir = ImageFs.find(context).rootDir
         val steamlessCli = File(rootDir, "Steamless/Steamless.CLI.exe")
         val pluginsDir = File(rootDir, "Steamless/Plugins")

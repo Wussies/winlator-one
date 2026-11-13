@@ -270,7 +270,18 @@ class SteamLoginActivity : FixedFontScaleComponentActivity() {
                         }
                     }
                 }
-                CredentialForm(state, viewModel, passwordVisible, onTogglePassword, compact = true)
+                if (com.winlator.cmod.app.NexoraPolicy.STEAM_PASSWORD_LOGIN_ENABLED) {
+                    CredentialForm(state, viewModel, passwordVisible, onTogglePassword, compact = true)
+                } else {
+                    // NEXORA: no password form; sign-in is QR-only via the official Steam app.
+                    Text(
+                        stringResource(R.string.nexora_steam_qr_only),
+                        color = TextSecondary,
+                        fontSize = 13.sp,
+                        lineHeight = 18.sp,
+                        textAlign = TextAlign.Center,
+                    )
+                }
             }
         }
 

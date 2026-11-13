@@ -3883,6 +3883,26 @@ private fun ReshadeCatalogRow(
 
 @Composable
 private fun SteamSection(state: GameSettingsStateHolder) {
+    // NEXORA: the upstream launch modes shown here are not available (see
+    // NexoraPolicy / SECURITY_AUDIT.md). Show what is true instead of toggles
+    // that would do nothing.
+    if (!com.winlator.cmod.app.NexoraPolicy.OFFICIAL_STEAM_CLIENT_AVAILABLE &&
+        !com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED
+    ) {
+        state.steamLauncher.value = false
+        state.useLegacyLauncher.value = false
+        state.runtimePatcher.value = false
+        SettingGroup {
+            Text(
+                stringResource(R.string.nexora_steam_launch_info),
+                color = TextDim,
+                fontSize = 12.sp,
+                lineHeight = 17.sp
+            )
+        }
+        return
+    }
+
 
     val onSteamLauncherChange: (Boolean) -> Unit = { enabled ->
         state.steamLauncher.value = enabled

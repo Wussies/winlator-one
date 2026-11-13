@@ -217,6 +217,7 @@ class SteamLoginViewModel : ViewModel() {
     }
 
     fun onCredentialLogin() {
+        if (!com.winlator.cmod.app.NexoraPolicy.STEAM_PASSWORD_LOGIN_ENABLED) return // NEXORA: QR only
         with(_loginState.value) {
             if (username.isEmpty() || password.isEmpty()) return@with
             credentialLoginJob?.cancel()

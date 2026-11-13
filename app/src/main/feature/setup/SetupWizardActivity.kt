@@ -467,55 +467,20 @@ class SetupWizardActivity : FixedFontScaleFragmentActivity() {
         val progress: Float? = null,
     )
 
+    // NEXORA: fallback list = pinned catalog (NexoraComponentPins); upstream's
+    // hard-coded URLs pointed at a personal repository and were stale.
     private val recommendedComponents =
-        listOf(
-            PackageSpec(
-                label = "DXVK 2.7.1 GPLAsync",
-                type = ContentProfile.ContentType.CONTENT_TYPE_DXVK,
-                url = "https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-Dxvk/Dxvk-2.7.1-gplasync.wcp",
-            ),
-            PackageSpec(
-                label = "DXVK 2.7.1 ARM64EC GPLAsync",
-                type = ContentProfile.ContentType.CONTENT_TYPE_DXVK,
-                url = "https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-Arm64ec-Dxvk/Dxvk-2.7.1-arm64ec-gplasync.wcp",
-            ),
-            PackageSpec(
-                label = "VKD3D Proton 3.0.1",
-                type = ContentProfile.ContentType.CONTENT_TYPE_VKD3D,
-                url = "https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-VKD3D/Vkd3d-proton-3.0.1.wcp",
-            ),
-            PackageSpec(
-                label = "VKD3D ARM64EC 3.0.1",
-                type = ContentProfile.ContentType.CONTENT_TYPE_VKD3D,
-                url = "https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-arm64ec-VKD3D/Vkd3d-arm64ec-3.0.1.wcp",
-            ),
-            PackageSpec(
-                label = "DXVK 2.4.1 pre-reg",
-                type = ContentProfile.ContentType.CONTENT_TYPE_DXVK,
-                url = "https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-Dxvk/Dxvk-2.4.1-pre-reg.wcp",
-            ),
-            PackageSpec(
-                label = "FEX 2605",
-                type = ContentProfile.ContentType.CONTENT_TYPE_FEXCORE,
-                url = "https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-FEX/FEX-2605.wcp",
-            ),
-            PackageSpec(
-                label = "Box64 0.4.2",
-                type = ContentProfile.ContentType.CONTENT_TYPE_BOX64,
-                url = "https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-Box64/Box64-0.4.2.wcp",
-            ),
-            PackageSpec(
-                label = "Wowbox64 0.4.2",
-                type = ContentProfile.ContentType.CONTENT_TYPE_WOWBOX64,
-                url = "https://github.com/nicholasx417/WinNative-Components/releases/download/Stable-wowbox64/Wowbox64-0.4.2.wcp",
-            ),
-        )
+        com.winlator.cmod.runtime.content.NexoraComponentPins.pins
+            .filter { it.type != "Proton" && it.type != "Wine" }
+            .mapNotNull { pin ->
+                ContentProfile.ContentType.getTypeByName(pin.type)?.let { PackageSpec(pin.verName, it, pin.upstreamUrl) }
+            }
 
     private val x86ProtonSpec =
         RuntimeSpec(
             label = "Recommended x86-64",
-            fallbackType = ContentProfile.ContentType.CONTENT_TYPE_WINE,
-            fallbackUrl = "https://github.com/nicholasx417/WinNative-Components/releases/download/Wine/wine-9.20-x86_64.wcp",
+            fallbackType = ContentProfile.ContentType.CONTENT_TYPE_PROTON,
+            fallbackUrl = "https://github.com/nicholasx417/WinNative-Components/releases/download/Proton/Proton-11.0-2-x86-64-steam.wcp",
         )
 
     private val recommendedUrlsState = mutableStateOf<Set<String>>(emptySet())
@@ -541,7 +506,7 @@ class SetupWizardActivity : FixedFontScaleFragmentActivity() {
         RuntimeSpec(
             label = "Recommended ARM64EC",
             fallbackType = ContentProfile.ContentType.CONTENT_TYPE_PROTON,
-            fallbackUrl = "https://github.com/nicholasx417/WinNative-Components/releases/download/Proton/Proton-10-arm64ec-coffincolors.wcp",
+            fallbackUrl = "https://github.com/nicholasx417/WinNative-Components/releases/download/Proton/Proton-11.0-2-arm64ec-steam-unix.wcp",
         )
 
     private val TAG = "SetupWizardActivity";
@@ -1246,7 +1211,11 @@ class SetupWizardActivity : FixedFontScaleFragmentActivity() {
                     // 2. Fetch full catalog (content.json)
                     val fullCatalog =
                         parseRecommendedPackages(
-                            Downloader.downloadString(ContentsManager.REMOTE_PROFILES),
+                            if (com.winlator.cmod.runtime.content.NexoraComponentPins.enforced) {
+                                com.winlator.cmod.runtime.content.NexoraComponentPins.catalogJson()
+                            } else {
+                                Downloader.downloadString(ContentsManager.REMOTE_PROFILES)
+                            },
                         )
 
                     // 3. Merge: start with recommended, then add any full catalog entries not already present
@@ -1301,7 +1270,13 @@ class SetupWizardActivity : FixedFontScaleFragmentActivity() {
         }
 
     private fun fetchRecommendedPackages(): List<RemotePackageSpec> {
-        val json = Downloader.downloadString(resolveJsonDownloadUrl(DEFAULT_JSON_URL))
+        // NEXORA: the recommended set is the pinned catalog, not a mutable remote JSON.
+        val json =
+            if (com.winlator.cmod.runtime.content.NexoraComponentPins.enforced) {
+                com.winlator.cmod.runtime.content.NexoraComponentPins.catalogJson()
+            } else {
+                Downloader.downloadString(resolveJsonDownloadUrl(DEFAULT_JSON_URL))
+            }
         if (!json.isNullOrBlank()) {
             prefs(this).edit().putString(KEY_DEFAULT_JSON_CACHE, json).apply()
             val specs = parseRecommendedPackages(json)

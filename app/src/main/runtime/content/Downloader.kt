@@ -71,6 +71,8 @@ object Downloader {
         file: File,
         listener: DownloadListener?,
     ): Boolean {
+        // NEXORA: components come only from the pinned, hash-verified catalog.
+        if (NexoraComponentPins.enforced) return NexoraComponentPins.download(originalUrl, file, listener)
         val filename = extractFilename(originalUrl)
         if (filename != null) {
             ensureFileMap()

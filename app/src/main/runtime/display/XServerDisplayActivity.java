@@ -5258,6 +5258,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
     }
 
     private boolean isBionicSteamEnabledForShortcut() {
+        if (!com.winlator.cmod.app.NexoraPolicy.OFFICIAL_STEAM_CLIENT_AVAILABLE) return false; // NEXORA: see NexoraPolicy
         if (!isSteamShortcut()) return false;
         if (isRealSteamLaunchEnabledForShortcut()) return false;
         boolean cold = shortcut != null
@@ -5293,6 +5294,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
     }
 
     private boolean isColdClientEnabledForShortcut() {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return false; // NEXORA: no ColdClient
         if (!isSteamShortcut()) return false;
         if (isRealSteamLaunchEnabledForShortcut()) return false; // mutually exclusive
         return shortcut != null
@@ -12137,6 +12139,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
 
     private void injectSteamApiIfMissing(File gameDir, String appDirPath, String language,
             boolean isOffline, boolean useSteamInput, String ticketBase64, java.util.List<String> backupPaths) {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return; // NEXORA: no Goldberg injection
         Log.w("XServerDisplayActivity", "No steam_api DLLs found in game directory — injecting Goldberg steam_api next to game exe");
         try {
             String exePath = resolveShortcutSteamExecutablePath(getCanonicalPathOrAbsolute(gameDir));
@@ -12254,6 +12257,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
 
     private void replaceSteamApiDlls(File gameDir, String appDirPath, String language,
             boolean isOffline, boolean useSteamInput, String ticketBase64) {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return; // NEXORA: game's own steam_api is kept
         if (gameDir == null || !gameDir.exists()) return;
 
         java.util.List<String> backupPaths = new java.util.ArrayList<>();
@@ -12387,6 +12391,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
 
     private void setupSteamSettingsForAllDirs(File dir, int appId, String language,
             boolean isOffline, boolean useSteamInput, String ticketBase64) {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return; // NEXORA: Goldberg settings not written
         if (dir == null || !dir.exists()) return;
 
         File[] files = dir.listFiles();
@@ -12416,6 +12421,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
 
     // Backfill steamclient stubs for older steam_api replacements.
     private void copySteamclientStubs(File dir) {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return; // NEXORA: no steamclient stubs
         if (dir == null || !dir.exists()) return;
         File[] files = dir.listFiles();
         if (files == null) return;
@@ -12611,6 +12617,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
     }
 
     private void ensureUnpackedExeActive() {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return; // NEXORA: no Steamless-unpacked exe swap
         if (shortcut == null || !"STEAM".equals(shortcut.getExtra("game_source"))) return;
         try {
             int appId = Integer.parseInt(shortcut.getExtra("app_id"));
@@ -12867,6 +12874,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
     }
 
     private void runSteamlessOnExe(GuestProgramLauncherComponent launcher) {
+        if (!com.winlator.cmod.app.NexoraPolicy.DRM_CIRCUMVENTION_ENABLED) return; // NEXORA: Steamless is not shipped
         if (shortcut == null || !"STEAM".equals(shortcut.getExtra("game_source"))) return;
         int appId;
         try {

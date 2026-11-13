@@ -452,7 +452,12 @@ class ContentsFragment : Fragment() {
 
                 val json =
                     withContext(Dispatchers.IO) {
-                        Downloader.downloadString(contentsUrl)
+                        // NEXORA: the remote catalog is replaced by the pinned catalog.
+                        if (com.winlator.cmod.runtime.content.NexoraComponentPins.enforced) {
+                            com.winlator.cmod.runtime.content.NexoraComponentPins.catalogJson()
+                        } else {
+                            Downloader.downloadString(contentsUrl)
+                        }
                     }
 
                 if (json != null) {

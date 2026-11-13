@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nexora_steam_launch_info">Steam games are launched directly. Games that require the Steam client or use Steam DRM need the official Steam client, which NEXORA does not include yet. NEXORA does not use Steam emulators or DRM removal tools.</string>
+    <string name="nexora_steam_qr_only">Sign in by scanning the QR code with the official Steam app. NEXORA never asks for your Steam password.</string>
+    <string name="nexora_remote_catalogs_disabled">Online component catalogs are disabled until NEXORA has a signed catalog. You can still import a component file from your device.</string>
+</resources>

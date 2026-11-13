@@ -277,7 +277,13 @@ class DriversFragment : Fragment() {
                 .toSet()
     }
 
+    // NEXORA: no driver repositories are pre-trusted. Upstream preloaded
+    // WinNative-Emu/Drivers and a personal repository (unsigned, mutable).
+    // Users can still add a repository themselves or import a local ZIP.
     private fun defaultRepoList(): List<DriverRepo> =
+        if (com.winlator.cmod.app.NexoraPolicy.REMOTE_COMPONENT_CATALOGS_ENABLED) upstreamDefaultRepoList() else emptyList()
+
+    private fun upstreamDefaultRepoList(): List<DriverRepo> =
         listOf(
             DriverRepo(
                 name = "WinNative Drivers",

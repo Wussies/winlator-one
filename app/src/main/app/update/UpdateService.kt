@@ -72,7 +72,8 @@ object UpdateService {
         if (UpdateRelease.isPullRequestBuild()) UpdateChannel.PULL_REQUEST else UpdateChannel.OFFICIAL
 
     fun isSupported(context: Context): Boolean =
-        when (channel()) {
+        // NEXORA: the upstream updater targets WinNative releases; disabled.
+        if (!com.winlator.cmod.app.NexoraPolicy.UPSTREAM_UPDATER_ENABLED) false else when (channel()) {
             // A CI build is signed with whatever key CI had, so the official certificate is not
             // asked for; what it is replaced with still has to match it, which install checks.
             UpdateChannel.PULL_REQUEST -> UpdateRelease.installedBuildRef().isNotEmpty()
@@ -93,6 +94,7 @@ object UpdateService {
     fun isEnabled(context: Context): Boolean = isSupported(context) && UpdateStore.isEnabled(context)
 
     fun onAppStarted(context: Context) {
+        if (!com.winlator.cmod.app.NexoraPolicy.UPSTREAM_UPDATER_ENABLED) return // NEXORA
         val appContext = context.applicationContext
         scope.launch { UpdateDownloader.clear(appContext) }
         startHourlyLoop(appContext)
@@ -113,6 +115,7 @@ object UpdateService {
     }
 
     fun startHourlyLoop(context: Context) {
+        if (!com.winlator.cmod.app.NexoraPolicy.UPSTREAM_UPDATER_ENABLED) return // NEXORA
         stopHourlyLoop()
         if (!isEnabled(context)) return
         val appContext = context.applicationContext
