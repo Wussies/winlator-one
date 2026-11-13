@@ -1,0 +1,10 @@
+21M	x/Box64-0.4.3-c08554e3f.wcp
+22M	x/Dxvk-2.4.1-pre-reg.wcp
+41M	x/Dxvk-3.0.2-arm64ec-gplasync.wcp
+43M	x/Dxvk-3.0.2-gplasync.wcp
+11M	x/FEXCore-2607-84e127a63-unix.wcp
+789M	x/Proton-11.0-2-arm64ec-steam-unix.wcp
+322M	x/Proton-11.0-2-x86-64-steam.wcp
+14M	x/Vkd3d-3.0.1-S6_9.wcp
+10M	x/Vkd3d-3.0.1-arm64ec-S6_9.wcp
+4.5M	x/WOWBOX64-0.4.3-c08554e.wcp
