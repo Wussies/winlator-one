@@ -1,0 +1,7 @@
+p/java 0 results []
+p/kotlin 0 results []
+p/c 0 results ['Other syntax error at line target/app/src/main/cpp/midihandler/fluidsynth/include/fluidsynth/settings.h:1:\n Failure: unallowed declarator as RHS to scope resolu', 'Other syntax error at line target/app/src/main/cpp/midihandler/fluidsynth/include/fluidsynth/sfont.h:1:\n Failure: unallowed declarator as RHS to scope resolutio', 'Other syntax error at line target/app/src/main/cpp/midihandler/fluidsynth/include/fluidsynth/shell.h:1:\n Failure: unallowed declarator as RHS to scope resolutio']
+p/secrets 0 results []
+p/github-actions 0 results []
+p/insecure-transport 0 results []
+p/default 2 results ['Other syntax error at line target/app/src/main/cpp/midihandler/fluidsynth/include/fluidsynth/settings.h:1:\n Failure: unallowed declarator as RHS to scope resolu', 'Other syntax error at line target/app/src/main/cpp/midihandler/fluidsynth/include/fluidsynth/sfont.h:1:\n Failure: unallowed declarator as RHS to scope resolutio', 'Other syntax error at line target/app/src/main/cpp/midihandler/fluidsynth/include/fluidsynth/shell.h:1:\n Failure: unallowed declarator as RHS to scope resolutio']
