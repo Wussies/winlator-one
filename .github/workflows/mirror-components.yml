@@ -23,13 +23,13 @@ jobs:
         run: |
           mkdir -p dist report
           # Record what upstream currently publishes (with GitHub's own asset digests).
-          for tag in Stable-Dxvk Stable-Arm64ec-Dxvk Stable-VKD3D Stable-arm64ec-VKD3D Stable-FEX Stable-Box64 Stable-wowbox64 Wine Proton; do
+          for tag in Stable-Dxvk Stable-Arm64ec-Dxvk Stable-VKD3D Stable-arm64ec-VKD3D Stable-fex-unix Stable-Box64 Stable-wowbox64 Proton; do
             curl -s -H "Authorization: Bearer ${{ github.token }}" \
               "https://api.github.com/repos/nicholasx417/WinNative-Components/releases/tags/$tag" \
               | python3 -c "import sys,json;d=json.load(sys.stdin);[print('$tag',a['name'],a['size'],a.get('digest',''),a['updated_at']) for a in d.get('assets',[])]" >> report/upstream-assets.txt || true
           done
           : > report/download-failures.txt
-          grep -v '^\s*#' audit/runtime-components.txt | grep -v '^\s*$' | while read -r name url; do
+          grep -v '^\s*#' audit/runtime-components.txt | grep -v '^\s*$' | while read -r name type ver url; do
             if ! curl -fL --retry 3 --proto '=https' -o "dist/$name" "$url"; then
               echo "$name $url" >> report/download-failures.txt; rm -f "dist/$name"
             fi
