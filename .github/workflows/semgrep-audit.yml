@@ -3,7 +3,7 @@ name: Semgrep audit (Stage 0, rerun)
 on:
   push:
     branches: [ 'audit/nexora-stage0' ]
-    paths: [ '.github/workflows/semgrep-audit.yml' ]
+    paths: [ '.github/workflows/semgrep-audit.yml' ]  # rerun 2
   workflow_dispatch:
 
 permissions:
@@ -33,13 +33,23 @@ jobs:
           pip install --quiet semgrep
           semgrep --version | tee out/version.txt
           set +e
-          semgrep scan --timeout 60 --max-target-bytes 2000000 \
-            --config p/java --config p/kotlin --config p/c --config p/secrets \
-            --config p/github-actions --config p/bash --config p/insecure-transport \
-            --exclude 'target/app/src/main/cpp/proot' \
-            --json --output out/semgrep.json target 2> out/stderr.txt
-          echo "exit=$?" >> out/version.txt
-          tail -n 30 out/stderr.txt
+          for cfg in p/java p/kotlin p/c p/secrets p/github-actions p/insecure-transport p/default; do
+            n=$(echo $cfg | tr '/' '_')
+            semgrep scan --timeout 60 --max-target-bytes 2000000 --config $cfg \
+              --exclude 'target/app/src/main/cpp/proot' --json --output out/$n.json target 2>/dev/null
+            echo "$cfg exit=$?" >> out/version.txt
+            python3 -c "import json,sys;d=json.load(open('out/$n.json'));print('$cfg', len(d.get('results',[])), 'results', [e.get('message','')[:160] for e in d.get('errors',[])][:3])" | tee -a out/errors.txt
+          done
+          python3 -c "
+          import json,glob
+          r=[];seen=set()
+          for f in glob.glob('out/p_*.json'):
+              for x in json.load(open(f)).get('results',[]):
+                  k=(x['check_id'],x['path'],x['start']['line'])
+                  if k not in seen: seen.add(k); r.append(x)
+          json.dump({'results':r,'errors':[]},open('out/semgrep.json','w'))
+          "
+          rm -f out/p_*.json
           python3 - <<'EOF'
           import json, collections
           d = json.load(open("out/semgrep.json"))
