@@ -138,7 +138,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [30, 35]
+        api-level: [30, 35, 36]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -187,7 +187,7 @@ jobs:
           name: NEXORA 0.3.0 Stage 5 (build ${{ github.run_number }})
           body: |
             Automatic build of `${{ github.sha }}` (${{ github.ref_name }}). Signing: ${{ needs.build.outputs.signing }}.
-            Emulator test "Install System Files" (Android 11 and 15, x86_64 + ARM64 translation): **${{ needs.emulator-install-test.result }}**.
+            Emulator test "Install System Files" (Android 11, 15 and 16 emulators, x86_64 + ARM64 translation): **${{ needs.emulator-install-test.result }}**.
             NOT tested on a OnePlus 13.
           files: dist/*
           prerelease: true

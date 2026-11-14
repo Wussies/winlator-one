@@ -14,6 +14,7 @@
 |---|---|
 | Release-сборка APK в GitHub Actions (не debuggable, R8), пакет `io.github.wussies.nexora`, иконка и тема NEXORA | **Build Verified** |
 | Проверка APK: MobSF, ClamAV (0 срабатываний), APKiD | **Build Verified** (build.12) |
+| Установка системных файлов (Install System Files) | **Runtime Verified на эмуляторах** Android 11 и 15 (x86_64 + трансляция ARM64), build.17; не проверено на OnePlus 13 |
 | Установка на Android 16 / запуск на OnePlus 13 | Implemented, не проверено на устройстве |
 | Вход в Steam: логин/пароль (только к серверам Valve) + Steam Guard, или QR | Implemented, не проверено |
 | Библиотека и загрузка Steam / Epic / GOG | Унаследовано от WinNative, не проверено |
@@ -25,7 +26,7 @@
 
 ## Скачать
 
-Вкладка **Releases** → последний `nexora-0.3.0-stage5-build.N` (pre-release, ~375 МБ: внутри Linux-среда и шаблоны Wine).
+Вкладка **Releases** → последний `nexora-0.3.0-stage5-build.N` (pre-release; сборки 10–14 вылетают при установке системных файлов — используйте 17 и новее; ~375 МБ: внутри Linux-среда и шаблоны Wine).
 
 ## Ветки
 

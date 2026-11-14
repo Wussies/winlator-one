@@ -87,6 +87,20 @@ grep -E "ImageFsInstaller|NativeContentIO|TarCompressorUtils|AndroidRuntime|DEBU
 
 starts=$(grep -c "ImageFsInstaller: ImageFS [0-9]* installed" "$OUT/logcat.txt" || true)
 if [ "$result" = "INSTALLED" ] && [ "$starts" != "1" ]; then result="DUPLICATE_INSTALL ($starts)"; fi
+log "evidence: installer log lines"
+grep -E "ImageFsInstaller|NativeContentIO" "$OUT/logcat.txt" | sed 's/^/  /' | tail -n 20 | tee -a "$OUT/steps.txt"
+button=$(python3 -I - "$OUT/ui-final.xml" <<'PY'
+import sys, xml.etree.ElementTree as ET
+try:
+    root = ET.fromstring(open(sys.argv[1], encoding="utf-8", errors="ignore").read().strip())
+    texts = [n.get("text") for n in root.iter("node") if n.get("text")]
+    i = [t.lower() for t in texts].index("install system files")
+    print(" | ".join(texts[i:i + 4]))
+except Exception as e:
+    print(f"(not found: {e})")
+PY
+)
+log "evidence: system-files card now shows: $button"
 if [ "$result" = "INSTALLED" ]; then
   log "RESULT: INSTALLED after $(( $(date +%s) - start ))s"
   exit 0

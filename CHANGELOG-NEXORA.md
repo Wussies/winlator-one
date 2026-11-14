@@ -4,6 +4,15 @@ Changes relative to the imported base WinNative-Emu/WinNative@72d145b (see PROVE
 
 ## 0.3.0-stage5 (in progress, not tested on a device)
 
+### Fixed — crash on "Install System Files" (builds 10–14)
+- Cause: the first R8 release builds stripped `OnExtractFileListener` methods the native extractor calls by name; `GetMethodID` failed and the pending `NoSuchMethodError` aborted the process. Same scan of the shipped dex: Vulkan loader helpers and seven Wayland compositor callbacks were also missing (would have broken game launch / Wayland mode).
+- Fix: app classes are kept unrenamed by R8; the native extractor clears the exception when an optional callback is missing.
+- The installer now: refuses a second concurrent install; checks the archive exists and free space suffices before deleting anything; guards every stage (an `Error` in a worker can no longer kill the app); removes a half-extracted tree after failure or interruption; tells the user why it failed (no space with the amount, damaged APK, unexpected error).
+- CI: `tools/check-jni-dex.py` fails the build if the dex lacks any Java member native code looks up (detects all 13 on build 14); emulator job presses "Install System Files" twice and requires exactly one completed installation without crash. Passed on Android 11 and 15 emulators (x86_64 + ARM64 translation) for build 17. **Not yet verified on a OnePlus 13.**
+
+### Steam (Linux client path, SECURITY_AUDIT A-6)
+- Linux runtime, ARM64 Proton and compositor driver are downloaded from NEXORA's mirror (release `nexora-components-3`) and checked against SHA-256 pinned in the source.
+
 ### Removed (licensing, SECURITY_AUDIT A-9)
 - Microsoft DLLs no longer shipped: DirectX (d3dx9/10/11, d3dcompiler), XAudio/XACT, DirectMusic, DirectPlay, DirectShow, DirectSound, Windows Media decoders, Visual C++ 2010 runtime.
 - nGlide and its configurator, dgVoodoo control panel, the Dd7To9 ddraw wrapper (contained a renamed Microsoft binary), Microsoft/Bitstream bitmap fonts in the container template.
