@@ -22,6 +22,15 @@ import java.util.List;
  *
  * It needs proot's seccomp filter, so PROOT_NO_SECCOMP turns it off as well; PROOT_FP_OFF in the
  * container's variables turns it off alone.
+ *
+ * NEXORA (SECURITY_AUDIT A-11): OFF by default. With it preloaded into the session (including
+ * Valve's Steam client), OnePlus 13 users saw OxygenOS's "An attempt by a malicious app to damage
+ * the system has been stopped" when Steam started. An independent project with the same design
+ * (proot + a preloaded library answering Steam's file calls without proot) measured the warning in
+ * 5 of 5 Steam starts with the library and 0 of 5 without it (github.com/tedin7/pons, commit
+ * 99de866). The fast path only saves proot round trips (loading speed); it is not needed for
+ * anything to work. PROOT_FP_ON=1 in the container's variables turns it on explicitly; it is not
+ * offered anywhere in the UI.
  */
 public final class ProotFastPath {
   public static final String LIBRARY = "/usr/local/lib/libwnfastpath.so";
@@ -31,7 +40,9 @@ public final class ProotFastPath {
   private ProotFastPath() {}
 
   public static boolean enabled(EnvVars sessionEnv) {
-    return !LinuxRuntime.noSeccomp(sessionEnv) && !sessionEnv.has("PROOT_FP_OFF");
+    return "1".equals(sessionEnv.get("PROOT_FP_ON"))
+        && !LinuxRuntime.noSeccomp(sessionEnv)
+        && !sessionEnv.has("PROOT_FP_OFF");
   }
 
   /** The key for this rootfs and these binds, or null when the library cannot be told them. */

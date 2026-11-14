@@ -4,6 +4,9 @@ Changes relative to the imported base WinNative-Emu/WinNative@72d145b (see PROVE
 
 ## 0.3.0-stage5 (in progress, not tested on a device)
 
+### Security — OxygenOS warning when Steam starts (SECURITY_AUDIT A-11)
+- proot's "fast path" (`libwnfastpath.so` preloaded into every Linux session process, including Valve's Steam client, issuing syscalls from a fixed-address trampoline page that proot's seccomp filter lets through) is **off by default**. An independent project with the same design measured OxygenOS/ColorOS's "malicious app" warning in 5/5 Steam starts with such a library and 0/5 without. Opt-in only via `PROOT_FP_ON=1`. Not yet confirmed on a OnePlus 13.
+
 ### Fixed — crash on "Install System Files" (builds 10–14)
 - Cause: the first R8 release builds stripped `OnExtractFileListener` methods the native extractor calls by name; `GetMethodID` failed and the pending `NoSuchMethodError` aborted the process. Same scan of the shipped dex: Vulkan loader helpers and seven Wayland compositor callbacks were also missing (would have broken game launch / Wayland mode).
 - Fix: app classes are kept unrenamed by R8; the native extractor clears the exception when an optional callback is missing.

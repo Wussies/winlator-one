@@ -8982,6 +8982,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
         FEXCorePresetManager.normalizeSmcChecksEnvVars(sessionEnv, userEnv);
         sessionEnv.putAll(userEnv);
         boolean fastPath = ProotFastPath.enabled(sessionEnv);
+        if (!fastPath) Log.i(TAG, "proot: fast path off (NEXORA default; PROOT_FP_ON=1 enables it)");
         try {
             LinuxRuntime.writeAccounts(this);
             LinuxRuntime.syncSessionFiles(this, fastPath);
