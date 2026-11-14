@@ -1,0 +1,150 @@
+# SECURITY_AUDIT A-6: the upstream Steam (GameScope) path downloads its Linux
+# runtime, ARM64 Proton and a Turnip driver from mutable release assets whose
+# checksums come from the same server. This job downloads them once, checks
+# them against the published JSON, records provenance (package list, files no
+# package owns, setuid files, executables), scans them with ClamAV and mirrors
+# them into release "nexora-components-3", where NEXORA pins them by SHA-256.
+# Nothing is executed.
+name: Mirror Linux Steam client components (A-6)
+
+on:
+  push:
+    branches: [ 'audit/nexora-stage0' ]
+    paths: [ '.github/workflows/mirror-linux-client.yml' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL
+          df -h /
+      - name: Download and verify against the published metadata
+        run: |
+          set -euo pipefail
+          mkdir -p dist report
+          BASE=https://github.com/WinNative-Emu/Components/releases/download/Assets
+          for c in linuxfs proton-arm64 linux-turnip; do
+            if curl -fsSL --retry 3 --proto '=https' -o "dist/$c.json" "$BASE/$c.json"; then
+              curl -fL --retry 3 --proto '=https' -o "dist/$c.tar.zst" "$BASE/$c.tar.zst"
+              want=$(python3 -c "import json;print(json.load(open('dist/$c.json'))['sha256'])")
+              have=$(sha256sum "dist/$c.tar.zst" | cut -d' ' -f1)
+              [ "$want" = "$have" ] || { echo "$c: checksum $have != published $want"; exit 1; }
+              echo "$c ok $have"
+            else
+              echo "$c: no published metadata (not mirrored)" | tee -a report/missing.txt
+              rm -f "dist/$c.json"
+            fi
+          done
+          # The compositor driver is pinned in the app source already.
+          D=WN-Turnip-1.16-p_Axxx.zip
+          curl -fL --retry 3 --proto '=https' -o "dist/$D" \
+            "https://github.com/nicholasx417/WinNative-Components/releases/download/WinNative-Turnip/$D"
+          echo "146023e8cb402390d2792087f3af6569d24a95d490105cbf41be1a7dacee8957  dist/$D" | sha256sum -c
+          (cd dist && sha256sum * > ../report/SHA256SUMS && stat -c '%n %s' * > ../report/SIZES)
+          cat report/SHA256SUMS
+          curl -s -H "Authorization: Bearer ${{ github.token }}" \
+            https://api.github.com/repos/WinNative-Emu/Components/releases/tags/Assets \
+            | python3 -c "import sys,json;d=json.load(sys.stdin);[print(a['name'],a['size'],a.get('digest',''),a['updated_at']) for a in d.get('assets',[])]" \
+            > report/upstream-assets.txt || true
+      - name: Unpack (read-only) and record provenance
+        run: |
+          set -euo pipefail
+          mkdir -p x/linuxfs x/proton-arm64 x/turnip
+          tar --zstd -xf dist/linuxfs.tar.zst -C x/linuxfs --no-same-owner 2>report/linuxfs-tar.err || true
+          tar --zstd -xf dist/proton-arm64.tar.zst -C x/proton-arm64 --no-same-owner 2>report/proton-tar.err || true
+          unzip -q dist/WN-Turnip-1.16-p_Axxx.zip -d x/turnip
+          df -h /
+          python3 - <<'PY'
+          import os, stat, re
+          root = "x/linuxfs"
+          out = ["# linuxfs provenance", ""]
+          db = os.path.join(root, "var/lib/pacman/local")
+          owned = set(); pkgs = []
+          if os.path.isdir(db):
+              for d in sorted(os.listdir(db)):
+                  p = os.path.join(db, d)
+                  desc = open(os.path.join(p, "desc"), errors="ignore").read() if os.path.exists(os.path.join(p, "desc")) else ""
+                  def field(k):
+                      m = re.search(r"%" + k + r"%\n(.*?)\n\n", desc + "\n\n", re.S)
+                      return (m.group(1).replace("\n", ", ") if m else "")
+                  pkgs.append((field("NAME"), field("VERSION"), field("LICENSE"), field("PACKAGER"), field("URL")))
+                  fp = os.path.join(p, "files")
+                  if os.path.exists(fp):
+                      for line in open(fp, errors="ignore"):
+                          line = line.strip()
+                          if line and not line.startswith("%"): owned.add(line.rstrip("/"))
+          out.append(f"Packages in the pacman database: {len(pkgs)}")
+          packagers = {}
+          for n, v, l, pk, u in pkgs: packagers[pk] = packagers.get(pk, 0) + 1
+          out.append("Packagers: " + "; ".join(f"{k or '?'}: {c}" for k, c in sorted(packagers.items(), key=lambda x: -x[1])))
+          out += ["", "| package | version | license | packager |", "|---|---|---|---|"]
+          out += [f"| {n} | {v} | {l} | {pk} |" for n, v, l, pk, u in pkgs]
+          unowned = []; setuid = []; elf = 0; pe = 0; total = 0
+          for dp, ds, fs in os.walk(root):
+              for f in fs:
+                  full = os.path.join(dp, f); rel = os.path.relpath(full, root)
+                  try: st = os.lstat(full)
+                  except OSError: continue
+                  if stat.S_ISLNK(st.st_mode) or not stat.S_ISREG(st.st_mode): continue
+                  total += 1
+                  if st.st_mode & (stat.S_ISUID | stat.S_ISGID): setuid.append(rel)
+                  with open(full, "rb") as fh: head = fh.read(4)
+                  if head == b"\x7fELF": elf += 1
+                  if head[:2] == b"MZ": pe += 1
+                  if rel not in owned and not rel.startswith(("var/lib/pacman", "etc/", "var/cache", "usr/share/doc")):
+                      unowned.append(rel)
+          out += ["", f"Regular files: {total}, ELF: {elf}, PE: {pe}", "", f"## setuid/setgid files ({len(setuid)})"] + [f"- {s}" for s in setuid]
+          out += ["", f"## Files no package owns ({len(unowned)}) — added by the image builder"] + [f"- {u}" for u in sorted(unowned)[:3000]]
+          open("report/linuxfs-provenance.md", "w").write("\n".join(out) + "\n")
+          prot = ["# proton-arm64 contents", ""]
+          for dp, ds, fs in os.walk("x/proton-arm64"):
+              depth = dp.count(os.sep) - "x/proton-arm64".count(os.sep)
+              if depth <= 2: prot.append(f"- {os.path.relpath(dp, 'x/proton-arm64')}/ ({len(fs)} files)")
+          for cand in ("version", "proton", "LICENSE", "PATENTS.AV1", "toolmanifest.vdf", "compatibilitytool.vdf"):
+              for dp, ds, fs in os.walk("x/proton-arm64"):
+                  if cand in fs and dp.count(os.sep) < 5:
+                      p = os.path.join(dp, cand)
+                      txt = open(p, errors="ignore").read(1500) if os.path.getsize(p) < 200000 else "(large)"
+                      prot += ["", f"### {os.path.relpath(p, 'x/proton-arm64')}", "```", txt, "```"]
+                      break
+          open("report/proton-arm64-contents.md", "w").write("\n".join(prot) + "\n")
+          PY
+          head -n 8 report/linuxfs-provenance.md
+          ls -R x/turnip | head -40 > report/turnip-contents.txt
+          du -sh x/* | tee report/unpacked-sizes.txt
+      - name: ClamAV
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq clamav > /dev/null
+          sudo systemctl stop clamav-freshclam 2>/dev/null || true
+          sudo freshclam --quiet || sudo freshclam
+          clamscan --version > report/clamav.txt
+          clamscan -r -i --detect-pua=yes --max-filesize=1000M --max-scansize=4000M x >> report/clamav.txt 2>&1 || true
+          tail -n 14 report/clamav.txt
+      - name: Store report on audit/results
+        run: |
+          git clone -q --depth 1 -b audit/results "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" results
+          mkdir -p results/linux-client && find report -type f -empty -delete && cp report/* results/linux-client/
+          cd results && git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "Linux Steam client component audit (run ${{ github.run_id }})" && git push -q origin audit/results
+      - name: Publish release nexora-components-3
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          R=nexora-components-3
+          cp report/SHA256SUMS report/clamav.txt dist/
+          if gh release view $R -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload $R -R "$GITHUB_REPOSITORY" --clobber dist/*
+          else
+            gh release create $R -R "$GITHUB_REPOSITORY" --prerelease --target "$GITHUB_SHA" \
+              --title "NEXORA Linux Steam client components" \
+              --notes "Mirror of the Linux runtime, ARM64 Proton and Turnip driver the upstream Steam (GameScope) path downloads from github.com/WinNative-Emu/Components (release Assets) and github.com/nicholasx417/WinNative-Components. Checked against the published SHA-256, inventoried and scanned (ClamAV); reports on branch audit/results, folder linux-client. Pinned by SHA-256 in NEXORA. The Valve Steam client itself is NOT here: it is downloaded from Valve's servers on the device." \
+              dist/*
+          fi
