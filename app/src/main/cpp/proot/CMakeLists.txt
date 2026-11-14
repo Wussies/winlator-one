@@ -21,7 +21,10 @@ target_include_directories(libproot-loader.so PRIVATE src)
 target_compile_definitions(libproot-loader.so PRIVATE ${PROOT_DEFINES})
 target_compile_options(libproot-loader.so PRIVATE ${PROOT_CFLAGS} -fPIC -ffreestanding -fno-stack-protector)
 target_link_options(libproot-loader.so PRIVATE -static -nostdlib -no-pie
-                    -Wl,--build-id=none,-Ttext=0x2000000000,--rosegment,-z,noexecstack)
+                    -Wl,--build-id=none,-Ttext=0x2000000000,--rosegment,-z,noexecstack
+                    # NEXORA: a link map keeps the symbol addresses available even when a
+                    # release toolchain strips the symbol table (loader-info.cmake reads it).
+                    -Wl,-Map=${CMAKE_CURRENT_BINARY_DIR}/libproot-loader.map)
 
 # tracee/mem.c finds the loader's pokedata_workaround stub by its offset from _start.
 set(LOADER_INFO ${CMAKE_CURRENT_BINARY_DIR}/loader-info.c)
@@ -29,6 +32,7 @@ find_program(PROOT_READELF llvm-readelf HINTS "${ANDROID_TOOLCHAIN_ROOT}/bin" RE
 add_custom_command(OUTPUT ${LOADER_INFO}
                    COMMAND ${CMAKE_COMMAND} -DREADELF=${PROOT_READELF}
                            -DLOADER=$<TARGET_FILE:libproot-loader.so> -DOUTPUT=${LOADER_INFO}
+                           -DMAP=${CMAKE_CURRENT_BINARY_DIR}/libproot-loader.map
                            -P ${CMAKE_CURRENT_SOURCE_DIR}/loader-info.cmake
                    DEPENDS libproot-loader.so ${CMAKE_CURRENT_SOURCE_DIR}/loader-info.cmake
                    VERBATIM)
