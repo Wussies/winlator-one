@@ -1736,15 +1736,8 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
         super.onNewIntent(intent);
         if (intent == null) return;
 
-        if ("com.winnative.cmod.DEBUG_INJECT_TAP".equals(intent.getAction())) {
-            handleDebugInjectTap(intent);
-            return;
-        }
-
-        if ("com.winnative.cmod.DEBUG_INJECT_KEY".equals(intent.getAction())) {
-            handleDebugInjectKey(intent);
-            return;
-        }
+        // NEXORA: upstream DEBUG_INJECT_TAP / DEBUG_INJECT_KEY intent handlers removed
+        // (input injection through intents).
 
         String incomingShortcutPath = intent.getStringExtra("shortcut_path");
         String incomingShortcutUuid = intent.getStringExtra("shortcut_uuid");

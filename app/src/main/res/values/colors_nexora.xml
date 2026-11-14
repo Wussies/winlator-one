@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- NEXORA colour system: AMOLED black, graphite surfaces, cold blue → violet accents. -->
+<resources>
+    <color name="nexora_black">#000000</color>
+    <color name="nexora_graphite_950">#05060A</color>
+    <color name="nexora_graphite_900">#0E1119</color>
+    <color name="nexora_graphite_800">#161A24</color>
+    <color name="nexora_graphite_700">#1F2533</color>
+    <color name="nexora_blue">#3D8BFF</color>
+    <color name="nexora_indigo">#5B6CFF</color>
+    <color name="nexora_violet">#A25CFF</color>
+    <color name="nexora_text">#F2F5FF</color>
+    <color name="nexora_text_dim">#8B95AD</color>
+</resources>

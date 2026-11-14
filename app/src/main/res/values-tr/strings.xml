@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Çalıştır</string>
     <string name="common_ui_edit">Düzenle</string>
     <string name="common_ui_remove">Kaldır</string>
@@ -166,7 +166,7 @@
     <string name="common_ui_grant_all_files_access_browse">Klasörlere doğrudan gözatmak için tüm dosyalara erişim izni verin.</string>
     <string name="common_ui_not_configured">Yapılandırılmadı</string>
     <string name="common_ui_reinstall">Yeniden Yükle</string>
-    <string name="common_ui_exit_app_confirm">WinNative uygulamasından çıkılsın mı?</string>
+    <string name="common_ui_exit_app_confirm">NEXORA uygulamasından çıkılsın mı?</string>
     <string name="common_ui_elements_count">%1$d öğe</string>
     <string name="common_ui_disabled_placeholder">-- Devre dışı --</string>
     <string name="common_ui_enabled">Etkin</string>
@@ -416,7 +416,7 @@
     <string name="shortcuts_properties_runtime_patcher">Çalışma Zamanı DRM Yamalayıcısı</string>
     <string name="shortcuts_properties_runtime_patcher_description">Başlatma sırasında bir DRM yamalayıcı DLL\'i enjekte eder. FPS\'yi düşürür — yalnızca Eski Başlatıcı tek başına başarısız olursa kullanın.</string>
     <string name="steam_section_title">Steam</string>
-    <string name="steam_section_real_client">WinNative Gerçek Steam İstemcisi</string>
+    <string name="steam_section_real_client">NEXORA Gerçek Steam İstemcisi</string>
     <string name="steam_section_emulator">Eski Steam Emülatörü</string>
     <string name="shortcuts_properties_use_steam_input">Steam Input\'u Kullan</string>
     <string name="steam_launcher_real_client">Steam Launcher</string>
@@ -743,8 +743,8 @@ E.g. <b>META</b> için <i>META tuşu</i>, \n
     <string name="session_xserver_pref_kbd">Klavye</string>
     <string name="session_xserver_pref_other">Diğer</string>
     <string name="session_xserver_pref_version">Sürüm</string>
-    <string name="session_xserver_notification_description">WinNative XServer Mesajları</string>
-    <string name="session_xserver_notification_content">WinNative çalışıyor, bu bildirimi kapatmayın veya kaydırmayın</string>
+    <string name="session_xserver_notification_description">NEXORA XServer Mesajları</string>
+    <string name="session_xserver_notification_content">NEXORA çalışıyor, bu bildirimi kapatmayın veya kaydırmayın</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Klavye</string>
@@ -1216,8 +1216,8 @@ E.g. <b>META</b> için <i>META tuşu</i>, \n
     <string name="settings_general_xinput_toggle_title">XInput\'u Devre Dışı Bırak</string>
     <string name="settings_general_xinput_toggle_summary">Özel fare ve klavye denetimi istediğinizde XInput işlemeyi kapatır.</string>
     <string name="settings_external_display_output_summary">Bu ekranı yansıtmak yerine oyunu bağlı bir harici ekrana taşıyın. Gözlükler her zaman kendi ekranlarını kullanır.</string>
-    <string name="settings_general_file_provider_summary">WinNative dosyalarını Android belge seçicilerine ve dosya yöneticilerine açar.</string>
-    <string name="settings_general_auto_scraping_summary">Bu ayar, WinNative\'in özel oyun görsellerini otomatik olarak getirmesine olanak tanır.</string>
+    <string name="settings_general_file_provider_summary">NEXORA dosyalarını Android belge seçicilerine ve dosya yöneticilerine açar.</string>
+    <string name="settings_general_auto_scraping_summary">Bu ayar, NEXORA\'in özel oyun görsellerini otomatik olarak getirmesine olanak tanır.</string>
     <string name="settings_general_open_browser_summary">Desteklenen web bağlantılarını Wine yerine Android tarayıcısında açar.</string>
     <string name="settings_general_clipboard_summary">Android ile Wine oturumları arasında kopyalama ve yapıştırmaya izin verir.</string>
     <string name="settings_general_imagefs_summary">Mevcut kapsayıcılarınızı kaldırmadan paket sistem dosyalarını geri yükler.</string>
@@ -1275,10 +1275,10 @@ E.g. <b>META</b> için <i>META tuşu</i>, \n
     <string name="settings_debug_delete_logs_confirm_message">Bu işlem, kaydedilen tüm günlük dosyalarını (%1$s) kalıcı olarak siler. Bu geri alınamaz.</string>
     <string name="settings_debug_logs_browser_title">Günlükler</string>
     <string name="settings_debug_log_truncated">Bu günlüğün son %1$s kısmı gösteriliyor</string>
-    <string name="settings_debug_logs_subject">WinNative Günlükleri (%1$s)</string>
+    <string name="settings_debug_logs_subject">NEXORA Günlükleri (%1$s)</string>
     <string name="settings_debug_no_logs_available">Kullanılabilir hata ayıklama günlüğü yok. Önce hata ayıklama seçeneklerini etkinleştirin ve bir oyun başlatın.</string>
     <string name="settings_debug_capture_failed">Günlükler yakalanamadı: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">WinNative işlem hatalarını, uyarılarını ve çökmelerini dosyaya kaydet</string>
+    <string name="settings_debug_log_to_file_desc">NEXORA işlem hatalarını, uyarılarını ve çökmelerini dosyaya kaydet</string>
     <string name="settings_filtered_logs_to_file_title">Filtrelenmiş Hata Ayıklama Günlüğü</string>
     <string name="settings_filtered_logs_to_file_desc">Uygulamanın günlüklerini, etiket filtresinde ayarlananlara göre filtreleyerek bir dosyaya kaydet.</string>
     <string name="settings_debug_section_emulation">Öykünme</string>
@@ -1737,7 +1737,7 @@ Yüklü konum:
     <string name="steam_chat_setting_ingame">Oyunda Sohbeti Etkinleştir</string>
     <string name="steam_chat_setting_ingame_desc">Oynarken mesaj alın ve gönderin</string>
     <string name="steam_chat_setting_stay_running">Arka Planda Çalıştır</string>
-    <string name="steam_chat_setting_stay_running_desc">WinNative\'den çıktıktan sonra sohbeti çalışır durumda tut</string>
+    <string name="steam_chat_setting_stay_running_desc">NEXORA\'den çıktıktan sonra sohbeti çalışır durumda tut</string>
     <string name="steam_chat_settings_overlay_needed">Sohbet balonlarını kullanmak için diğer uygulamaların üzerinde göstermeye izin verin</string>
     <string name="steam_chat_heads_title">Mesajlar</string>
     <string name="steam_chat_heads_recent_title">Son</string>
@@ -2388,7 +2388,7 @@ Yüklü konum:
     <string name="retro_scr_sgsr_upscaling">SGSR ölçekleme</string>
     <string name="retro_scr_performance_hud">Performans HUD</string>
     <string name="retro_scr_credits_licenses">KATKIDA BULUNANLAR &amp; LİSANSLAR</string>
-    <string name="retro_scr_credits_desc">WinNative\'in bazı özellikleri bu açık kaynaklı projeler üzerine kuruludur. Her kaynağı görüntülemek için dokunun.</string>
+    <string name="retro_scr_credits_desc">NEXORA\'in bazı özellikleri bu açık kaynaklı projeler üzerine kuruludur. Her kaynağı görüntülemek için dokunun.</string>
     <string name="retro_scr_tab_defaults">Varsayılanlar</string>
     <string name="retro_scr_tab_credits">Katkıda Bulunanlar</string>
     <string name="settings_support_title">Destek</string>
@@ -2915,14 +2915,14 @@ Yüklü konum:
     <string name="update_ignore_until_next">Sonraki güncellemeye kadar yoksay</string>
     <string name="update_no_notes">Bu derleme için sürüm notu yayımlanmadı.</string>
     <string name="update_apk_notice">Bu güncelleme uygulamanın kendisini değiştirir, bu yüzden Android kurulumu onaylamanızı isteyecek. Oyunlarınız, kapsayıcılarınız ve ayarlarınız korunur.</string>
-    <string name="update_up_to_date">WinNative güncel.</string>
+    <string name="update_up_to_date">NEXORA güncel.</string>
     <string name="update_unsupported_build">Uygulama içi güncellemeler yalnızca resmi imzalı sürümlerde sunulur.</string>
     <string name="settings_general_update_source">Güncelleme kaynağı</string>
     <string name="settings_general_update_source_summary">Bir pull request’ten alınan yapı o pull request’i, resmi bir kurulum ise resmi sürümleri izler.</string>
     <string name="update_channel_official">Resmi</string>
     <string name="networking_section_title">Ağ</string>
     <string name="networking_driver">Ağ sürücüsü</string>
-    <string name="networking_driver_winnative">WinNative Ağ Sürücüsü</string>
+    <string name="networking_driver_winnative">NEXORA Ağ Sürücüsü</string>
     <string name="networking_driver_none">Wine varsayılanı (adaptör öykünmesi yok)</string>
     <string name="networking_driver_summary">Windows programlarına kararlı MAC adresleri olan gerçek bir ağ adaptörü listesi verir. Android, arabirim ayrıntılarını uygulamalardan gizler; bu olmadan oyunlar ve DRM, ağ kartı bulunmayan bir makine görür.</string>
     <string name="networking_mac">MAC adresi</string>

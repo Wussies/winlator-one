@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">実行</string>
     <string name="common_ui_edit">編集</string>
     <string name="common_ui_remove">削除</string>
@@ -166,7 +166,7 @@
     <string name="common_ui_grant_all_files_access_browse">フォルダを直接参照するには、すべてのファイルへのアクセスを許可してください。</string>
     <string name="common_ui_not_configured">未設定</string>
     <string name="common_ui_reinstall">再インストール</string>
-    <string name="common_ui_exit_app_confirm">WinNativeを終了しますか?</string>
+    <string name="common_ui_exit_app_confirm">NEXORAを終了しますか?</string>
     <string name="common_ui_elements_count">%1$d 個の要素</string>
     <string name="common_ui_disabled_placeholder">-- 無効 --</string>
     <string name="common_ui_enabled">有効</string>
@@ -416,7 +416,7 @@
     <string name="shortcuts_properties_runtime_patcher">ランタイム DRM パッチャー</string>
     <string name="shortcuts_properties_runtime_patcher_description">起動時に DRM パッチャー DLL を注入します。FPS が低下します — レガシーランチャー単体で失敗する場合にのみ使用してください。</string>
     <string name="steam_section_title">Steam</string>
-    <string name="steam_section_real_client">WinNative 本物の Steam クライアント</string>
+    <string name="steam_section_real_client">NEXORA 本物の Steam クライアント</string>
     <string name="steam_section_emulator">レガシー Steam エミュレーター</string>
     <string name="shortcuts_properties_use_steam_input">Steam Input を使用</string>
     <string name="steam_launcher_real_client">Steam Launcher</string>
@@ -743,8 +743,8 @@
     <string name="session_xserver_pref_kbd">キーボード</string>
     <string name="session_xserver_pref_other">その他</string>
     <string name="session_xserver_pref_version">バージョン</string>
-    <string name="session_xserver_notification_description">WinNative XServer メッセージ</string>
-    <string name="session_xserver_notification_content">WinNative が実行中です。この通知を消したりスワイプしたりしないでください</string>
+    <string name="session_xserver_notification_description">NEXORA XServer メッセージ</string>
+    <string name="session_xserver_notification_content">NEXORA が実行中です。この通知を消したりスワイプしたりしないでください</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">キーボード</string>
@@ -1216,8 +1216,8 @@
     <string name="settings_general_xinput_toggle_title">XInput を無効にする</string>
     <string name="settings_general_xinput_toggle_summary">マウスとキーボードを排他的に制御したいときに XInput 処理をオフにします。</string>
     <string name="settings_external_display_output_summary">この画面をミラーリングする代わりに、接続された外部ディスプレイにゲームを移動します。グラスは常に独自のディスプレイを使用します。</string>
-    <string name="settings_general_file_provider_summary">WinNative のファイルを Android のドキュメントピッカーやファイルマネージャーに公開します。</string>
-    <string name="settings_general_auto_scraping_summary">WinNative がカスタムゲームのアートワークを自動的に取得できるようにします。</string>
+    <string name="settings_general_file_provider_summary">NEXORA のファイルを Android のドキュメントピッカーやファイルマネージャーに公開します。</string>
+    <string name="settings_general_auto_scraping_summary">NEXORA がカスタムゲームのアートワークを自動的に取得できるようにします。</string>
     <string name="settings_general_open_browser_summary">対応する Web リンクを Wine 内ではなく Android のブラウザで開きます。</string>
     <string name="settings_general_clipboard_summary">Android と Wine セッション間でのコピー＆ペーストを許可します。</string>
     <string name="settings_general_imagefs_summary">既存のコンテナを削除せずに、同梱のシステムファイルを復元します。</string>
@@ -1275,10 +1275,10 @@
     <string name="settings_debug_delete_logs_confirm_message">保存済みのすべてのログファイル（%1$s）を完全に削除します。この操作は元に戻せません。</string>
     <string name="settings_debug_logs_browser_title">ログ</string>
     <string name="settings_debug_log_truncated">このログの末尾 %1$s を表示中</string>
-    <string name="settings_debug_logs_subject">WinNative ログ（%1$s）</string>
+    <string name="settings_debug_logs_subject">NEXORA ログ（%1$s）</string>
     <string name="settings_debug_no_logs_available">利用可能なデバッグログがありません。先にデバッグオプションを有効にしてゲームを起動してください。</string>
     <string name="settings_debug_capture_failed">ログの取得に失敗しました: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">WinNative プロセスのエラー、警告、クラッシュをファイルに記録します</string>
+    <string name="settings_debug_log_to_file_desc">NEXORA プロセスのエラー、警告、クラッシュをファイルに記録します</string>
     <string name="settings_filtered_logs_to_file_title">フィルタされたデバッグログ</string>
     <string name="settings_filtered_logs_to_file_desc">タグフィルタで設定された内容に従って、アプリのログをフィルタリングし、ファイルに保存します。</string>
     <string name="settings_debug_section_emulation">エミュレーション</string>
@@ -1737,7 +1737,7 @@
     <string name="steam_chat_setting_ingame">ゲーム中のチャットを有効にする</string>
     <string name="steam_chat_setting_ingame_desc">プレイ中にメッセージを送受信します</string>
     <string name="steam_chat_setting_stay_running">バックグラウンドで実行</string>
-    <string name="steam_chat_setting_stay_running_desc">WinNative を終了した後もチャットを実行し続けます</string>
+    <string name="steam_chat_setting_stay_running_desc">NEXORA を終了した後もチャットを実行し続けます</string>
     <string name="steam_chat_settings_overlay_needed">チャットヘッドを使用するには他のアプリの上への表示を許可してください</string>
     <string name="steam_chat_heads_title">メッセージ</string>
     <string name="steam_chat_heads_recent_title">最近</string>
@@ -2388,7 +2388,7 @@
     <string name="retro_scr_sgsr_upscaling">SGSR アップスケーリング</string>
     <string name="retro_scr_performance_hud">パフォーマンス HUD</string>
     <string name="retro_scr_credits_licenses">クレジット &amp; ライセンス</string>
-    <string name="retro_scr_credits_desc">WinNative の一部の機能はこれらのオープンソースプロジェクトを基盤としています。タップして各ソースを表示します。</string>
+    <string name="retro_scr_credits_desc">NEXORA の一部の機能はこれらのオープンソースプロジェクトを基盤としています。タップして各ソースを表示します。</string>
     <string name="retro_scr_tab_defaults">デフォルト</string>
     <string name="retro_scr_tab_credits">クレジット</string>
     <string name="settings_support_title">サポート</string>
@@ -2915,14 +2915,14 @@
     <string name="update_ignore_until_next">次のアップデートまで無視</string>
     <string name="update_no_notes">このビルドのリリースノートは公開されていません。</string>
     <string name="update_apk_notice">このアップデートはアプリ本体を変更するため、Android がインストールの確認を求めます。ゲーム、コンテナ、設定はそのまま保持されます。</string>
-    <string name="update_up_to_date">WinNative は最新です。</string>
+    <string name="update_up_to_date">NEXORA は最新です。</string>
     <string name="update_unsupported_build">アプリ内アップデートは、公式の署名済みリリースでのみ提供されます。</string>
     <string name="settings_general_update_source">更新の取得元</string>
     <string name="settings_general_update_source_summary">プルリクエストのビルドはそのプルリクエストを、公式インストールは公式リリースを追跡します。</string>
     <string name="update_channel_official">公式</string>
     <string name="networking_section_title">ネットワーク</string>
     <string name="networking_driver">ネットワークドライバー</string>
-    <string name="networking_driver_winnative">WinNative ネットワークドライバー</string>
+    <string name="networking_driver_winnative">NEXORA ネットワークドライバー</string>
     <string name="networking_driver_none">Wine のデフォルト (アダプターのエミュレーションなし)</string>
     <string name="networking_driver_summary">安定した MAC アドレスを持つ実際のネットワークアダプターの一覧を Windows プログラムに提供します。Android はインターフェースの詳細をアプリから隠すため、これがないとゲームや DRM にはネットワークカードのないマシンとして見えます。</string>
     <string name="networking_mac">MAC アドレス</string>

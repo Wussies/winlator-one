@@ -72,10 +72,10 @@ jobs:
           path: ~/.nexora-debug-key
           key: nexora-debug-keystore-v1
 
-      - name: Build (standard debug)
+      - name: Build (standard release: not debuggable, R8)
         env:
           GRADLE_OPTS: -Xmx4g -XX:+UseG1GC
-          VERSION_NAME: 0.1.0-stage1
+          VERSION_NAME: 0.2.0-stage4
           NEXORA_MODE: ${{ steps.key.outputs.mode }}
           SECRET_PASSWORD: ${{ secrets.NEXORA_KEYSTORE_PASSWORD }}
           SECRET_ALIAS: ${{ secrets.NEXORA_KEY_ALIAS }}
@@ -94,13 +94,13 @@ jobs:
             export KEYSTORE_FILE="$HOME/.nexora-debug-key/debug.jks"
             export KEYSTORE_PASSWORD=nexora-debug KEY_ALIAS=nexora-debug KEY_PASSWORD=nexora-debug
           fi
-          ./gradlew --no-daemon --stacktrace :app:assembleStandardDebug -x lint
+          ./gradlew --no-daemon --stacktrace :app:assembleStandardRelease -x lint
 
       - name: Collect APK
         id: apk
         run: |
-          SRC=$(ls app/build/outputs/apk/standard/debug/*.apk | head -n1)
-          NAME="NEXORA-0.1.0-stage1-build${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}.apk"
+          SRC=$(ls app/build/outputs/apk/standard/release/*.apk | head -n1)
+          NAME="NEXORA-0.2.0-stage4-build${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}.apk"
           mkdir -p dist && cp "$SRC" "dist/$NAME"
           (cd dist && sha256sum "$NAME" > "$NAME.sha256")
           echo "name=$NAME" >> "$GITHUB_OUTPUT"
@@ -118,11 +118,11 @@ jobs:
         if: github.event_name == 'push'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: nexora-0.1.0-stage1-build.${{ github.run_number }}
+          tag_name: nexora-0.2.0-stage4-build.${{ github.run_number }}
           target_commitish: ${{ github.sha }}
-          name: NEXORA 0.1.0 Stage 1 (build ${{ github.run_number }})
+          name: NEXORA 0.2.0 Stage 4 (build ${{ github.run_number }})
           body: |
             Automatic build of `${{ github.sha }}` (${{ github.ref_name }}).
-            Stage 1 base — NOT tested on a device. Signing: ${{ steps.key.outputs.mode }}.
+            Stage 4 base (release build) — NOT tested on a device. Signing: ${{ steps.key.outputs.mode }}.
           files: dist/*
           prerelease: true

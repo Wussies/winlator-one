@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- NEXORA "N" monogram (original artwork). Kept inside the 66dp adaptive-icon safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:pathData="M33,75L33,37Q33,33 37,33L41,33Q43.5,33 45,35L66,61L66,37Q66,33 70,33L71,33Q75,33 75,37L75,71Q75,75 71,75L67,75Q64.5,75 63,73L42,47L42,71Q42,75 38,75L37,75Q33,75 33,75Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="31"
+                android:startY="32"
+                android:endX="77"
+                android:endY="76">
+                <item android:offset="0" android:color="#FF3D8BFF" />
+                <item android:offset="0.5" android:color="#FF5B6CFF" />
+                <item android:offset="1" android:color="#FFA25CFF" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:pathData="M41,33Q43.5,33 45,35L66,61L66,64L43,36Q42,34.6 40,34.6Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="31"
+                android:startY="32"
+                android:endX="77"
+                android:endY="76">
+                <item android:offset="0" android:color="#8CFFFFFF" />
+                <item android:offset="1" android:color="#00FFFFFF" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:pathData="M77,31m-6,0a6,6 0,1 1,12 0a6,6 0,1 1,-12 0" android:fillColor="#2EA25CFF" />
+    <path android:pathData="M77,31m-3.2,0a3.2,3.2 0,1 1,6.4 0a3.2,3.2 0,1 1,-6.4 0" android:fillColor="#FFA25CFF" />
+</vector>

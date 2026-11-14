@@ -2,7 +2,7 @@
 
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Rulare</string>
     <string name="common_ui_edit">Editare</string>
     <string name="common_ui_remove">Eliminare</string>
@@ -661,8 +661,8 @@ De ex. <b>META</b> pentru <i>tasta META</i>, \n
     <string name="session_xserver_pref_kbd">Tastatura</string>
     <string name="session_xserver_pref_other">Altele</string>
     <string name="session_xserver_pref_version">Versiune</string>
-    <string name="session_xserver_notification_description">Mesaje WinNative XServer</string>
-    <string name="session_xserver_notification_content">WinNative rulează, nu închideți sau glisați această notificare</string>
+    <string name="session_xserver_notification_description">Mesaje NEXORA XServer</string>
+    <string name="session_xserver_notification_content">NEXORA rulează, nu închideți sau glisați această notificare</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Tastatura</string>
@@ -930,8 +930,8 @@ De ex. <b>META</b> pentru <i>tasta META</i>, \n
     <string name="settings_general_xinput_toggle_title">Dezactiveaza XInput</string>
     <string name="settings_general_xinput_toggle_summary">Opreste gestionarea XInput cand doresti control exclusiv cu mouse-ul si tastatura.</string>
     <string name="settings_external_display_output_summary">Mută jocul pe un afișaj extern conectat în loc să oglindească acest ecran. Ochelarii folosesc întotdeauna propriul afișaj.</string>
-    <string name="settings_general_file_provider_summary">Expune fisierele WinNative catre selectoarele de documente si managerii de fisiere Android.</string>
-    <string name="settings_general_auto_scraping_summary">Această setare permite WinNative să obțină automat ilustrațiile jocurilor personalizate.</string>
+    <string name="settings_general_file_provider_summary">Expune fisierele NEXORA catre selectoarele de documente si managerii de fisiere Android.</string>
+    <string name="settings_general_auto_scraping_summary">Această setare permite NEXORA să obțină automat ilustrațiile jocurilor personalizate.</string>
     <string name="settings_general_open_browser_summary">Deschide link-urile web compatibile in browserul Android in loc de Wine.</string>
     <string name="settings_general_clipboard_summary">Permite copierea si lipirea intre Android si sesiunile Wine.</string>
     <string name="settings_general_imagefs_summary">Restaureaza fisierele de sistem incluse fara a elimina containerele existente.</string>
@@ -987,10 +987,10 @@ De ex. <b>META</b> pentru <i>tasta META</i>, \n
     <string name="settings_debug_delete_logs_confirm_message">Aceasta șterge definitiv toate fișierele jurnal salvate (%1$s). Acțiunea nu poate fi anulată.</string>
     <string name="settings_debug_logs_browser_title">Jurnale</string>
     <string name="settings_debug_log_truncated">Se afișează ultimele %1$s din acest jurnal</string>
-    <string name="settings_debug_logs_subject">Jurnale WinNative (%1$s)</string>
+    <string name="settings_debug_logs_subject">Jurnale NEXORA (%1$s)</string>
     <string name="settings_debug_no_logs_available">Nu sunt disponibile jurnale de depanare. Activează mai întâi opțiunile de depanare și lansează un joc.</string>
     <string name="settings_debug_capture_failed">Capturarea jurnalelor a eșuat: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">Înregistrează erorile, avertismentele și blocările procesului WinNative în fișier</string>
+    <string name="settings_debug_log_to_file_desc">Înregistrează erorile, avertismentele și blocările procesului NEXORA în fișier</string>
     <string name="settings_filtered_logs_to_file_title">Jurnal de depanare filtrat</string>
     <string name="settings_filtered_logs_to_file_desc">Salvaţi jurnalele aplicaţiei într-un fişier, filtrate conform configurării din filtrul de etichete.</string>
     <string name="settings_debug_section_emulation">Emulare</string>
@@ -1389,7 +1389,7 @@ Cale instalata:
     <string name="cloud_saves_syncing_from_provider">Se descarcă salvarea de la %1$s\u2026</string>
     <string name="cloud_saves_sync_summary">Preia versiunea pe care o are %1$s acum.</string>
     <string name="cloud_saves_sync_summary_generic">Preia versiunea cloud curentă.</string>
-    <string name="common_ui_exit_app_confirm">Ieși din WinNative?</string>
+    <string name="common_ui_exit_app_confirm">Ieși din NEXORA?</string>
     <string name="container_surface_effect">Efect de suprafață</string>
     <string name="downloads_queue_cancel_download_confirm">Anulezi descărcarea pentru %1$s și ștergi toate fișierele descărcate?</string>
     <string name="downloads_queue_paused_resume_hint">Pauză - apasă Reluare pentru a continua</string>
@@ -1481,7 +1481,7 @@ Cale instalata:
     <string name="downloads_queue_cancel_all_warning">Anularea descărcărilor de DLC, jocuri sau actualizări poate corupe instalările jocurilor.\n\nSigur vrei să anulezi toate descărcările și să ștergi fișierele descărcate până acum?</string>
     <string name="shortcuts_properties_use_legacy_launcher">Folosește lansatorul moștenit</string>
     <string name="shortcuts_properties_use_legacy_launcher_description">Emulare Steam moștenită: rulează jocul prin lansatorul ColdClient și elimină DRM-ul SteamStub din exe. Folosește doar pentru jocuri mai vechi care nu funcționează cu Steam Launcher.</string>
-    <string name="steam_section_real_client">Client Steam real WinNative</string>
+    <string name="steam_section_real_client">Client Steam real NEXORA</string>
     <string name="steam_section_emulator">Emulator Steam moștenit</string>
     <string name="shortcuts_properties_steam_offline_mode_description">Rulează fără Steam Cloud, astfel salvările rămân pe acest dispozitiv, iar jocul pornește și fără conexiune. Dezactivează opțiunea pentru a relua Steam Cloud; dacă salvarea locală diferă de cea din cloud, vei alege pe care să o păstrezi.</string>
     <string name="input_controls_select_style">Selectează stilul</string>
@@ -1781,7 +1781,7 @@ Cale instalata:
     <string name="session_record_settings_title">Setări de înregistrare</string>
     <string name="session_record_started">Înregistrare pornită</string>
     <string name="steam_chat_setting_stay_running">Rulează în fundal</string>
-    <string name="steam_chat_setting_stay_running_desc">Menține chatul activ după ce ieși din WinNative</string>
+    <string name="steam_chat_setting_stay_running_desc">Menține chatul activ după ce ieși din NEXORA</string>
     <string name="settings_content_refresh">Reîmprospătează</string>
 
     <!-- Settings > Debug -->
@@ -2389,7 +2389,7 @@ Cale instalata:
     <string name="retro_scr_sgsr_upscaling">Mărire SGSR</string>
     <string name="retro_scr_performance_hud">HUD performanță</string>
     <string name="retro_scr_credits_licenses">CREDITE &amp; LICENȚE</string>
-    <string name="retro_scr_credits_desc">Unele funcții ale WinNative sunt construite pe aceste proiecte open-source. Atinge pentru a vedea fiecare sursă.</string>
+    <string name="retro_scr_credits_desc">Unele funcții ale NEXORA sunt construite pe aceste proiecte open-source. Atinge pentru a vedea fiecare sursă.</string>
     <string name="retro_scr_tab_defaults">Implicite</string>
     <string name="retro_scr_tab_credits">Credite</string>
     <string name="settings_support_title">Asistență</string>
@@ -2916,14 +2916,14 @@ Cale instalata:
     <string name="update_ignore_until_next">Ignoră până la următoarea actualizare</string>
     <string name="update_no_notes">Nu au fost publicate note de lansare pentru această compilare.</string>
     <string name="update_apk_notice">Această actualizare modifică aplicația în sine, așa că Android îți va cere să confirmi instalarea. Jocurile, containerele și setările tale se păstrează.</string>
-    <string name="update_up_to_date">WinNative este la zi.</string>
+    <string name="update_up_to_date">NEXORA este la zi.</string>
     <string name="update_unsupported_build">Actualizările din aplicație sunt oferite doar pentru versiunile oficiale semnate.</string>
     <string name="settings_general_update_source">Sursa actualizarilor</string>
     <string name="settings_general_update_source_summary">O compilare dintr-un pull request urmeaza acel pull request; o instalare oficiala urmeaza versiunile oficiale.</string>
     <string name="update_channel_official">Oficial</string>
     <string name="networking_section_title">Rețea</string>
     <string name="networking_driver">Driver de rețea</string>
-    <string name="networking_driver_winnative">Driver de rețea WinNative</string>
+    <string name="networking_driver_winnative">Driver de rețea NEXORA</string>
     <string name="networking_driver_none">Implicit Wine (fără emulare de adaptor)</string>
     <string name="networking_driver_summary">Oferă programelor Windows o listă reală de adaptoare de rețea, cu adrese MAC stabile. Android ascunde detaliile interfețelor față de aplicații, așa că fără el jocurile și sistemele DRM văd o mașină fără plăci de rețea.</string>
     <string name="networking_mac">Adresă MAC</string>

@@ -2,6 +2,21 @@
 
 Changes relative to the imported base WinNative-Emu/WinNative@72d145b (see PROVENANCE.md).
 
+## 0.2.0-stage4 (in progress, not tested on a device)
+
+### Security (SECURITY_AUDIT.md, APK audit A-1…A-5)
+- `XServerDisplayActivity` is no longer exported and has no VIEW intent filters (any app could launch arbitrary programs through `boot_exe` / `.desktop` files).
+- Removed the `DEBUG_INJECT_TAP` / `DEBUG_INJECT_KEY` intent handlers.
+- `ShortcutBroadcastReceiver` not exported; the "shortcut added" broadcast is limited to this app.
+- `winlator_vibration` socket accepts only this app's UID.
+- Removed permissions `WRITE_SECURE_SETTINGS`, `REQUEST_INSTALL_PACKAGES`, `SYSTEM_ALERT_WINDOW`, `INSTALL_SHORTCUT` (Steam chat heads hidden).
+- CI builds the **release** variant (not debuggable, R8) instead of debug.
+
+### Identity
+- Package name `io.github.wussies.nexora`; app name NEXORA in all languages.
+- Original vector launcher icon (adaptive + monochrome/themed), Android 12+ splash screen, NEXORA colour tokens and base accent colours.
+- WinNative badge replaced; the upstream Support page (WinNative donations/Discord) hidden.
+
 ## 0.1.0-stage1 (unreleased, not tested on a device)
 
 ### Removed (security quarantine, SECURITY_AUDIT.md)

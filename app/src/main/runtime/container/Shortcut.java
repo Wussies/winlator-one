@@ -300,6 +300,8 @@ public class Shortcut {
       android.content.Context context = container.getManager().getContext();
       android.content.Intent intent =
           new android.content.Intent(context.getPackageName() + ".SHORTCUT_ADDED");
+      // NEXORA: deliver only to this app (the shortcut path must not leak to other apps).
+      intent.setPackage(context.getPackageName());
       intent.putExtra("shortcut_path", file.getPath());
       intent.putExtra("shortcut_added", true);
       context.sendBroadcast(intent);

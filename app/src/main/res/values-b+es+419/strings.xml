@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Ejecutar</string>
     <string name="common_ui_edit">Editar</string>
     <string name="common_ui_remove">Quitar</string>
@@ -166,7 +166,7 @@
     <string name="common_ui_grant_all_files_access_browse">Concede acceso a todos los archivos para explorar carpetas directamente.</string>
     <string name="common_ui_not_configured">No configurado</string>
     <string name="common_ui_reinstall">Reinstalar</string>
-    <string name="common_ui_exit_app_confirm">¿Salir de WinNative?</string>
+    <string name="common_ui_exit_app_confirm">¿Salir de NEXORA?</string>
     <string name="common_ui_elements_count">%1$d elementos</string>
     <string name="common_ui_disabled_placeholder">-- Deshabilitado --</string>
     <string name="common_ui_enabled">Habilitado</string>
@@ -416,7 +416,7 @@
     <string name="shortcuts_properties_runtime_patcher">Parcheador de DRM en tiempo de ejecución</string>
     <string name="shortcuts_properties_runtime_patcher_description">Inyecta una DLL parcheadora de DRM al iniciar. Reduce los FPS: úsalo solo si el lanzador heredado por sí solo falla.</string>
     <string name="steam_section_title">Steam</string>
-    <string name="steam_section_real_client">Cliente real de Steam de WinNative</string>
+    <string name="steam_section_real_client">Cliente real de Steam de NEXORA</string>
     <string name="steam_section_emulator">Emulador heredado de Steam</string>
     <string name="shortcuts_properties_use_steam_input">Usar Steam Input</string>
     <string name="steam_launcher_real_client">Steam Launcher</string>
@@ -743,8 +743,8 @@ Por ejemplo, <b>META</b> para la <i>tecla META</i>, \n
     <string name="session_xserver_pref_kbd">Teclado</string>
     <string name="session_xserver_pref_other">Otros</string>
     <string name="session_xserver_pref_version">Versión</string>
-    <string name="session_xserver_notification_description">Mensajes de XServer de WinNative</string>
-    <string name="session_xserver_notification_content">WinNative se está ejecutando, no cierres ni deslices esta notificación</string>
+    <string name="session_xserver_notification_description">Mensajes de XServer de NEXORA</string>
+    <string name="session_xserver_notification_content">NEXORA se está ejecutando, no cierres ni deslices esta notificación</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Teclado</string>
@@ -1216,8 +1216,8 @@ Por ejemplo, <b>META</b> para la <i>tecla META</i>, \n
     <string name="settings_general_xinput_toggle_title">Desactivar XInput</string>
     <string name="settings_general_xinput_toggle_summary">Desactiva el manejo de XInput cuando quieres control exclusivo del mouse y el teclado.</string>
     <string name="settings_external_display_output_summary">Mueve el juego a una pantalla externa conectada en lugar de duplicar esta pantalla. Los lentes siempre usan su propia pantalla.</string>
-    <string name="settings_general_file_provider_summary">Expone los archivos de WinNative a los selectores de documentos y administradores de archivos de Android.</string>
-    <string name="settings_general_auto_scraping_summary">Permite que WinNative obtenga automáticamente el arte de juegos personalizados.</string>
+    <string name="settings_general_file_provider_summary">Expone los archivos de NEXORA a los selectores de documentos y administradores de archivos de Android.</string>
+    <string name="settings_general_auto_scraping_summary">Permite que NEXORA obtenga automáticamente el arte de juegos personalizados.</string>
     <string name="settings_general_open_browser_summary">Abre los enlaces web compatibles en el navegador de Android en lugar de dentro de Wine.</string>
     <string name="settings_general_clipboard_summary">Permite copiar y pegar entre las sesiones de Android y Wine.</string>
     <string name="settings_general_imagefs_summary">Restaura los archivos del sistema incluidos sin eliminar tus contenedores existentes.</string>
@@ -1275,10 +1275,10 @@ Por ejemplo, <b>META</b> para la <i>tecla META</i>, \n
     <string name="settings_debug_delete_logs_confirm_message">Esto elimina permanentemente todos los archivos de registro guardados (%1$s). Esta acción no se puede deshacer.</string>
     <string name="settings_debug_logs_browser_title">Registros</string>
     <string name="settings_debug_log_truncated">Mostrando los últimos %1$s de este registro</string>
-    <string name="settings_debug_logs_subject">Registros de WinNative (%1$s)</string>
+    <string name="settings_debug_logs_subject">Registros de NEXORA (%1$s)</string>
     <string name="settings_debug_no_logs_available">No hay registros de depuración disponibles. Primero habilita las opciones de depuración e inicia un juego.</string>
     <string name="settings_debug_capture_failed">Error al capturar los registros: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">Registra en un archivo los errores, advertencias y fallos del proceso de WinNative</string>
+    <string name="settings_debug_log_to_file_desc">Registra en un archivo los errores, advertencias y fallos del proceso de NEXORA</string>
     <string name="settings_filtered_logs_to_file_title">Registro de depuración filtrado</string>
     <string name="settings_filtered_logs_to_file_desc">Guarda los registros de la aplicación en un archivo, filtrados según lo configurado en el filtro de etiquetas.</string>
     <string name="settings_debug_section_emulation">Emulación</string>
@@ -1737,7 +1737,7 @@ Ruta instalada:
     <string name="steam_chat_setting_ingame">Activar chat en el juego</string>
     <string name="steam_chat_setting_ingame_desc">Recibe y envía mensajes mientras juegas</string>
     <string name="steam_chat_setting_stay_running">Ejecutar en segundo plano</string>
-    <string name="steam_chat_setting_stay_running_desc">Mantén el chat en ejecución después de salir de WinNative</string>
+    <string name="steam_chat_setting_stay_running_desc">Mantén el chat en ejecución después de salir de NEXORA</string>
     <string name="steam_chat_settings_overlay_needed">Permite mostrar sobre otras apps para usar las burbujas de chat</string>
     <string name="steam_chat_heads_title">Mensajes</string>
     <string name="steam_chat_heads_recent_title">Recientes</string>
@@ -2388,7 +2388,7 @@ Ruta instalada:
     <string name="retro_scr_sgsr_upscaling">Escalado SGSR</string>
     <string name="retro_scr_performance_hud">HUD de rendimiento</string>
     <string name="retro_scr_credits_licenses">CRÉDITOS &amp; LICENCIAS</string>
-    <string name="retro_scr_credits_desc">Algunas funciones de WinNative se basan en estos proyectos de código abierto. Toca para ver cada fuente.</string>
+    <string name="retro_scr_credits_desc">Algunas funciones de NEXORA se basan en estos proyectos de código abierto. Toca para ver cada fuente.</string>
     <string name="retro_scr_tab_defaults">Predeterminados</string>
     <string name="retro_scr_tab_credits">Créditos</string>
     <string name="settings_support_title">Soporte</string>
@@ -2914,14 +2914,14 @@ Ruta instalada:
     <string name="update_ignore_until_next">Ignorar hasta la próxima actualización</string>
     <string name="update_no_notes">No se publicaron notas de la versión para esta compilación.</string>
     <string name="update_apk_notice">Esta actualización cambia la app en sí, así que Android te pedirá que confirmes la instalación. Tus juegos, contenedores y ajustes se conservan.</string>
-    <string name="update_up_to_date">WinNative está actualizado.</string>
+    <string name="update_up_to_date">NEXORA está actualizado.</string>
     <string name="update_unsupported_build">Las actualizaciones dentro de la app solo se ofrecen en versiones oficiales firmadas.</string>
     <string name="settings_general_update_source">Origen de actualizaciones</string>
     <string name="settings_general_update_source_summary">Una compilación de un pull request sigue a ese pull request; una instalación oficial sigue las versiones oficiales.</string>
     <string name="update_channel_official">Oficial</string>
     <string name="networking_section_title">Red</string>
     <string name="networking_driver">Controlador de red</string>
-    <string name="networking_driver_winnative">Controlador de red de WinNative</string>
+    <string name="networking_driver_winnative">Controlador de red de NEXORA</string>
     <string name="networking_driver_none">Predeterminado de Wine (sin emulación de adaptadores)</string>
     <string name="networking_driver_summary">Le da a los programas de Windows una lista real de adaptadores de red con direcciones MAC estables. Android oculta los detalles de las interfaces a las apps, así que sin esto los juegos y el DRM ven una máquina sin tarjetas de red.</string>
     <string name="networking_mac">Dirección MAC</string>

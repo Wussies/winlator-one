@@ -2,7 +2,7 @@
 
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Kør</string>
     <string name="common_ui_edit">Rediger</string>
     <string name="common_ui_remove">Fjern</string>
@@ -661,8 +661,8 @@ F.eks. <b>META</b> for <i>META-tast</i>, \n
     <string name="session_xserver_pref_kbd">Tastatur</string>
     <string name="session_xserver_pref_other">Andet</string>
     <string name="session_xserver_pref_version">Version</string>
-    <string name="session_xserver_notification_description">WinNative XServer-beskeder</string>
-    <string name="session_xserver_notification_content">WinNative kører, luk ikke eller swipe denne notifikation væk</string>
+    <string name="session_xserver_notification_description">NEXORA XServer-beskeder</string>
+    <string name="session_xserver_notification_content">NEXORA kører, luk ikke eller swipe denne notifikation væk</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Tastatur</string>
@@ -930,8 +930,8 @@ F.eks. <b>META</b> for <i>META-tast</i>, \n
     <string name="settings_general_xinput_toggle_title">Deaktiver XInput</string>
     <string name="settings_general_xinput_toggle_summary">Slår XInput-håndtering fra når du ønsker eksklusiv mus- og tastaturkontrol.</string>
     <string name="settings_external_display_output_summary">Flyt spillet til en tilsluttet ekstern skærm i stedet for at spejle denne skærm. Briller bruger altid deres egen skærm.</string>
-    <string name="settings_general_file_provider_summary">Gør WinNative-filer tilgængelige for Android-dokumentvælgere og filhåndtering.</string>
-    <string name="settings_general_auto_scraping_summary">Denne indstilling giver WinNative mulighed for automatisk at hente grafik til brugerdefinerede spil.</string>
+    <string name="settings_general_file_provider_summary">Gør NEXORA-filer tilgængelige for Android-dokumentvælgere og filhåndtering.</string>
+    <string name="settings_general_auto_scraping_summary">Denne indstilling giver NEXORA mulighed for automatisk at hente grafik til brugerdefinerede spil.</string>
     <string name="settings_general_open_browser_summary">Åbn understøttede weblinks i Android-browseren i stedet for inde i Wine.</string>
     <string name="settings_general_clipboard_summary">Tillad kopiering og indsættelse mellem Android og Wine-sessioner.</string>
     <string name="settings_general_imagefs_summary">Gendan medfølgende systemfiler uden at fjerne dine eksisterende containere.</string>
@@ -987,10 +987,10 @@ F.eks. <b>META</b> for <i>META-tast</i>, \n
     <string name="settings_debug_delete_logs_confirm_message">Dette sletter permanent alle gemte logfiler (%1$s). Det kan ikke fortrydes.</string>
     <string name="settings_debug_logs_browser_title">Logfiler</string>
     <string name="settings_debug_log_truncated">Viser de sidste %1$s af denne logfil</string>
-    <string name="settings_debug_logs_subject">WinNative-logfiler (%1$s)</string>
+    <string name="settings_debug_logs_subject">NEXORA-logfiler (%1$s)</string>
     <string name="settings_debug_no_logs_available">Ingen fejlfindingslogfiler tilgængelige. Aktiver fejlfindingsindstillinger først og start et spil.</string>
     <string name="settings_debug_capture_failed">Kunne ikke indfange logfiler: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">Log WinNative-procesfejl, advarsler og nedbrud til fil</string>
+    <string name="settings_debug_log_to_file_desc">Log NEXORA-procesfejl, advarsler og nedbrud til fil</string>
     <string name="settings_filtered_logs_to_file_title">Filtreret fejlfindingslog</string>
     <string name="settings_filtered_logs_to_file_desc">Gem appens logfiler i en fil, filtreret i henhold til det, der er konfigureret i tag-filteret.</string>
     <string name="settings_debug_section_emulation">Emulering</string>
@@ -1316,7 +1316,7 @@ Installeret sti:
     <string name="update_ignore_until_next">Ignorer indtil næste opdatering</string>
     <string name="update_no_notes">Der blev ikke udgivet nogen udgivelsesnoter for dette build.</string>
     <string name="update_apk_notice">Denne opdatering ændrer selve appen, så Android beder dig bekræfte installationen. Dine spil, containere og indstillinger bevares.</string>
-    <string name="update_up_to_date">WinNative er opdateret.</string>
+    <string name="update_up_to_date">NEXORA er opdateret.</string>
     <string name="update_unsupported_build">Opdateringer i appen tilbydes kun på officielle signerede udgivelser.</string>
     <string name="settings_general_update_source">Opdateringskilde</string>
     <string name="settings_general_update_source_summary">En build fra en pull request følger den pull request; en officiel installation følger de officielle udgivelser.</string>
@@ -1399,7 +1399,7 @@ Installeret sti:
     <string name="cloud_saves_syncing_from_provider">Downloader save fra %1$s\u2026</string>
     <string name="cloud_saves_sync_summary">Hent den version %1$s har lige nu.</string>
     <string name="cloud_saves_sync_summary_generic">Hent den nuværende cloud-version.</string>
-    <string name="common_ui_exit_app_confirm">Afslut WinNative?</string>
+    <string name="common_ui_exit_app_confirm">Afslut NEXORA?</string>
     <string name="container_surface_effect">Overfladeeffekt</string>
     <string name="downloads_queue_cancel_download_confirm">Annuller downloaden af %1$s og slet alle downloadede filer?</string>
     <string name="downloads_queue_paused_resume_hint">Sat på pause – tryk på Fortsæt for at genoptage</string>
@@ -1491,7 +1491,7 @@ Installeret sti:
     <string name="downloads_queue_cancel_all_warning">Annullering af DLC-, spil- eller opdateringsdownloads kan potentielt beskadige dine spilinstallationer.\n\nEr du sikker på, at du vil annullere alle downloads og slette de filer, der er downloadet indtil nu?</string>
     <string name="shortcuts_properties_use_legacy_launcher">Brug Legacy Launcher</string>
     <string name="shortcuts_properties_use_legacy_launcher_description">Ældre Steam-emulering: kører spillet gennem ColdClient-launcheren og fjerner SteamStub DRM fra exe-filen. Brug kun til ældre spil, der ikke virker med Steam Launcher.</string>
-    <string name="steam_section_real_client">WinNative ægte Steam-klient</string>
+    <string name="steam_section_real_client">NEXORA ægte Steam-klient</string>
     <string name="steam_section_emulator">Ældre Steam-emulator</string>
     <string name="shortcuts_properties_steam_offline_mode_description">Spiller uden Steam Cloud, så de gemte spil bliver på denne enhed, og spillet starter også uden forbindelse. Slå fra for at genoptage Steam Cloud; hvis det lokale og skyens gemte spil er forskellige, bliver du spurgt, hvilket du vil beholde.</string>
     <string name="input_controls_select_style">Vælg stil</string>
@@ -1793,7 +1793,7 @@ Installeret sti:
     <string name="session_record_settings_title">Optageindstillinger</string>
     <string name="session_record_started">Optagelse startet</string>
     <string name="steam_chat_setting_stay_running">Kør i baggrunden</string>
-    <string name="steam_chat_setting_stay_running_desc">Hold chatten kørende, efter du afslutter WinNative</string>
+    <string name="steam_chat_setting_stay_running_desc">Hold chatten kørende, efter du afslutter NEXORA</string>
     <string name="settings_content_refresh">Opdater</string>
 
     <!-- Settings > Debug -->
@@ -2401,7 +2401,7 @@ Installeret sti:
     <string name="retro_scr_sgsr_upscaling">SGSR-opskalering</string>
     <string name="retro_scr_performance_hud">Ydeevne-HUD</string>
     <string name="retro_scr_credits_licenses">MEDVIRKENDE &amp; LICENSER</string>
-    <string name="retro_scr_credits_desc">Nogle af WinNatives funktioner er bygget på disse open source-projekter. Tryk for at se hver kilde.</string>
+    <string name="retro_scr_credits_desc">Nogle af NEXORAs funktioner er bygget på disse open source-projekter. Tryk for at se hver kilde.</string>
     <string name="retro_scr_tab_defaults">Standarder</string>
     <string name="retro_scr_tab_credits">Medvirkende</string>
     <string name="settings_support_title">Support</string>
@@ -2925,7 +2925,7 @@ Installeret sti:
     <string name="steam_controller_restart_required">Træder i kraft, næste gang et spil starter.</string>
     <string name="networking_section_title">Netværk</string>
     <string name="networking_driver">Netværksdriver</string>
-    <string name="networking_driver_winnative">WinNative-netværksdriver</string>
+    <string name="networking_driver_winnative">NEXORA-netværksdriver</string>
     <string name="networking_driver_none">Wine-standard (ingen adapteremulering)</string>
     <string name="networking_driver_summary">Giver Windows-programmer en rigtig liste over netværksadaptere med stabile MAC-adresser. Android skjuler oplysninger om netværksgrænseflader for apps, så uden den ser spil og DRM en maskine uden netværkskort.</string>
     <string name="networking_mac">MAC-adresse</string>

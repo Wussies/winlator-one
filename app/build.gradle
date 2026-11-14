@@ -189,7 +189,9 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.winnative.cmod"
+        // NEXORA: own package name (GitHub-user namespace; Wussies controls
+        // wussies.github.io). The Java/Kotlin namespace stays com.winlator.cmod.
+        applicationId "io.github.wussies.nexora"
         minSdk 26
         targetSdk 28
         versionCode appVersionCode
@@ -273,7 +275,7 @@ android {
     productFlavors {
         standard {
             dimension "branding"
-            applicationId "com.winnative.cmod"
+            applicationId "io.github.wussies.nexora"
         }
         // NEXORA: the upstream "ludashi", "pubg" and "antutu" flavors were removed.
         // They reused other vendors' package names (com.ludashi.benchmark,

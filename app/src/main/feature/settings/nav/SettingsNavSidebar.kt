@@ -139,6 +139,8 @@ enum class SettingsNavItem(
 private val sectionedNavItems: Map<NavSection, List<SettingsNavItem>> =
     SettingsNavItem.entries
         .filter { it != SettingsNavItem.RETRO || com.winlator.cmod.app.NexoraPolicy.RETRO_CONSOLES_ENABLED } // NEXORA
+        // NEXORA: the upstream Support page links to WinNative's donations and Discord.
+        .filter { it != SettingsNavItem.SUPPORT }
         .groupBy { it.section }
 
 // ─── Main sidebar composable ────────────────────────────────────────

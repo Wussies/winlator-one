@@ -2,7 +2,7 @@
 
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">运行</string>
     <string name="common_ui_edit">编辑</string>
     <string name="common_ui_remove">移除</string>
@@ -661,8 +661,8 @@
     <string name="session_xserver_pref_kbd">键盘</string>
     <string name="session_xserver_pref_other">其他</string>
     <string name="session_xserver_pref_version">版本</string>
-    <string name="session_xserver_notification_description">WinNative XServer 消息</string>
-    <string name="session_xserver_notification_content">WinNative 正在运行，请勿关闭或滑动移除此通知</string>
+    <string name="session_xserver_notification_description">NEXORA XServer 消息</string>
+    <string name="session_xserver_notification_content">NEXORA 正在运行，请勿关闭或滑动移除此通知</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">键盘</string>
@@ -930,8 +930,8 @@
     <string name="settings_general_xinput_toggle_title">禁用 XInput</string>
     <string name="settings_general_xinput_toggle_summary">在需要独占鼠标和键盘控制时关闭 XInput 处理。</string>
     <string name="settings_external_display_output_summary">将游戏移到已连接的外部显示器，而不是镜像此屏幕。眼镜始终使用自己的显示屏。</string>
-    <string name="settings_general_file_provider_summary">向 Android 文档选择器和文件管理器公开 WinNative 文件。</string>
-    <string name="settings_general_auto_scraping_summary">让 WinNative 自动抓取自定义游戏封面。</string>
+    <string name="settings_general_file_provider_summary">向 Android 文档选择器和文件管理器公开 NEXORA 文件。</string>
+    <string name="settings_general_auto_scraping_summary">让 NEXORA 自动抓取自定义游戏封面。</string>
     <string name="settings_general_open_browser_summary">在 Android 浏览器中打开支持的网页链接，而非在 Wine 内部打开。</string>
     <string name="settings_general_clipboard_summary">允许在 Android 和 Wine 会话之间复制和粘贴。</string>
     <string name="settings_general_imagefs_summary">恢复捆绑的系统文件而不删除现有容器。</string>
@@ -987,10 +987,10 @@
     <string name="settings_debug_delete_logs_confirm_message">这将永久删除所有已保存的日志文件（%1$s）。此操作无法撤销。</string>
     <string name="settings_debug_logs_browser_title">日志</string>
     <string name="settings_debug_log_truncated">正在显示此日志的最后 %1$s</string>
-    <string name="settings_debug_logs_subject">WinNative 日志 (%1$s)</string>
+    <string name="settings_debug_logs_subject">NEXORA 日志 (%1$s)</string>
     <string name="settings_debug_no_logs_available">没有可用的调试日志。请先启用调试选项并启动游戏。</string>
     <string name="settings_debug_capture_failed">无法捕获日志：%1$s</string>
-    <string name="settings_debug_log_to_file_desc">将 WinNative 进程错误、警告和崩溃记录到文件</string>
+    <string name="settings_debug_log_to_file_desc">将 NEXORA 进程错误、警告和崩溃记录到文件</string>
     <string name="settings_filtered_logs_to_file_title">已筛选调试日志</string>
     <string name="settings_filtered_logs_to_file_desc">将应用的日志保存到文件中，按标签过滤器的配置进行过滤。</string>
     <string name="settings_debug_section_emulation">模拟</string>
@@ -1389,7 +1389,7 @@
     <string name="cloud_saves_syncing_from_provider">正在从 %1$s 下载存档\u2026</string>
     <string name="cloud_saves_sync_summary">拉取 %1$s 当前的版本。</string>
     <string name="cloud_saves_sync_summary_generic">拉取当前云端版本。</string>
-    <string name="common_ui_exit_app_confirm">退出 WinNative？</string>
+    <string name="common_ui_exit_app_confirm">退出 NEXORA？</string>
     <string name="container_surface_effect">画面效果</string>
     <string name="downloads_queue_cancel_download_confirm">取消 %1$s 的下载并删除所有已下载文件？</string>
     <string name="downloads_queue_paused_resume_hint">已暂停 - 点击"继续"以恢复</string>
@@ -1481,7 +1481,7 @@
     <string name="downloads_queue_cancel_all_warning">取消 DLC、游戏或更新下载可能会损坏你的游戏安装。\n\n确定要取消所有下载并删除目前已下载的文件吗？</string>
     <string name="shortcuts_properties_use_legacy_launcher">使用旧版启动器</string>
     <string name="shortcuts_properties_use_legacy_launcher_description">旧版 Steam 模拟：通过 ColdClient 启动器运行游戏，并从 exe 中移除 SteamStub DRM。仅用于无法使用 Steam Launcher 的旧游戏。</string>
-    <string name="steam_section_real_client">WinNative 真实 Steam 客户端</string>
+    <string name="steam_section_real_client">NEXORA 真实 Steam 客户端</string>
     <string name="steam_section_emulator">旧版 Steam 模拟器</string>
     <string name="shortcuts_properties_steam_offline_mode_description">不使用 Steam 云存档运行，存档保留在本机，没有网络也能启动游戏。关闭后将恢复 Steam 云存档；若本地与云端存档不同，会询问你保留哪一个。</string>
     <string name="input_controls_select_style">选择样式</string>
@@ -1782,7 +1782,7 @@
     <string name="session_record_settings_title">录制设置</string>
     <string name="session_record_started">已开始录制</string>
     <string name="steam_chat_setting_stay_running">在后台运行</string>
-    <string name="steam_chat_setting_stay_running_desc">退出 WinNative 后保持聊天运行</string>
+    <string name="steam_chat_setting_stay_running_desc">退出 NEXORA 后保持聊天运行</string>
     <string name="settings_content_refresh">刷新</string>
 
     <!-- Settings > Debug -->
@@ -2390,7 +2390,7 @@
     <string name="retro_scr_sgsr_upscaling">SGSR 放大</string>
     <string name="retro_scr_performance_hud">性能 HUD</string>
     <string name="retro_scr_credits_licenses">鸣谢 &amp; 许可</string>
-    <string name="retro_scr_credits_desc">WinNative 的部分功能基于这些开源项目构建。点按可查看各来源。</string>
+    <string name="retro_scr_credits_desc">NEXORA 的部分功能基于这些开源项目构建。点按可查看各来源。</string>
     <string name="retro_scr_tab_defaults">默认</string>
     <string name="retro_scr_tab_credits">鸣谢</string>
     <string name="settings_support_title">支持</string>
@@ -2916,14 +2916,14 @@
     <string name="update_ignore_until_next">忽略到下次更新</string>
     <string name="update_no_notes">此构建未发布更新说明。</string>
     <string name="update_apk_notice">此更新会更改应用本身，因此 Android 会要求你确认安装。你的游戏、容器和设置都会保留。</string>
-    <string name="update_up_to_date">WinNative 已是最新版本。</string>
+    <string name="update_up_to_date">NEXORA 已是最新版本。</string>
     <string name="update_unsupported_build">仅官方签名版本提供应用内更新。</string>
     <string name="settings_general_update_source">更新来源</string>
     <string name="settings_general_update_source_summary">来自拉取请求的构建跟随该拉取请求；官方安装跟随官方版本。</string>
     <string name="update_channel_official">官方</string>
     <string name="networking_section_title">网络</string>
     <string name="networking_driver">网络驱动</string>
-    <string name="networking_driver_winnative">WinNative 网络驱动</string>
+    <string name="networking_driver_winnative">NEXORA 网络驱动</string>
     <string name="networking_driver_none">Wine 默认（不模拟网络适配器）</string>
     <string name="networking_driver_summary">为 Windows 程序提供一份带有稳定 MAC 地址的真实网络适配器列表。Android 会对应用隐藏网络接口详情，若不启用，游戏和 DRM 会看到一台没有网卡的机器。</string>
     <string name="networking_mac">MAC 地址</string>

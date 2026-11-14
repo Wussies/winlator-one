@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Suorita</string>
     <string name="common_ui_edit">Muokkaa</string>
     <string name="common_ui_remove">Poista</string>
@@ -166,7 +166,7 @@
     <string name="common_ui_grant_all_files_access_browse">Myönnä kaikkien tiedostojen käyttöoikeus selataksesi kansioita suoraan.</string>
     <string name="common_ui_not_configured">Ei määritetty</string>
     <string name="common_ui_reinstall">Asenna uudelleen</string>
-    <string name="common_ui_exit_app_confirm">Poistutaanko WinNativesta?</string>
+    <string name="common_ui_exit_app_confirm">Poistutaanko NEXORAsta?</string>
     <string name="common_ui_elements_count">%1$d elementtiä</string>
     <string name="common_ui_disabled_placeholder">-- Poistettu käytöstä --</string>
     <string name="common_ui_enabled">Käytössä</string>
@@ -416,7 +416,7 @@
     <string name="shortcuts_properties_runtime_patcher">DRM-suorituksenaikainen korjain</string>
     <string name="shortcuts_properties_runtime_patcher_description">Lisää DRM-korjaimen DLL:n käynnistyksen yhteydessä. Laskee FPS:ää – käytä vain, jos pelkkä vanha käynnistin epäonnistuu.</string>
     <string name="steam_section_title">Steam</string>
-    <string name="steam_section_real_client">WinNative-oikea Steam-asiakas</string>
+    <string name="steam_section_real_client">NEXORA-oikea Steam-asiakas</string>
     <string name="steam_section_emulator">Vanha Steam-emulaattori</string>
     <string name="shortcuts_properties_use_steam_input">Käytä Steam-syötettä</string>
     <string name="steam_launcher_real_client">Steam Launcher</string>
@@ -743,8 +743,8 @@ E.g. <b>META</b> for <i>META-näppäin</i>, \n
     <string name="session_xserver_pref_kbd">Näppäimistö</string>
     <string name="session_xserver_pref_other">Muut</string>
     <string name="session_xserver_pref_version">Versio</string>
-    <string name="session_xserver_notification_description">WinNative XServer -viestit</string>
-    <string name="session_xserver_notification_content">WinNative on käynnissä, älä sulje tai pyyhkäise tätä ilmoitusta pois</string>
+    <string name="session_xserver_notification_description">NEXORA XServer -viestit</string>
+    <string name="session_xserver_notification_content">NEXORA on käynnissä, älä sulje tai pyyhkäise tätä ilmoitusta pois</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Näppäimistö</string>
@@ -1216,8 +1216,8 @@ E.g. <b>META</b> for <i>META-näppäin</i>, \n
     <string name="settings_general_xinput_toggle_title">Poista XInput käytöstä</string>
     <string name="settings_general_xinput_toggle_summary">Poistaa XInput-käsittelyn käytöstä, kun haluat yksinomaisen hiiren ja näppäimistön hallinnan.</string>
     <string name="settings_external_display_output_summary">Siirrä peli liitettyyn ulkoiseen näyttöön tämän näytön peilaamisen sijaan. Lasit käyttävät aina omaa näyttöään.</string>
-    <string name="settings_general_file_provider_summary">Tuo WinNative-tiedostot Androidin dokumenttien valitsimien ja tiedostonhallintaohjelmien saataville.</string>
-    <string name="settings_general_auto_scraping_summary">Tämä asetus antaa WinNativen hakea mukautettujen pelien kuvituksen automaattisesti.</string>
+    <string name="settings_general_file_provider_summary">Tuo NEXORA-tiedostot Androidin dokumenttien valitsimien ja tiedostonhallintaohjelmien saataville.</string>
+    <string name="settings_general_auto_scraping_summary">Tämä asetus antaa NEXORAn hakea mukautettujen pelien kuvituksen automaattisesti.</string>
     <string name="settings_general_open_browser_summary">Avaa tuetut verkkolinkit Androidin selaimessa Wine-istunnon sijaan.</string>
     <string name="settings_general_clipboard_summary">Salli kopiointi ja liittäminen Androidin ja Wine-istuntojen välillä.</string>
     <string name="settings_general_imagefs_summary">Palauta mukana toimitetut järjestelmätiedostot poistamatta olemassa olevia säilöjä.</string>
@@ -1275,10 +1275,10 @@ E.g. <b>META</b> for <i>META-näppäin</i>, \n
     <string name="settings_debug_delete_logs_confirm_message">Tämä poistaa pysyvästi kaikki tallennetut lokitiedostot (%1$s). Tätä ei voi kumota.</string>
     <string name="settings_debug_logs_browser_title">Lokit</string>
     <string name="settings_debug_log_truncated">Näytetään tämän lokin viimeiset %1$s</string>
-    <string name="settings_debug_logs_subject">WinNative-lokit (%1$s)</string>
+    <string name="settings_debug_logs_subject">NEXORA-lokit (%1$s)</string>
     <string name="settings_debug_no_logs_available">Virheenkorjauslokeja ei ole saatavilla. Ota ensin virheenkorjausasetukset käyttöön ja käynnistä peli.</string>
     <string name="settings_debug_capture_failed">Lokien kaappaus epäonnistui: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">Kirjaa WinNative-prosessin virheet, varoitukset ja kaatumiset tiedostoon</string>
+    <string name="settings_debug_log_to_file_desc">Kirjaa NEXORA-prosessin virheet, varoitukset ja kaatumiset tiedostoon</string>
     <string name="settings_filtered_logs_to_file_title">Suodatettu vianmääritysloki</string>
     <string name="settings_filtered_logs_to_file_desc">Tallenna sovelluksen lokit tiedostoon, suodatettuna tunnistesuodattimen määritysten mukaisesti.</string>
     <string name="settings_debug_section_emulation">Emulointi</string>
@@ -1737,7 +1737,7 @@ Asennuspolku:
     <string name="steam_chat_setting_ingame">Ota chat käyttöön pelissä</string>
     <string name="steam_chat_setting_ingame_desc">Vastaanota ja lähetä viestejä pelatessasi</string>
     <string name="steam_chat_setting_stay_running">Suorita taustalla</string>
-    <string name="steam_chat_setting_stay_running_desc">Pidä chat käynnissä, kun poistut WinNativesta</string>
+    <string name="steam_chat_setting_stay_running_desc">Pidä chat käynnissä, kun poistut NEXORAsta</string>
     <string name="steam_chat_settings_overlay_needed">Salli näyttö muiden sovellusten päällä käyttääksesi chat-kuplia</string>
     <string name="steam_chat_heads_title">Viestit</string>
     <string name="steam_chat_heads_recent_title">Viimeaikaiset</string>
@@ -2388,7 +2388,7 @@ Asennuspolku:
     <string name="retro_scr_sgsr_upscaling">SGSR-skaalaus</string>
     <string name="retro_scr_performance_hud">Suorituskyky-HUD</string>
     <string name="retro_scr_credits_licenses">TEKIJÄT &amp; LISENSSIT</string>
-    <string name="retro_scr_credits_desc">Osa WinNativen ominaisuuksista perustuu näihin avoimen lähdekoodin projekteihin. Napauta nähdäksesi kunkin lähteen.</string>
+    <string name="retro_scr_credits_desc">Osa NEXORAn ominaisuuksista perustuu näihin avoimen lähdekoodin projekteihin. Napauta nähdäksesi kunkin lähteen.</string>
     <string name="retro_scr_tab_defaults">Oletukset</string>
     <string name="retro_scr_tab_credits">Tekijät</string>
     <string name="settings_support_title">Tuki</string>
@@ -2915,14 +2915,14 @@ Asennuspolku:
     <string name="update_ignore_until_next">Ohita seuraavaan päivitykseen asti</string>
     <string name="update_no_notes">Tälle koontiversiolle ei julkaistu julkaisutietoja.</string>
     <string name="update_apk_notice">Tämä päivitys muuttaa itse sovellusta, joten Android pyytää sinua vahvistamaan asennuksen. Pelisi, säiliösi ja asetuksesi säilyvät.</string>
-    <string name="update_up_to_date">WinNative on ajan tasalla.</string>
+    <string name="update_up_to_date">NEXORA on ajan tasalla.</string>
     <string name="update_unsupported_build">Sovelluksen sisäisiä päivityksiä tarjotaan vain virallisissa allekirjoitetuissa julkaisuissa.</string>
     <string name="settings_general_update_source">Päivitysten lähde</string>
     <string name="settings_general_update_source_summary">Vetopyynnöstä tehty koonti seuraa sitä vetopyyntöä; virallinen asennus seuraa virallisia julkaisuja.</string>
     <string name="update_channel_official">Virallinen</string>
     <string name="networking_section_title">Verkko</string>
     <string name="networking_driver">Verkkoajuri</string>
-    <string name="networking_driver_winnative">WinNative-verkkoajuri</string>
+    <string name="networking_driver_winnative">NEXORA-verkkoajuri</string>
     <string name="networking_driver_none">Winen oletus (ei sovitinemulointia)</string>
     <string name="networking_driver_summary">Antaa Windows-ohjelmille todellisen luettelon verkkosovittimista vakaine MAC-osoitteineen. Android piilottaa liitäntätiedot sovelluksilta, joten ilman sitä pelit ja DRM näkevät koneen, jossa ei ole verkkokortteja.</string>
     <string name="networking_mac">MAC-osoite</string>

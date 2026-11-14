@@ -372,6 +372,8 @@ private fun ChatSettingsDialog(onDismiss: () -> Unit) {
                             navCol = 0,
                             enabled = master,
                         ) { v -> notifications = v; PrefManager.chatNotificationsEnabled = v }
+                        // NEXORA: chat heads need SYSTEM_ALERT_WINDOW, which NEXORA does not request.
+                        if (false) {
                         ChatSettingToggle(
                             stringResource(R.string.steam_chat_setting_heads),
                             stringResource(R.string.steam_chat_setting_heads_desc),
@@ -400,6 +402,7 @@ private fun ChatSettingsDialog(onDismiss: () -> Unit) {
                                 PrefManager.chatHeadsEnabled = false
                                 ChatOverlayService.stop(context)
                             }
+                        }
                         }
                     }
                     Column(Modifier.weight(1f)) {

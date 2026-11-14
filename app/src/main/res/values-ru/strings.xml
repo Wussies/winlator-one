@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Запустить</string>
     <string name="common_ui_edit">Редактировать</string>
     <string name="common_ui_remove">Удалить</string>
@@ -165,7 +165,7 @@
     <string name="common_ui_grant_all_files_access_browse">Предоставьте полный доступ к файлам, чтобы просматривать папки напрямую.</string>
     <string name="common_ui_not_configured">Не настроено</string>
     <string name="common_ui_reinstall">Переустановить</string>
-    <string name="common_ui_exit_app_confirm">Выйти из WinNative?</string>
+    <string name="common_ui_exit_app_confirm">Выйти из NEXORA?</string>
     <string name="common_ui_elements_count">%1$d элементов</string>
     <string name="common_ui_disabled_placeholder">-- Отключено --</string>
     <string name="common_ui_enabled">Включено</string>
@@ -664,8 +664,8 @@
     <string name="session_xserver_pref_kbd">Клавиатура</string>
     <string name="session_xserver_pref_other">Другое</string>
     <string name="session_xserver_pref_version">Версия</string>
-    <string name="session_xserver_notification_description">Сообщения WinNative XServer</string>
-    <string name="session_xserver_notification_content">WinNative запущен, не уничтожайте и не смахивайте это уведомление</string>
+    <string name="session_xserver_notification_description">Сообщения NEXORA XServer</string>
+    <string name="session_xserver_notification_content">NEXORA запущен, не уничтожайте и не смахивайте это уведомление</string>
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Клавиатура</string>
     <string name="session_drawer_fps_monitor">Монитор ФПС</string>
@@ -1002,8 +1002,8 @@
     <string name="settings_general_xinput_toggle_title">Отключить XInput</string>
     <string name="settings_general_xinput_toggle_summary">Отключает обработку XInput, если вам требуется единоличное управление мышью и клавиатурой.</string>
     <string name="settings_external_display_output_summary">Переносит игру на подключённый внешний дисплей вместо зеркалирования этого экрана. Очки всегда используют собственный дисплей.</string>
-    <string name="settings_general_file_provider_summary">Предоставляйте файлы WinNative средствам выбора документов и файловым менеджерам Android.</string>
-    <string name="settings_general_auto_scraping_summary">Этот параметр позволяет WinNative автоматически загружать обложки пользовательских игр.</string>
+    <string name="settings_general_file_provider_summary">Предоставляйте файлы NEXORA средствам выбора документов и файловым менеджерам Android.</string>
+    <string name="settings_general_auto_scraping_summary">Этот параметр позволяет NEXORA автоматически загружать обложки пользовательских игр.</string>
     <string name="settings_general_open_browser_summary">Открывайте поддерживаемые веб-ссылки в браузере Android, а не внутри Wine.</string>
     <string name="settings_general_clipboard_summary">Разрешить копирование и вставку между сеансами Android и Wine.</string>
     <string name="settings_general_imagefs_summary">Восстановите связанные системные файлы, не удаляя существующие контейнеры.</string>
@@ -1059,10 +1059,10 @@
     <string name="settings_debug_delete_logs_confirm_message">Это навсегда удалит все сохраненные файлы журналов (%1$s). Действие нельзя отменить.</string>
     <string name="settings_debug_logs_browser_title">Журналы</string>
     <string name="settings_debug_log_truncated">Показаны последние %1$s этого журнала</string>
-    <string name="settings_debug_logs_subject">Журналы WinNative (%1$s)</string>
+    <string name="settings_debug_logs_subject">Журналы NEXORA (%1$s)</string>
     <string name="settings_debug_no_logs_available">Журналы отладки отсутствуют. Сначала включите параметры отладки и запустите игру.</string>
     <string name="settings_debug_capture_failed">Не удалось записать журналы: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">Записывать ошибки процесса WinNative, предупреждения и сбои в файл.</string>
+    <string name="settings_debug_log_to_file_desc">Записывать ошибки процесса NEXORA, предупреждения и сбои в файл.</string>
     <string name="settings_filtered_logs_to_file_title">Отфильтрованный журнал отладки</string>
     <string name="settings_filtered_logs_to_file_desc">Сохранить журналы приложения в файл, отфильтрованные согласно настройкам фильтра тегов.</string>
     <string name="settings_debug_section_emulation">Эмуляция</string>
@@ -1406,7 +1406,7 @@
     <string name="downloads_queue_this_game">эта игра</string>
     <string name="shortcuts_properties_use_legacy_launcher">Использовать устаревший лаунчер</string>
     <string name="shortcuts_properties_use_legacy_launcher_description">Устаревшая эмуляция Steam: запускает игру через лаунчер ColdClient и удаляет SteamStub DRM из exe. Используйте только для старых игр, которые не работают со Steam Launcher.</string>
-    <string name="steam_section_real_client">Настоящий клиент Steam WinNative</string>
+    <string name="steam_section_real_client">Настоящий клиент Steam NEXORA</string>
     <string name="steam_section_emulator">Устаревший эмулятор Steam</string>
     <string name="shortcuts_properties_steam_offline_mode_description">Игра запускается без Steam Cloud: сохранения остаются на этом устройстве, и игра стартует даже без подключения. Отключите параметр, чтобы возобновить Steam Cloud; если локальное и облачное сохранения различаются, вы выберете, какое оставить.</string>
     <string name="cloud_sync_disable_title">Отключить облачные сохранения</string>
@@ -1688,7 +1688,7 @@
     <string name="session_record_settings_title">Настройки записи</string>
     <string name="session_record_started">Запись начата</string>
     <string name="steam_chat_setting_stay_running">Работать в фоне</string>
-    <string name="steam_chat_setting_stay_running_desc">Оставлять чат активным после выхода из WinNative</string>
+    <string name="steam_chat_setting_stay_running_desc">Оставлять чат активным после выхода из NEXORA</string>
     <string name="settings_content_refresh">Обновить</string>
 
     <!-- Settings > Debug -->
@@ -2296,7 +2296,7 @@
     <string name="retro_scr_sgsr_upscaling">Апскейл SGSR</string>
     <string name="retro_scr_performance_hud">HUD производительности</string>
     <string name="retro_scr_credits_licenses">БЛАГОДАРНОСТИ &amp; ЛИЦЕНЗИИ</string>
-    <string name="retro_scr_credits_desc">Некоторые функции WinNative построены на этих проектах с открытым исходным кодом. Нажмите, чтобы посмотреть каждый источник.</string>
+    <string name="retro_scr_credits_desc">Некоторые функции NEXORA построены на этих проектах с открытым исходным кодом. Нажмите, чтобы посмотреть каждый источник.</string>
     <string name="retro_scr_tab_defaults">По умолчанию</string>
     <string name="retro_scr_tab_credits">Благодарности</string>
     <string name="settings_support_title">Поддержка</string>
@@ -2822,14 +2822,14 @@
     <string name="update_ignore_until_next">Пропустить до следующего обновления</string>
     <string name="update_no_notes">Для этой сборки не опубликованы примечания к выпуску.</string>
     <string name="update_apk_notice">Это обновление изменяет само приложение, поэтому Android попросит подтвердить установку. Ваши игры, контейнеры и настройки сохранятся.</string>
-    <string name="update_up_to_date">У вас последняя версия WinNative.</string>
+    <string name="update_up_to_date">У вас последняя версия NEXORA.</string>
     <string name="update_unsupported_build">Обновления внутри приложения доступны только для официальных подписанных выпусков.</string>
     <string name="settings_general_update_source">Источник обновлений</string>
     <string name="settings_general_update_source_summary">Сборка из пул-реквеста следует за этим пул-реквестом; официальная установка — за официальными выпусками.</string>
     <string name="update_channel_official">Официальный</string>
     <string name="networking_section_title">Сеть</string>
     <string name="networking_driver">Сетевой драйвер</string>
-    <string name="networking_driver_winnative">Сетевой драйвер WinNative</string>
+    <string name="networking_driver_winnative">Сетевой драйвер NEXORA</string>
     <string name="networking_driver_none">По умолчанию Wine (без эмуляции адаптера)</string>
     <string name="networking_driver_summary">Даёт программам Windows реальный список сетевых адаптеров со стабильными MAC-адресами. Android скрывает сведения об интерфейсах от приложений, поэтому без него игры и DRM видят машину без сетевых карт.</string>
     <string name="networking_mac">MAC-адрес</string>

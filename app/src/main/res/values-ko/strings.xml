@@ -2,7 +2,7 @@
 
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">실행</string>
     <string name="common_ui_edit">편집</string>
     <string name="common_ui_remove">제거</string>
@@ -661,8 +661,8 @@
     <string name="session_xserver_pref_kbd">키보드</string>
     <string name="session_xserver_pref_other">기타</string>
     <string name="session_xserver_pref_version">버전</string>
-    <string name="session_xserver_notification_description">WinNative XServer 메시지</string>
-    <string name="session_xserver_notification_content">WinNative가 실행 중입니다. 이 알림을 종료하거나 스와이프하지 마세요</string>
+    <string name="session_xserver_notification_description">NEXORA XServer 메시지</string>
+    <string name="session_xserver_notification_content">NEXORA가 실행 중입니다. 이 알림을 종료하거나 스와이프하지 마세요</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">키보드</string>
@@ -930,8 +930,8 @@
     <string name="settings_general_xinput_toggle_title">XInput 비활성화</string>
     <string name="settings_general_xinput_toggle_summary">마우스와 키보드만 사용하려는 경우 XInput 처리를 끕니다.</string>
     <string name="settings_external_display_output_summary">이 화면을 미러링하는 대신 연결된 외부 디스플레이로 게임을 옮깁니다. 안경은 항상 자체 디스플레이를 사용합니다.</string>
-    <string name="settings_general_file_provider_summary">Android 문서 선택기 및 파일 관리자에 WinNative 파일을 노출합니다.</string>
-    <string name="settings_general_auto_scraping_summary">WinNative가 사용자 지정 게임 아트워크를 자동으로 가져올 수 있도록 합니다.</string>
+    <string name="settings_general_file_provider_summary">Android 문서 선택기 및 파일 관리자에 NEXORA 파일을 노출합니다.</string>
+    <string name="settings_general_auto_scraping_summary">NEXORA가 사용자 지정 게임 아트워크를 자동으로 가져올 수 있도록 합니다.</string>
     <string name="settings_general_open_browser_summary">지원되는 웹 링크를 Wine 내부 대신 Android 브라우저에서 엽니다.</string>
     <string name="settings_general_clipboard_summary">Android와 Wine 세션 간에 복사 및 붙여넣기를 허용합니다.</string>
     <string name="settings_general_imagefs_summary">기존 컨테이너를 제거하지 않고 번들된 시스템 파일을 복원합니다.</string>
@@ -987,10 +987,10 @@
     <string name="settings_debug_delete_logs_confirm_message">저장된 모든 로그 파일(%1$s)을 영구적으로 삭제합니다. 되돌릴 수 없습니다.</string>
     <string name="settings_debug_logs_browser_title">로그</string>
     <string name="settings_debug_log_truncated">이 로그의 마지막 %1$s 표시 중</string>
-    <string name="settings_debug_logs_subject">WinNative 로그 (%1$s)</string>
+    <string name="settings_debug_logs_subject">NEXORA 로그 (%1$s)</string>
     <string name="settings_debug_no_logs_available">사용 가능한 디버그 로그가 없습니다. 먼저 디버그 옵션을 활성화하고 게임을 실행하세요.</string>
     <string name="settings_debug_capture_failed">로그 캡처 실패: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">WinNative 프로세스 오류, 경고 및 충돌을 파일에 기록</string>
+    <string name="settings_debug_log_to_file_desc">NEXORA 프로세스 오류, 경고 및 충돌을 파일에 기록</string>
     <string name="settings_filtered_logs_to_file_title">필터링된 디버그 로그</string>
     <string name="settings_filtered_logs_to_file_desc">앱의 로그를 파일에 저장합니다. 태그 필터에 설정된 대로 필터링됩니다.</string>
     <string name="settings_debug_section_emulation">에뮬레이션</string>
@@ -1390,7 +1390,7 @@
     <string name="cloud_saves_syncing_from_provider">%1$s에서 저장 파일 다운로드 중\u2026</string>
     <string name="cloud_saves_sync_summary">%1$s에 현재 있는 버전을 가져옵니다.</string>
     <string name="cloud_saves_sync_summary_generic">현재 클라우드 버전을 가져옵니다.</string>
-    <string name="common_ui_exit_app_confirm">WinNative를 종료하시겠습니까?</string>
+    <string name="common_ui_exit_app_confirm">NEXORA를 종료하시겠습니까?</string>
     <string name="container_surface_effect">표면 효과</string>
     <string name="downloads_queue_cancel_download_confirm">%1$s 다운로드를 취소하고 다운로드된 모든 파일을 삭제하시겠습니까?</string>
     <string name="downloads_queue_paused_resume_hint">일시 중지됨 - 계속하려면 재개를 탭하세요</string>
@@ -1482,7 +1482,7 @@
     <string name="downloads_queue_cancel_all_warning">DLC, 게임 또는 업데이트 다운로드를 취소하면 게임 설치가 손상될 수 있습니다.\n\n모든 다운로드를 취소하고 지금까지 다운로드한 파일을 삭제할까요?</string>
     <string name="shortcuts_properties_use_legacy_launcher">Legacy Launcher 사용</string>
     <string name="shortcuts_properties_use_legacy_launcher_description">Legacy Steam 에뮬레이션: ColdClient 런처로 게임을 실행하고 exe에서 SteamStub DRM을 제거합니다. Steam Launcher에서 작동하지 않는 오래된 게임에만 사용하세요.</string>
-    <string name="steam_section_real_client">WinNative 실제 Steam 클라이언트</string>
+    <string name="steam_section_real_client">NEXORA 실제 Steam 클라이언트</string>
     <string name="steam_section_emulator">레거시 Steam 에뮬레이터</string>
     <string name="shortcuts_properties_steam_offline_mode_description">Steam 클라우드를 사용하지 않고 실행하여 저장 파일이 이 기기에 남고 연결이 없어도 게임이 시작됩니다. 끄면 Steam 클라우드가 다시 시작되며, 로컬과 클라우드 저장 파일이 다르면 어느 쪽을 유지할지 묻습니다.</string>
     <string name="input_controls_select_style">스타일 선택</string>
@@ -1783,7 +1783,7 @@
     <string name="session_record_settings_title">녹화 설정</string>
     <string name="session_record_started">녹화 시작됨</string>
     <string name="steam_chat_setting_stay_running">백그라운드에서 실행</string>
-    <string name="steam_chat_setting_stay_running_desc">WinNative를 종료한 후에도 채팅 유지</string>
+    <string name="steam_chat_setting_stay_running_desc">NEXORA를 종료한 후에도 채팅 유지</string>
     <string name="settings_content_refresh">새로고침</string>
 
     <!-- Settings > Debug -->
@@ -2391,7 +2391,7 @@
     <string name="retro_scr_sgsr_upscaling">SGSR 업스케일링</string>
     <string name="retro_scr_performance_hud">성능 HUD</string>
     <string name="retro_scr_credits_licenses">크레딧 &amp; 라이선스</string>
-    <string name="retro_scr_credits_desc">WinNative의 일부 기능은 이러한 오픈 소스 프로젝트를 기반으로 합니다. 탭하여 각 소스를 확인하세요.</string>
+    <string name="retro_scr_credits_desc">NEXORA의 일부 기능은 이러한 오픈 소스 프로젝트를 기반으로 합니다. 탭하여 각 소스를 확인하세요.</string>
     <string name="retro_scr_tab_defaults">기본값</string>
     <string name="retro_scr_tab_credits">크레딧</string>
     <string name="settings_support_title">지원</string>
@@ -2918,14 +2918,14 @@
     <string name="update_ignore_until_next">다음 업데이트까지 무시</string>
     <string name="update_no_notes">이 빌드에 대한 릴리스 노트가 게시되지 않았습니다.</string>
     <string name="update_apk_notice">이 업데이트는 앱 자체를 변경하므로 Android가 설치 확인을 요청합니다. 게임, 컨테이너, 설정은 그대로 유지됩니다.</string>
-    <string name="update_up_to_date">WinNative가 최신 상태입니다.</string>
+    <string name="update_up_to_date">NEXORA가 최신 상태입니다.</string>
     <string name="update_unsupported_build">인앱 업데이트는 공식 서명된 릴리스에서만 제공됩니다.</string>
     <string name="settings_general_update_source">업데이트 출처</string>
     <string name="settings_general_update_source_summary">풀 리퀘스트 빌드는 해당 풀 리퀘스트를, 공식 설치는 공식 릴리스를 따릅니다.</string>
     <string name="update_channel_official">공식</string>
     <string name="networking_section_title">네트워크</string>
     <string name="networking_driver">네트워크 드라이버</string>
-    <string name="networking_driver_winnative">WinNative 네트워크 드라이버</string>
+    <string name="networking_driver_winnative">NEXORA 네트워크 드라이버</string>
     <string name="networking_driver_none">Wine 기본값 (어댑터 에뮬레이션 없음)</string>
     <string name="networking_driver_summary">Windows 프로그램에 안정적인 MAC 주소를 가진 실제 네트워크 어댑터 목록을 제공합니다. Android는 인터페이스 정보를 앱에 숨기므로, 이 기능이 없으면 게임과 DRM이 네트워크 카드가 없는 기기로 인식합니다.</string>
     <string name="networking_mac">MAC 주소</string>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Kör</string>
     <string name="common_ui_edit">Redigera</string>
     <string name="common_ui_remove">Ta bort</string>
@@ -166,7 +166,7 @@
     <string name="common_ui_grant_all_files_access_browse">Bevilja åtkomst till alla filer för att bläddra bland mappar direkt.</string>
     <string name="common_ui_not_configured">Inte konfigurerad</string>
     <string name="common_ui_reinstall">Installera om</string>
-    <string name="common_ui_exit_app_confirm">Avsluta WinNative?</string>
+    <string name="common_ui_exit_app_confirm">Avsluta NEXORA?</string>
     <string name="common_ui_elements_count">%1$d element</string>
     <string name="common_ui_disabled_placeholder">-- Inaktiverad --</string>
     <string name="common_ui_enabled">Aktiverad</string>
@@ -416,7 +416,7 @@
     <string name="shortcuts_properties_runtime_patcher">DRM-patchning vid körning</string>
     <string name="shortcuts_properties_runtime_patcher_description">Injicerar en DRM-patchnings-DLL vid start. Minskar FPS — använd endast om det äldre startprogrammet ensamt misslyckas.</string>
     <string name="steam_section_title">Steam</string>
-    <string name="steam_section_real_client">WinNative Real Steam Client</string>
+    <string name="steam_section_real_client">NEXORA Real Steam Client</string>
     <string name="steam_section_emulator">Äldre Steam-emulator</string>
     <string name="shortcuts_properties_use_steam_input">Använd Steam Input</string>
     <string name="steam_launcher_real_client">Steam Launcher</string>
@@ -743,8 +743,8 @@ T.ex. <b>META</b> för <i>META-tangent</i>, \n
     <string name="session_xserver_pref_kbd">Tangentbord</string>
     <string name="session_xserver_pref_other">Övrigt</string>
     <string name="session_xserver_pref_version">Version</string>
-    <string name="session_xserver_notification_description">WinNative XServer-meddelanden</string>
-    <string name="session_xserver_notification_content">WinNative körs, avsluta eller svep inte bort den här aviseringen</string>
+    <string name="session_xserver_notification_description">NEXORA XServer-meddelanden</string>
+    <string name="session_xserver_notification_content">NEXORA körs, avsluta eller svep inte bort den här aviseringen</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Tangentbord</string>
@@ -1216,8 +1216,8 @@ T.ex. <b>META</b> för <i>META-tangent</i>, \n
     <string name="settings_general_xinput_toggle_title">Inaktivera XInput</string>
     <string name="settings_general_xinput_toggle_summary">Stänger av XInput-hantering när du vill ha exklusiv mus- och tangentbordskontroll.</string>
     <string name="settings_external_display_output_summary">Flytta spelet till en ansluten extern skärm i stället för att spegla den här skärmen. Glasögon använder alltid sin egen skärm.</string>
-    <string name="settings_general_file_provider_summary">Exponera WinNative-filer för Androids dokumentväljare och filhanterare.</string>
-    <string name="settings_general_auto_scraping_summary">Den här inställningen låter WinNative automatiskt hämta grafik för anpassade spel.</string>
+    <string name="settings_general_file_provider_summary">Exponera NEXORA-filer för Androids dokumentväljare och filhanterare.</string>
+    <string name="settings_general_auto_scraping_summary">Den här inställningen låter NEXORA automatiskt hämta grafik för anpassade spel.</string>
     <string name="settings_general_open_browser_summary">Öppna webblänkar som stöds i Android-webbläsaren i stället för i Wine.</string>
     <string name="settings_general_clipboard_summary">Tillåt kopiera och klistra in mellan Android- och Wine-sessioner.</string>
     <string name="settings_general_imagefs_summary">Återställ medföljande systemfiler utan att ta bort dina befintliga containrar.</string>
@@ -1275,10 +1275,10 @@ T.ex. <b>META</b> för <i>META-tangent</i>, \n
     <string name="settings_debug_delete_logs_confirm_message">Detta tar permanent bort alla sparade loggfiler (%1$s). Detta kan inte ångras.</string>
     <string name="settings_debug_logs_browser_title">Loggar</string>
     <string name="settings_debug_log_truncated">Visar de senaste %1$s av denna logg</string>
-    <string name="settings_debug_logs_subject">WinNative-loggar (%1$s)</string>
+    <string name="settings_debug_logs_subject">NEXORA-loggar (%1$s)</string>
     <string name="settings_debug_no_logs_available">Inga felsökningsloggar tillgängliga. Aktivera felsökningsalternativ först och starta ett spel.</string>
     <string name="settings_debug_capture_failed">Det gick inte att fånga loggar: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">Logga WinNative-processfel, varningar och krascher till fil</string>
+    <string name="settings_debug_log_to_file_desc">Logga NEXORA-processfel, varningar och krascher till fil</string>
     <string name="settings_filtered_logs_to_file_title">Filtrerad felsökningslogg</string>
     <string name="settings_filtered_logs_to_file_desc">Spara appens loggar till en fil, filtrerade enligt vad som är konfigurerat i taggfiltren.</string>
     <string name="settings_debug_section_emulation">Emulering</string>
@@ -1737,7 +1737,7 @@ Installerad sökväg:
     <string name="steam_chat_setting_ingame">Aktivera chatt i spel</string>
     <string name="steam_chat_setting_ingame_desc">Ta emot och skicka meddelanden medan du spelar</string>
     <string name="steam_chat_setting_stay_running">Kör i bakgrunden</string>
-    <string name="steam_chat_setting_stay_running_desc">Håll chatten igång efter att du avslutat WinNative</string>
+    <string name="steam_chat_setting_stay_running_desc">Håll chatten igång efter att du avslutat NEXORA</string>
     <string name="steam_chat_settings_overlay_needed">Tillåt visning över andra appar för att använda chatthuvuden</string>
     <string name="steam_chat_heads_title">Meddelanden</string>
     <string name="steam_chat_heads_recent_title">Senaste</string>
@@ -2388,7 +2388,7 @@ Installerad sökväg:
     <string name="retro_scr_sgsr_upscaling">SGSR-uppskalning</string>
     <string name="retro_scr_performance_hud">Prestanda-HUD</string>
     <string name="retro_scr_credits_licenses">MEDVERKANDE &amp; LICENSER</string>
-    <string name="retro_scr_credits_desc">Vissa av WinNatives funktioner bygger på dessa projekt med öppen källkod. Tryck för att visa varje källa.</string>
+    <string name="retro_scr_credits_desc">Vissa av NEXORAs funktioner bygger på dessa projekt med öppen källkod. Tryck för att visa varje källa.</string>
     <string name="retro_scr_tab_defaults">Standarder</string>
     <string name="retro_scr_tab_credits">Medverkande</string>
     <string name="settings_support_title">Support</string>
@@ -2915,14 +2915,14 @@ Installerad sökväg:
     <string name="update_ignore_until_next">Ignorera till nästa uppdatering</string>
     <string name="update_no_notes">Inga versionsanteckningar publicerades för det här bygget.</string>
     <string name="update_apk_notice">Den här uppdateringen ändrar själva appen, så Android ber dig bekräfta installationen. Dina spel, containrar och inställningar behålls.</string>
-    <string name="update_up_to_date">WinNative är uppdaterad.</string>
+    <string name="update_up_to_date">NEXORA är uppdaterad.</string>
     <string name="update_unsupported_build">Uppdateringar i appen erbjuds endast för officiella signerade versioner.</string>
     <string name="settings_general_update_source">Uppdateringskälla</string>
     <string name="settings_general_update_source_summary">Ett bygge från en pull request följer den pull requesten; en officiell installation följer de officiella utgåvorna.</string>
     <string name="update_channel_official">Officiell</string>
     <string name="networking_section_title">Nätverk</string>
     <string name="networking_driver">Nätverksdrivrutin</string>
-    <string name="networking_driver_winnative">WinNative nätverksdrivrutin</string>
+    <string name="networking_driver_winnative">NEXORA nätverksdrivrutin</string>
     <string name="networking_driver_none">Wine-standard (ingen adapteremulering)</string>
     <string name="networking_driver_summary">Ger Windows-program en riktig lista över nätverksadaptrar med stabila MAC-adresser. Android döljer gränssnittsinformation för appar, så utan den ser spel och DRM en maskin utan nätverkskort.</string>
     <string name="networking_mac">MAC-adress</string>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Monochrome layer for Android 13+ themed icons. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#FFFFFFFF" android:pathData="M33,75L33,37Q33,33 37,33L41,33Q43.5,33 45,35L66,61L66,37Q66,33 70,33L71,33Q75,33 75,37L75,71Q75,75 71,75L67,75Q64.5,75 63,73L42,47L42,71Q42,75 38,75L37,75Q33,75 33,75Z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M77,31m-3.2,0a3.2,3.2 0,1 1,6.4 0a3.2,3.2 0,1 1,-6.4 0" />
+</vector>

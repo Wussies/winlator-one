@@ -2,7 +2,7 @@
 
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Lancer</string>
     <string name="common_ui_edit">Modifier</string>
     <string name="common_ui_remove">Supprimer</string>
@@ -661,8 +661,8 @@ Par ex. <b>META</b> pour la <i>touche META</i>, \n
     <string name="session_xserver_pref_kbd">Clavier</string>
     <string name="session_xserver_pref_other">Autre</string>
     <string name="session_xserver_pref_version">Version</string>
-    <string name="session_xserver_notification_description">Messages XServer de WinNative</string>
-    <string name="session_xserver_notification_content">WinNative est en cours d\'exécution, ne supprimez pas et ne balayez pas cette notification</string>
+    <string name="session_xserver_notification_description">Messages XServer de NEXORA</string>
+    <string name="session_xserver_notification_content">NEXORA est en cours d\'exécution, ne supprimez pas et ne balayez pas cette notification</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Clavier</string>
@@ -930,8 +930,8 @@ Par ex. <b>META</b> pour la <i>touche META</i>, \n
     <string name="settings_general_xinput_toggle_title">Désactiver XInput</string>
     <string name="settings_general_xinput_toggle_summary">Désactive la gestion XInput lorsque vous souhaitez un contrôle exclusif au clavier et à la souris.</string>
     <string name="settings_external_display_output_summary">Déplace le jeu vers un écran externe connecté au lieu de dupliquer cet écran. Les lunettes utilisent toujours leur propre écran.</string>
-    <string name="settings_general_file_provider_summary">Exposer les fichiers de WinNative aux sélecteurs de documents et gestionnaires de fichiers Android.</string>
-    <string name="settings_general_auto_scraping_summary">Permet à WinNative de récupérer automatiquement les illustrations des jeux personnalisés.</string>
+    <string name="settings_general_file_provider_summary">Exposer les fichiers de NEXORA aux sélecteurs de documents et gestionnaires de fichiers Android.</string>
+    <string name="settings_general_auto_scraping_summary">Permet à NEXORA de récupérer automatiquement les illustrations des jeux personnalisés.</string>
     <string name="settings_general_open_browser_summary">Ouvrir les liens web pris en charge dans le navigateur Android au lieu de les ouvrir dans Wine.</string>
     <string name="settings_general_clipboard_summary">Permettre le copier-coller entre Android et les sessions Wine.</string>
     <string name="settings_general_imagefs_summary">Restaurer les fichiers système fournis sans supprimer vos conteneurs existants.</string>
@@ -987,10 +987,10 @@ Par ex. <b>META</b> pour la <i>touche META</i>, \n
     <string name="settings_debug_delete_logs_confirm_message">Cela supprime définitivement tous les fichiers journaux enregistrés (%1$s). Cette action est irréversible.</string>
     <string name="settings_debug_logs_browser_title">Journaux</string>
     <string name="settings_debug_log_truncated">Affichage des derniers %1$s de ce journal</string>
-    <string name="settings_debug_logs_subject">Journaux WinNative (%1$s)</string>
+    <string name="settings_debug_logs_subject">Journaux NEXORA (%1$s)</string>
     <string name="settings_debug_no_logs_available">Aucun journal de débogage disponible. Activez d\'abord les options de débogage puis lancez un jeu.</string>
     <string name="settings_debug_capture_failed">Échec de la capture des journaux : %1$s</string>
-    <string name="settings_debug_log_to_file_desc">Journaliser les erreurs, avertissements et plantages du processus WinNative dans un fichier</string>
+    <string name="settings_debug_log_to_file_desc">Journaliser les erreurs, avertissements et plantages du processus NEXORA dans un fichier</string>
     <string name="settings_filtered_logs_to_file_title">Journal de débogage filtré</string>
     <string name="settings_filtered_logs_to_file_desc">Enregistrez les journaux de l\'application dans un fichier, filtrés selon la configuration du filtre de balises.</string>
     <string name="settings_debug_section_emulation">Émulation</string>
@@ -1389,7 +1389,7 @@ Chemin installé :
     <string name="cloud_saves_syncing_from_provider">Téléchargement de la sauvegarde depuis %1$s\u2026</string>
     <string name="cloud_saves_sync_summary">Récupère la version actuelle de %1$s.</string>
     <string name="cloud_saves_sync_summary_generic">Récupère la version cloud actuelle.</string>
-    <string name="common_ui_exit_app_confirm">Quitter WinNative ?</string>
+    <string name="common_ui_exit_app_confirm">Quitter NEXORA ?</string>
     <string name="container_surface_effect">Effet de surface</string>
     <string name="downloads_queue_cancel_download_confirm">Annuler le téléchargement de %1$s et supprimer tous les fichiers téléchargés ?</string>
     <string name="downloads_queue_paused_resume_hint">En pause - appuyez sur Reprendre pour continuer</string>
@@ -1481,7 +1481,7 @@ Chemin installé :
     <string name="downloads_queue_cancel_all_warning">Annuler des téléchargements de DLC, jeux ou mises à jour peut potentiellement corrompre vos installations de jeux.\n\nVoulez-vous vraiment annuler tous les téléchargements et supprimer les fichiers déjà téléchargés ?</string>
     <string name="shortcuts_properties_use_legacy_launcher">Utiliser le lanceur hérité</string>
     <string name="shortcuts_properties_use_legacy_launcher_description">Émulation Steam héritée : lance le jeu via le lanceur ColdClient et retire le DRM SteamStub de l\'exe. À utiliser uniquement pour les anciens jeux qui ne fonctionnent pas avec Steam Launcher.</string>
-    <string name="steam_section_real_client">Client Steam réel WinNative</string>
+    <string name="steam_section_real_client">Client Steam réel NEXORA</string>
     <string name="steam_section_emulator">Émulateur Steam hérité</string>
     <string name="shortcuts_properties_steam_offline_mode_description">Joue sans utiliser Steam Cloud : les sauvegardes restent sur cet appareil et le jeu démarre même sans connexion. Désactivez l\'option pour reprendre Steam Cloud ; si la sauvegarde locale et celle du cloud diffèrent, il vous sera demandé laquelle conserver.</string>
     <string name="input_controls_select_style">Sélectionner le style</string>
@@ -1803,7 +1803,7 @@ Chemin installé :
     <string name="session_record_settings_title">Paramètres d\'enregistrement</string>
     <string name="session_record_started">Enregistrement démarré</string>
     <string name="steam_chat_setting_stay_running">Exécuter en arrière-plan</string>
-    <string name="steam_chat_setting_stay_running_desc">Garder le chat actif après avoir quitté WinNative</string>
+    <string name="steam_chat_setting_stay_running_desc">Garder le chat actif après avoir quitté NEXORA</string>
     <string name="settings_content_refresh">Actualiser</string>
 
     <!-- Settings > Other: Background Protection -->
@@ -2392,7 +2392,7 @@ Chemin installé :
     <string name="retro_scr_sgsr_upscaling">Mise à l\'échelle SGSR</string>
     <string name="retro_scr_performance_hud">HUD de performances</string>
     <string name="retro_scr_credits_licenses">CRÉDITS &amp; LICENCES</string>
-    <string name="retro_scr_credits_desc">Certaines fonctionnalités de WinNative reposent sur ces projets open source. Appuyez pour voir chaque source.</string>
+    <string name="retro_scr_credits_desc">Certaines fonctionnalités de NEXORA reposent sur ces projets open source. Appuyez pour voir chaque source.</string>
     <string name="retro_scr_tab_defaults">Par défaut</string>
     <string name="retro_scr_tab_credits">Crédits</string>
     <string name="settings_support_title">Assistance</string>
@@ -2918,14 +2918,14 @@ Chemin installé :
     <string name="update_ignore_until_next">Ignorer jusqu\'à la prochaine mise à jour</string>
     <string name="update_no_notes">Aucune note de version n\'a été publiée pour ce build.</string>
     <string name="update_apk_notice">Cette mise à jour modifie l\'application elle-même ; Android vous demandera donc de confirmer l\'installation. Vos jeux, conteneurs et paramètres sont conservés.</string>
-    <string name="update_up_to_date">WinNative est à jour.</string>
+    <string name="update_up_to_date">NEXORA est à jour.</string>
     <string name="update_unsupported_build">Les mises à jour intégrées ne sont proposées que sur les versions officielles signées.</string>
     <string name="settings_general_update_source">Source des mises à jour</string>
     <string name="settings_general_update_source_summary">Une version issue d’une pull request suit cette pull request ; une installation officielle suit les versions officielles.</string>
     <string name="update_channel_official">Officiel</string>
     <string name="networking_section_title">Réseau</string>
     <string name="networking_driver">Pilote réseau</string>
-    <string name="networking_driver_winnative">Pilote réseau WinNative</string>
+    <string name="networking_driver_winnative">Pilote réseau NEXORA</string>
     <string name="networking_driver_none">Valeur par défaut de Wine (aucune émulation d\'adaptateur)</string>
     <string name="networking_driver_summary">Fournit aux programmes Windows une véritable liste d\'adaptateurs réseau avec des adresses MAC stables. Android masque les détails des interfaces aux applications : sans lui, les jeux et les DRM voient une machine sans aucune carte réseau.</string>
     <string name="networking_mac">Adresse MAC</string>

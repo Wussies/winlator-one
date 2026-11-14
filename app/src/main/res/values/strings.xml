@@ -2,7 +2,7 @@
 
 <resources>
     <!-- Common > UI Labels -->
-    <string name="common_ui_app_name">WinNative</string>
+    <string name="common_ui_app_name">NEXORA</string>
     <string name="common_ui_run">Run</string>
     <string name="common_ui_edit">Edit</string>
     <string name="common_ui_remove">Remove</string>
@@ -167,7 +167,7 @@
     <string name="common_ui_grant_all_files_access_browse">Grant all file access to browse folders directly.</string>
     <string name="common_ui_not_configured">Not configured</string>
     <string name="common_ui_reinstall">Reinstall</string>
-    <string name="common_ui_exit_app_confirm">Exit WinNative?</string>
+    <string name="common_ui_exit_app_confirm">Exit NEXORA?</string>
     <string name="common_ui_elements_count">%1$d elements</string>
     <string name="common_ui_disabled_placeholder">-- Disabled --</string>
     <string name="common_ui_enabled">Enabled</string>
@@ -478,7 +478,7 @@
     <string name="shortcuts_properties_runtime_patcher">Runtime DRM Patcher</string>
     <string name="shortcuts_properties_runtime_patcher_description">Injects a DRM patcher DLL at launch. Reduces FPS — only use if the Legacy Launcher alone fails.</string>
     <string name="steam_section_title">Steam</string>
-    <string name="steam_section_real_client">WinNative Real Steam Client</string>
+    <string name="steam_section_real_client">NEXORA Real Steam Client</string>
     <string name="steam_section_emulator">Legacy Steam Emulator</string>
     <string name="shortcuts_properties_use_steam_input">Use Steam Input</string>
     <string name="steam_launcher_real_client">Steam Launcher</string>
@@ -844,8 +844,8 @@ E.g. <b>META</b> for <i>META key</i>, \n
     <string name="session_xserver_pref_kbd">Keyboard</string>
     <string name="session_xserver_pref_other">Other</string>
     <string name="session_xserver_pref_version">Version</string>
-    <string name="session_xserver_notification_description">WinNative XServer Messages</string>
-    <string name="session_xserver_notification_content">WinNative is running, do not kill or swipe this notification</string>
+    <string name="session_xserver_notification_description">NEXORA XServer Messages</string>
+    <string name="session_xserver_notification_content">NEXORA is running, do not kill or swipe this notification</string>
 
     <!-- Session > Drawer Menu -->
     <string name="session_drawer_keyboard">Keyboard</string>
@@ -1364,8 +1364,8 @@ E.g. <b>META</b> for <i>META key</i>, \n
     <string name="settings_general_xinput_toggle_title">Disable XInput</string>
     <string name="settings_general_xinput_toggle_summary">Turns off XInput handling when you want exclusive mouse and keyboard control.</string>
     <string name="settings_external_display_output_summary">Move the game to a connected external display instead of mirroring this screen. Glasses always use their own display.</string>
-    <string name="settings_general_file_provider_summary">Expose WinNative files to Android document pickers and file managers.</string>
-    <string name="settings_general_auto_scraping_summary">This setting allows WinNative to automatically pull custom game artwork.</string>
+    <string name="settings_general_file_provider_summary">Expose NEXORA files to Android document pickers and file managers.</string>
+    <string name="settings_general_auto_scraping_summary">This setting allows NEXORA to automatically pull custom game artwork.</string>
     <string name="settings_general_open_browser_summary">Open supported web links in the Android browser instead of inside Wine.</string>
     <string name="settings_general_clipboard_summary">Allow copy and paste between Android and Wine sessions.</string>
     <string name="settings_general_imagefs_summary">Restore bundled system files without removing your existing containers.</string>
@@ -1441,10 +1441,10 @@ E.g. <b>META</b> for <i>META key</i>, \n
     <string name="settings_debug_delete_logs_confirm_message">This permanently deletes all saved log files (%1$s). This can\'t be undone.</string>
     <string name="settings_debug_logs_browser_title">Logs</string>
     <string name="settings_debug_log_truncated">Showing last %1$s of this log</string>
-    <string name="settings_debug_logs_subject">WinNative Logs (%1$s)</string>
+    <string name="settings_debug_logs_subject">NEXORA Logs (%1$s)</string>
     <string name="settings_debug_no_logs_available">No debug logs available. Enable debugging options first and launch a game.</string>
     <string name="settings_debug_capture_failed">Failed to capture logs: %1$s</string>
-    <string name="settings_debug_log_to_file_desc">Log WinNative process errors, warnings and crashes to file</string>
+    <string name="settings_debug_log_to_file_desc">Log NEXORA process errors, warnings and crashes to file</string>
     <string name="settings_filtered_logs_to_file_title">Filtered Debug Log</string>
     <string name="settings_filtered_logs_to_file_desc">Save the app’s logs to a file, filtered according to what is configured in the tag filter.</string>
     <string name="settings_debug_section_emulation">Emulation</string>
@@ -1943,7 +1943,7 @@ Installed path:
     <string name="steam_chat_setting_ingame">Enable Chat in Game</string>
     <string name="steam_chat_setting_ingame_desc">Receive and send messages while playing</string>
     <string name="steam_chat_setting_stay_running">Run in Background</string>
-    <string name="steam_chat_setting_stay_running_desc">Keep chat running after you exit WinNative</string>
+    <string name="steam_chat_setting_stay_running_desc">Keep chat running after you exit NEXORA</string>
     <string name="steam_chat_settings_overlay_needed">Allow display over other apps to use chat heads</string>
     <string name="steam_chat_heads_title">Messages</string>
     <string name="steam_chat_heads_recent_title">Recent</string>
@@ -2645,7 +2645,7 @@ Installed path:
     <string name="retro_scr_sgsr_upscaling">SGSR upscaling</string>
     <string name="retro_scr_performance_hud">Performance HUD</string>
     <string name="retro_scr_credits_licenses">CREDITS &amp; LICENSES</string>
-    <string name="retro_scr_credits_desc">Some of WinNative\'s features are built on these open-source projects. Tap to view each source.</string>
+    <string name="retro_scr_credits_desc">Some of NEXORA\'s features are built on these open-source projects. Tap to view each source.</string>
     <string name="retro_scr_tab_defaults">Defaults</string>
     <string name="retro_scr_tab_credits">Credits</string>
     <string name="settings_support_title">Support</string>
@@ -2842,14 +2842,14 @@ Installed path:
     <string name="update_ignore_until_next">Ignore until next update</string>
     <string name="update_no_notes">No release notes were published for this build.</string>
     <string name="update_apk_notice">This update changes the app itself, so Android will ask you to confirm the install. Your games, containers and settings are kept.</string>
-    <string name="update_up_to_date">WinNative is up to date.</string>
+    <string name="update_up_to_date">NEXORA is up to date.</string>
     <string name="update_unsupported_build">In-app updates are only offered on official signed releases.</string>
     <string name="settings_general_update_source">Update Source</string>
     <string name="settings_general_update_source_summary">A build from a pull request follows that pull request; an official install follows the official releases.</string>
     <string name="update_channel_official">Official</string>
     <string name="networking_section_title">Networking</string>
     <string name="networking_driver">Network driver</string>
-    <string name="networking_driver_winnative">WinNative Network Driver</string>
+    <string name="networking_driver_winnative">NEXORA Network Driver</string>
     <string name="networking_driver_none">Wine default (no adapter emulation)</string>
     <string name="networking_driver_summary">Gives Windows programs a real network adapter list with stable MAC addresses. Android hides interface details from apps, so without it games and DRM see a machine with no network cards.</string>
     <string name="networking_mac">MAC address</string>

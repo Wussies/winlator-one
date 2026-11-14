@@ -1319,6 +1319,12 @@ public class WinHandler {
             while (this.vibrationRunning) {
               LocalSocket client = this.vibrationServer.accept();
               try {
+                // NEXORA: the abstract socket is reachable by every app; accept only
+                // our own processes (Wine runs under this app's UID).
+                if (client.getPeerCredentials().getUid() != android.os.Process.myUid()) {
+                  client.close();
+                  continue;
+                }
                 java.io.InputStream is = client.getInputStream();
                 byte[] buffer = new byte[8];
                 int read = is.read(buffer);
