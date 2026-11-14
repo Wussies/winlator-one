@@ -462,12 +462,6 @@ object WnLibSteamClient {
     @JvmStatic external fun nativeDiagnosticRequestUserInfoBulk(sids: LongArray, flags: Int): Boolean
     @JvmStatic external fun nativeDiagnosticGetCachedOwnershipTicket(
         appId: Int, out: ByteArray?): Int
-    @JvmStatic external fun nativeDiagnosticInjectOwnershipTicket(
-        appId: Int, bytes: ByteArray): Boolean
-    @JvmStatic external fun nativeDiagnosticInjectLogonState(loggedOn: Boolean)
-    @JvmStatic external fun nativeDiagnosticInjectFriendsList(sids: LongArray?)
-    @JvmStatic external fun nativeDiagnosticInjectLicenseList(
-        packageIds: IntArray, ownerIds: IntArray?)
     @JvmStatic external fun nativeDiagnosticGetLicenseOwner(packageId: Int): Int
     @JvmStatic external fun nativeSetAppSourcePackages(
         appId: Int, packageIds: IntArray?)
@@ -475,8 +469,6 @@ object WnLibSteamClient {
     @JvmStatic external fun nativeDiagnosticBIsSubscribedFromFreeWeekend(): Boolean
     @JvmStatic external fun nativeDiagnosticBIsSubscribedFromFamilySharing(): Boolean
     @JvmStatic external fun nativeDiagnosticGetAppOwner(): Long
-    @JvmStatic external fun nativeDiagnosticInjectTrialLicense(
-        packageId: Int, minuteLimit: Int, minutesUsed: Int)
     @JvmStatic external fun nativeDiagnosticBIsTimedTrial(): Long
     @JvmStatic external fun nativeDiagnosticBIsDlcInstalled(appId: Int): Boolean
     @JvmStatic external fun nativeSetAppCurrentBeta(appId: Int, branch: String?)
@@ -554,20 +546,8 @@ object WnLibSteamClient {
     @JvmStatic external fun nativeGetPushedCloudEnabledAccount(): Boolean
     @JvmStatic external fun nativeGetPushedCloudEnabledApp(): Boolean
     @JvmStatic external fun nativeGetPushedEncryptedAppTicketSize(appId: Int): Int
-    @JvmStatic external fun nativeDiagnosticInjectAccountInfo(
-        twoFactor: Boolean, phoneVerified: Boolean,
-        phoneIdentifying: Boolean, phoneNeedsVerification: Boolean)
     @JvmStatic external fun nativeDiagnosticUpdateAvgRateStat(
         name: String, countThisSession: Float, sessionLength: Double): Float
-    @JvmStatic external fun nativeDiagnosticInjectPersonaEvent(
-        steamId: Long,
-        personaState: Int,
-        gameAppId: Int,
-        name: String?,
-        avatarHash: ByteArray?,
-        rpKeys: Array<String>?,
-        rpValues: Array<String>?,
-    )
 
     @JvmStatic external fun nativeSetGameOverlayActive(active: Boolean)
 

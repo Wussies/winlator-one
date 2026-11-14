@@ -32,10 +32,6 @@ bool wn_cm_get_cached_app_ownership_ticket(uint32_t app_id,
                                             size_t max_len,
                                             size_t* out_len);
 
-__attribute__((visibility("default")))
-bool wn_cm_bridge_inject_test_ownership_ticket(uint32_t app_id,
-                                                 const uint8_t* bytes,
-                                                 size_t len);
 
 __attribute__((visibility("default")))
 bool wn_cm_notify_games_played(uint32_t app_id);
@@ -86,8 +82,6 @@ void wn_cm_bridge_register_logon_state_observer(WnCmLogonStateObserverFn fn);
 __attribute__((visibility("default")))
 void wn_cm_bridge_dispatch_logon_state(bool logged_on);
 
-__attribute__((visibility("default")))
-void wn_cm_bridge_inject_test_logon_state(bool logged_on);
 
 
 typedef void (*WnCmFriendsListObserverFn)(const uint64_t* sids, size_t count);
@@ -98,8 +92,6 @@ void wn_cm_bridge_register_friends_list_observer(WnCmFriendsListObserverFn fn);
 __attribute__((visibility("default")))
 void wn_cm_bridge_dispatch_friends_list(const uint64_t* sids, size_t count);
 
-__attribute__((visibility("default")))
-void wn_cm_bridge_inject_test_friends_list(const uint64_t* sids, size_t count);
 
 
 struct WnCmLicenseEntry {
@@ -123,9 +115,6 @@ __attribute__((visibility("default")))
 void wn_cm_bridge_dispatch_license_list(const WnCmLicenseEntry* licenses,
                                           size_t count);
 
-__attribute__((visibility("default")))
-void wn_cm_bridge_inject_test_license_list(const WnCmLicenseEntry* licenses,
-                                             size_t count);
 
 
 struct WnCmAccountInfo {
@@ -147,8 +136,6 @@ void wn_cm_bridge_register_account_info_observer(WnCmAccountInfoObserverFn fn);
 __attribute__((visibility("default")))
 void wn_cm_bridge_dispatch_account_info(const WnCmAccountInfo* info);
 
-__attribute__((visibility("default")))
-void wn_cm_bridge_inject_test_account_info(const WnCmAccountInfo* info);
 
 typedef void (*WnCmServerRealTimeObserverFn)(uint32_t server_realtime);
 

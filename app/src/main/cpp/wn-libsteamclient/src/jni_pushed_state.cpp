@@ -562,18 +562,6 @@ extern "C" void* wn_get_isteam_friends();
 extern "C" void* wn_get_isteam_utils();
 
 JNIEXPORT void JNICALL
-Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticInjectAccountInfo(
-        JNIEnv* /*env*/, jclass /*cls*/, jboolean twoFA, jboolean phoneV,
-        jboolean phoneId, jboolean phoneNV) {
-    WnCmAccountInfo info{};
-    info.two_factor_enabled = twoFA == JNI_TRUE;
-    info.phone_verified     = phoneV == JNI_TRUE;
-    info.phone_identifying  = phoneId == JNI_TRUE;
-    info.phone_requires_verification = phoneNV == JNI_TRUE;
-    wn_cm_bridge_inject_test_account_info(&info);
-}
-
-JNIEXPORT void JNICALL
 Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeSetAccountFlag(
         JNIEnv* /*env*/, jclass /*cls*/, jint flagKind, jboolean on) {
     auto& p = lsc::pushed();
@@ -2183,43 +2171,6 @@ Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagn
            ? JNI_TRUE : JNI_FALSE;
 }
 
-JNIEXPORT void JNICALL
-Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticInjectLogonState(
-        JNIEnv* /*env*/, jclass /*cls*/, jboolean jLoggedOn) {
-    wn_cm_bridge_inject_test_logon_state(jLoggedOn == JNI_TRUE);
-}
-
-JNIEXPORT void JNICALL
-Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticInjectLicenseList(
-        JNIEnv* env, jclass /*cls*/, jintArray jPackageIds, jintArray jOwnerIds) {
-    if (!jPackageIds) {
-        wn_cm_bridge_inject_test_license_list(nullptr, 0);
-        return;
-    }
-    jsize n = env->GetArrayLength(jPackageIds);
-    if (n <= 0) {
-        wn_cm_bridge_inject_test_license_list(nullptr, 0);
-        return;
-    }
-    jint* pkg_ids = env->GetIntArrayElements(jPackageIds, nullptr);
-    jint* own_ids = jOwnerIds ? env->GetIntArrayElements(jOwnerIds, nullptr) : nullptr;
-    if (!pkg_ids) return;
-    std::vector<WnCmLicenseEntry> entries;
-    entries.reserve(static_cast<size_t>(n));
-    uint32_t now = static_cast<uint32_t>(::time(nullptr));
-    for (jsize i = 0; i < n; ++i) {
-        WnCmLicenseEntry e{};
-        e.package_id   = static_cast<uint32_t>(pkg_ids[i]);
-        e.owner_id     = (own_ids && i < env->GetArrayLength(jOwnerIds))
-                            ? static_cast<uint32_t>(own_ids[i]) : 0u;
-        e.time_created = now;
-        entries.push_back(e);
-    }
-    wn_cm_bridge_inject_test_license_list(entries.data(), entries.size());
-    env->ReleaseIntArrayElements(jPackageIds, pkg_ids, JNI_ABORT);
-    if (own_ids) env->ReleaseIntArrayElements(jOwnerIds, own_ids, JNI_ABORT);
-}
-
 JNIEXPORT jint JNICALL
 Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticGetLicenseOwner(
         JNIEnv* /*env*/, jclass /*cls*/, jint jPackageId) {
@@ -2294,19 +2245,6 @@ Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagn
     return static_cast<jlong>(fn(obj));
 }
 
-JNIEXPORT void JNICALL
-Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticInjectTrialLicense(
-        JNIEnv* /*env*/, jclass /*cls*/, jint jPackageId,
-        jint jMinuteLimit, jint jMinutesUsed) {
-    if (jPackageId <= 0) return;
-    auto& p = lsc::pushed();
-    std::lock_guard<std::mutex> lk(lsc::state_mutex());
-    auto& slot = p.licenses[static_cast<uint32_t>(jPackageId)];
-    slot.package_id    = static_cast<uint32_t>(jPackageId);
-    slot.minute_limit  = jMinuteLimit;
-    slot.minutes_used  = jMinutesUsed;
-}
-
 JNIEXPORT jboolean JNICALL
 Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticBIsDlcInstalled(
         JNIEnv* /*env*/, jclass /*cls*/, jint jAppId) {
@@ -2363,101 +2301,6 @@ Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeSetAp
     } else {
         p.app_source_packages[key] = std::move(pkgs);
     }
-}
-
-JNIEXPORT void JNICALL
-Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticInjectFriendsList(
-        JNIEnv* env, jclass /*cls*/, jlongArray jSids) {
-    if (!jSids) {
-        wn_cm_bridge_inject_test_friends_list(nullptr, 0);
-        return;
-    }
-    jsize n = env->GetArrayLength(jSids);
-    if (n <= 0) {
-        wn_cm_bridge_inject_test_friends_list(nullptr, 0);
-        return;
-    }
-    jlong* arr = env->GetLongArrayElements(jSids, nullptr);
-    if (!arr) return;
-    static_assert(sizeof(jlong) == sizeof(uint64_t), "jlong/uint64 size mismatch");
-    wn_cm_bridge_inject_test_friends_list(
-        reinterpret_cast<const uint64_t*>(arr), static_cast<size_t>(n));
-    env->ReleaseLongArrayElements(jSids, arr, JNI_ABORT);
-}
-
-JNIEXPORT void JNICALL
-Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticInjectPersonaEvent(
-        JNIEnv* env, jclass /*cls*/,
-        jlong jSteamId,
-        jint  jPersonaState,
-        jint  jGameAppId,
-        jstring jName,
-        jbyteArray jAvatarHash,
-        jobjectArray jRpKeys,
-        jobjectArray jRpValues) {
-    WnCmPersonaEvent ev{};
-    ev.sid              = static_cast<uint64_t>(jSteamId);
-    ev.persona_state    = (jPersonaState < 0) ? UINT32_MAX
-                                              : static_cast<uint32_t>(jPersonaState);
-    ev.game_played_app  = (jGameAppId <= 0) ? 0 : static_cast<uint32_t>(jGameAppId);
-
-    std::string name_storage;
-    if (jName) {
-        name_storage = jstr(env, jName);
-        if (!name_storage.empty()) ev.name = name_storage.c_str();
-    }
-
-    std::vector<uint8_t> hash_storage;
-    if (jAvatarHash) {
-        jsize n = env->GetArrayLength(jAvatarHash);
-        if (n > 0) {
-            hash_storage.resize(static_cast<size_t>(n));
-            env->GetByteArrayRegion(jAvatarHash, 0, n,
-                reinterpret_cast<jbyte*>(hash_storage.data()));
-            ev.avatar_hash     = hash_storage.data();
-            ev.avatar_hash_len = hash_storage.size();
-        }
-    }
-
-    std::vector<std::string> key_storage, value_storage;
-    std::vector<WnCmRichPresenceKV> rp_kv;
-    if (jRpKeys && jRpValues) {
-        jsize kn = env->GetArrayLength(jRpKeys);
-        jsize vn = env->GetArrayLength(jRpValues);
-        jsize count = std::min(kn, vn);
-        key_storage.reserve(count);
-        value_storage.reserve(count);
-        rp_kv.reserve(count);
-        for (jsize i = 0; i < count; ++i) {
-            auto k_obj = reinterpret_cast<jstring>(env->GetObjectArrayElement(jRpKeys, i));
-            auto v_obj = reinterpret_cast<jstring>(env->GetObjectArrayElement(jRpValues, i));
-            key_storage.push_back(jstr(env, k_obj));
-            value_storage.push_back(jstr(env, v_obj));
-            if (k_obj) env->DeleteLocalRef(k_obj);
-            if (v_obj) env->DeleteLocalRef(v_obj);
-            rp_kv.push_back({key_storage.back().c_str(),
-                             value_storage.back().c_str()});
-        }
-        if (!rp_kv.empty()) {
-            ev.rp_pairs = rp_kv.data();
-            ev.rp_count = rp_kv.size();
-        }
-    }
-
-    wn_cm_bridge_dispatch_persona(&ev);
-}
-
-JNIEXPORT jboolean JNICALL
-Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnLibSteamClient_nativeDiagnosticInjectOwnershipTicket(
-        JNIEnv* env, jclass /*cls*/, jint jAppId, jbyteArray jBytes) {
-    if (jAppId <= 0 || !jBytes) return JNI_FALSE;
-    jsize n = env->GetArrayLength(jBytes);
-    if (n <= 0) return JNI_FALSE;
-    std::vector<uint8_t> tmp(static_cast<size_t>(n));
-    env->GetByteArrayRegion(jBytes, 0, n, reinterpret_cast<jbyte*>(tmp.data()));
-    return wn_cm_bridge_inject_test_ownership_ticket(
-        static_cast<uint32_t>(jAppId), tmp.data(), tmp.size())
-        ? JNI_TRUE : JNI_FALSE;
 }
 
 JNIEXPORT jint JNICALL

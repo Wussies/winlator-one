@@ -287,6 +287,8 @@ impl CmBridge {
         &self.observers
     }
 
+    // NEXORA: test-only; no production path may plant an ownership ticket (SECURITY_AUDIT A-7).
+    #[cfg(test)]
     pub fn inject_ownership_ticket(&self, app_id: u32, ticket: &[u8]) -> bool {
         if app_id == 0 || ticket.is_empty() {
             return false;
@@ -626,23 +628,6 @@ pub unsafe extern "C" fn wn_cm_get_cached_app_ownership_ticket(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn wn_cm_bridge_inject_test_ownership_ticket(
-    app_id: u32,
-    bytes: *const u8,
-    len: usize,
-) -> bool {
-    if bytes.is_null() && len != 0 {
-        return false;
-    }
-    let ticket = if len == 0 {
-        &[]
-    } else {
-        unsafe { std::slice::from_raw_parts(bytes, len) }
-    };
-    global_bridge().inject_ownership_ticket(app_id, ticket)
-}
-
-#[no_mangle]
 pub extern "C" fn wn_cm_notify_games_played(app_id: u32) -> bool {
     let Some(client) = global_bridge().active() else {
         return false;
@@ -762,11 +747,6 @@ pub extern "C" fn wn_cm_bridge_dispatch_logon_state(logged_on: bool) {
 }
 
 #[no_mangle]
-pub extern "C" fn wn_cm_bridge_inject_test_logon_state(logged_on: bool) {
-    wn_cm_bridge_dispatch_logon_state(logged_on);
-}
-
-#[no_mangle]
 pub extern "C" fn wn_cm_bridge_register_friends_list_observer(callback: WnCmFriendsListObserverFn) {
     global_bridge().observers.register_friends_list(callback);
 }
@@ -782,11 +762,6 @@ pub unsafe extern "C" fn wn_cm_bridge_dispatch_friends_list(sids: *const u64, co
     }
     let friends = unsafe { std::slice::from_raw_parts(sids, count) };
     global_bridge().observers.dispatch_friends_list(friends);
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn wn_cm_bridge_inject_test_friends_list(sids: *const u64, count: usize) {
-    unsafe { wn_cm_bridge_dispatch_friends_list(sids, count) };
 }
 
 #[no_mangle]
@@ -811,14 +786,6 @@ pub unsafe extern "C" fn wn_cm_bridge_dispatch_license_list(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn wn_cm_bridge_inject_test_license_list(
-    licenses: *const WnCmLicenseEntry,
-    count: usize,
-) {
-    unsafe { wn_cm_bridge_dispatch_license_list(licenses, count) };
-}
-
-#[no_mangle]
 pub extern "C" fn wn_cm_bridge_register_account_info_observer(callback: WnCmAccountInfoObserverFn) {
     global_bridge().observers.register_account_info(callback);
 }
@@ -828,11 +795,6 @@ pub unsafe extern "C" fn wn_cm_bridge_dispatch_account_info(info: *const WnCmAcc
     if let Some(info) = unsafe { info.as_ref() } {
         global_bridge().observers.dispatch_account_info(info);
     }
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn wn_cm_bridge_inject_test_account_info(info: *const WnCmAccountInfo) {
-    unsafe { wn_cm_bridge_dispatch_account_info(info) };
 }
 
 #[no_mangle]

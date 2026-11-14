@@ -9,6 +9,9 @@ Changes relative to the imported base WinNative-Emu/WinNative@72d145b (see PROVE
 - nGlide and its configurator, dgVoodoo control panel, the Dd7To9 ddraw wrapper (contained a renamed Microsoft binary), Microsoft/Bitstream bitmap fonts in the container template.
 - `proton-9.0-arm64ec.txz` (64 MB) is no longer packaged: no code reads it (the Wine list it would be installed from is empty, as upstream). It was the source of the only ClamAV detections (`PUA.Win.Packer.Embedpe`, Wine's kernel32.dll). Wine/Proton come from the verified component downloads.
 
+### Security
+- Removed every way to plant Steam data locally (SECURITY_AUDIT A-7): the `nativeDiagnosticInject*` JNI calls (ownership ticket, licenses, trial license, logon state, friends, account info, persona events), the matching `wn_cm_bridge_inject_test_*` exports, and the `HybridModeReceiver` debug broadcast harness. Ownership and licences can only come from Steam's servers.
+
 ### Changed
 - Windows components default to Wine's builtin DLLs. "Native (Windows)" uses Microsoft's DLLs only when the user installed them in the container with Microsoft's official redistributable; the container settings explain this.
 
