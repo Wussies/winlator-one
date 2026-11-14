@@ -656,7 +656,7 @@ object GameSaveBackupManager {
     }
 
     private fun parseCustomGameId(gameId: String): Pair<Int, String>? {
-        val base = gameId.removeSuffix(ENGINE_SAVE_SUFFIX)
+        val base = gameId
         val sep = base.indexOf(':')
         if (sep <= 0 || sep == base.length - 1) return null
         val cid = base.substring(0, sep).toIntOrNull() ?: return null
