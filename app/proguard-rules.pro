@@ -106,3 +106,8 @@
 -dontwarn androidx.window.sidecar.SidecarInterface
 -dontwarn androidx.window.sidecar.SidecarProvider
 -dontwarn androidx.window.sidecar.SidecarWindowLayoutInfo
+
+# NEXORA: SnakeYAML's bean introspector references java.beans, which Android
+# does not have. ComponentInstaller only loads plain Maps, so that code path
+# is never used; silence R8's missing-class error for it.
+-dontwarn java.beans.**
