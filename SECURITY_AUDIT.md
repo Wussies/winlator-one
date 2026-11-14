@@ -195,3 +195,21 @@ QR-вход Steam требует второго экрана: на одном т
 учитываться эвристиками Play Protect как признак фишинга. Это не скрывается и
 не обходится; если обнаружение повторится, вход по паролю можно снова
 выключить флагом `NexoraPolicy.STEAM_PASSWORD_LOGIN_ENABLED`.
+
+
+## A-9 — что сделано (Этап 5a)
+
+Удалено из APK:
+- `assets/wincomponents/`: direct3d, xaudio, vcrun2010, directmusic, directplay, directshow, directsound, wmdecoder (~250 DLL Microsoft);
+- `assets/ddrawrapper/nglide.tzst` (nGlide 2.10, закрытый freeware) и `dd7to9.tzst` (переименованный Microsoft HLSL-компилятор); пункт Dd7To9 убран из списка, безусловная распаковка nGlide удалена;
+- из `container_pattern_common.tzst` (перепакован): шрифты Microsoft/Bitstream `app932.fon`, `app936.fon`, `vga932.fon`, `vga936.fon`, `dgVoodooCpl.exe` (dgVoodoo 2, закрытый freeware), `nglide_config.exe`.
+
+Поведение: по умолчанию все компоненты — «Встроенный (Wine)». «Родной (Windows)» теперь только
+выставляет порядок загрузки native,builtin, то есть использует DLL Microsoft, если пользователь сам
+установил их в контейнер официальным установщиком Microsoft; иначе Wine берёт свою DLL. Пояснение
+добавлено в настройки контейнера.
+
+Проверено: остальные Windows-файлы в шаблонах контейнеров — сборки Wine (сведения о версии Wine);
+AkelPad (`notepad.exe`, BSD), cnc-ddraw (MIT), d8vk (zlib), ddraw-4.21/11.8 (Wine, LGPL), zink (Mesa, MIT).
+Остаётся (Этап 5b): готовые `assets/winnative/*.exe` и `wnsteam/bionic/*.exe` — собрать из исходников в CI;
+cnc-ddraw/d8vk/zink — закрепить к официальным релизам по SHA-256.

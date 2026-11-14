@@ -11192,8 +11192,7 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
                 applyVkd3dWrapper(vkd3dWrapper);
             }
 
-            Log.d(TAG, "Extracting nglide wrapper");
-            TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, this, "ddrawrapper/nglide.tzst", windowsDir, onExtractFileListener);
+            // NEXORA: nGlide (closed-source freeware) is not redistributed (SECURITY_AUDIT A-9).
 
             // Clear any stale D7VK passthrough DLL left from a previous selection.
             File syswow64Dir = new File(rootDir, ImageFs.WINEPREFIX + "/drive_c/windows/syswow64");

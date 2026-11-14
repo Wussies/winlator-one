@@ -75,7 +75,7 @@ jobs:
       - name: "Build (standard release, not debuggable, R8)"
         env:
           GRADLE_OPTS: -Xmx4g -XX:+UseG1GC
-          VERSION_NAME: 0.2.0-stage4
+          VERSION_NAME: 0.3.0-stage5
           NEXORA_MODE: ${{ steps.key.outputs.mode }}
           SECRET_PASSWORD: ${{ secrets.NEXORA_KEYSTORE_PASSWORD }}
           SECRET_ALIAS: ${{ secrets.NEXORA_KEY_ALIAS }}
@@ -100,7 +100,7 @@ jobs:
         id: apk
         run: |
           SRC=$(ls app/build/outputs/apk/standard/release/*.apk | head -n1)
-          NAME="NEXORA-0.2.0-stage4-build${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}.apk"
+          NAME="NEXORA-0.3.0-stage5-build${GITHUB_RUN_NUMBER}-${GITHUB_SHA::7}.apk"
           mkdir -p dist && cp "$SRC" "dist/$NAME"
           (cd dist && sha256sum "$NAME" > "$NAME.sha256")
           echo "name=$NAME" >> "$GITHUB_OUTPUT"
@@ -118,7 +118,7 @@ jobs:
         if: github.event_name == 'push'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: nexora-0.2.0-stage4-build.${{ github.run_number }}
+          tag_name: nexora-0.3.0-stage5-build.${{ github.run_number }}
           target_commitish: ${{ github.sha }}
           name: NEXORA 0.2.0 Stage 4 (build ${{ github.run_number }})
           body: |

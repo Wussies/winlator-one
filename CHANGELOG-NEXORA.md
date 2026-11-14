@@ -2,6 +2,15 @@
 
 Changes relative to the imported base WinNative-Emu/WinNative@72d145b (see PROVENANCE.md).
 
+## 0.3.0-stage5 (in progress, not tested on a device)
+
+### Removed (licensing, SECURITY_AUDIT A-9)
+- Microsoft DLLs no longer shipped: DirectX (d3dx9/10/11, d3dcompiler), XAudio/XACT, DirectMusic, DirectPlay, DirectShow, DirectSound, Windows Media decoders, Visual C++ 2010 runtime.
+- nGlide and its configurator, dgVoodoo control panel, the Dd7To9 ddraw wrapper (contained a renamed Microsoft binary), Microsoft/Bitstream bitmap fonts in the container template.
+
+### Changed
+- Windows components default to Wine's builtin DLLs. "Native (Windows)" uses Microsoft's DLLs only when the user installed them in the container with Microsoft's official redistributable; the container settings explain this.
+
 ## 0.2.0-stage4 (in progress, not tested on a device)
 
 ### Security (SECURITY_AUDIT.md, APK audit A-1…A-5)

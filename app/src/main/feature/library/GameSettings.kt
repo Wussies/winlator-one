@@ -4183,6 +4183,17 @@ private fun ComponentsSection(
     callbacks: GameSettingsCallbacks
 ) {
 
+    if (state.directXComponents.value.isNotEmpty() || state.generalComponents.value.isNotEmpty()) {
+        // NEXORA (SECURITY_AUDIT A-9): Microsoft DLLs are not bundled.
+        Text(
+            stringResource(R.string.nexora_wincomponents_native_info),
+            color = TextSecondary,
+            fontSize = 11.sp,
+            lineHeight = 15.sp,
+        )
+        Spacer(Modifier.height(8.dp))
+    }
+
     if (state.directXComponents.value.isNotEmpty()) {
         SubsectionLabel(stringResource(R.string.container_wine_directx))
         Spacer(Modifier.height(8.dp))

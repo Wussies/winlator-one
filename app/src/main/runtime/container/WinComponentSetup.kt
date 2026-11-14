@@ -84,12 +84,29 @@ object WinComponentSetup {
         }
     }
 
+    /**
+     * NEXORA: Microsoft's DLLs are not redistributed in the APK (SECURITY_AUDIT A-9).
+     * "Native" then means: prefer the Microsoft DLLs the user installed in this
+     * container with Microsoft's own redistributable installer; Wine falls back
+     * to its builtin DLL when none is installed. Only components NEXORA may ship
+     * (none at the moment) are bundled as assets.
+     */
+    @JvmStatic
+    fun isNativeBundled(context: Context, identifier: String): Boolean =
+        runCatching {
+            context.assets.list("wincomponents")?.contains("$identifier.tzst") == true
+        }.getOrDefault(false)
+
     private fun extractNativeWinComponent(
         context: Context,
         identifier: String,
         windowsDir: File,
         onExtractFileListener: OnExtractFileListener?,
     ) {
+        if (!isNativeBundled(context, identifier)) {
+            Log.i(TAG, "$identifier: not bundled; using Microsoft DLLs installed in the container, if any")
+            return
+        }
         TarCompressorUtils.extract(
             TarCompressorUtils.Type.ZSTD,
             context,
