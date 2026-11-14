@@ -115,8 +115,9 @@ jobs:
 
       - name: "JNI check: every Java member native code looks up is in the dex"
         run: |
-          pip install --quiet androguard==4.1.4
-          python3 -I tools/check-jni-dex.py "dist/${{ steps.apk.outputs.name }}" app/src/main/cpp app/src/main
+          python3 -m venv "$RUNNER_TEMP/jnicheck"
+          "$RUNNER_TEMP/jnicheck/bin/pip" install --quiet androguard==4.1.4
+          "$RUNNER_TEMP/jnicheck/bin/python" -I tools/check-jni-dex.py "dist/${{ steps.apk.outputs.name }}" app/src/main/cpp app/src/main
 
       - uses: actions/upload-artifact@v4
         with:
