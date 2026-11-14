@@ -2713,12 +2713,10 @@ pub extern "system" fn Java_com_winlator_cmod_feature_stores_steam_wnsteam_WnSte
     let cancel = handle.begin_login_cancel();
     thread::spawn(move || {
         let timeout = Duration::from_secs(30);
-        let mut config = CredentialsAuthConfig {
-            username,
-            password,
-            persistent_session: persistent_session != JNI_FALSE,
-            ..Default::default()
-        };
+        let mut config = CredentialsAuthConfig::default();
+        config.username = username;
+        config.password = password;
+        config.persistent_session = persistent_session != JNI_FALSE;
         let key_job = match request_service_method_job(
             &runtime,
             "Authentication.GetPasswordRSAPublicKey#1",

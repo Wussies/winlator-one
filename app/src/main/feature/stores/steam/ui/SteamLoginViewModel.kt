@@ -217,9 +217,12 @@ class SteamLoginViewModel : ViewModel() {
     }
 
     fun onCredentialLogin() {
-        if (!com.winlator.cmod.app.NexoraPolicy.STEAM_PASSWORD_LOGIN_ENABLED) return // NEXORA: QR only
+        if (!com.winlator.cmod.app.NexoraPolicy.STEAM_PASSWORD_LOGIN_ENABLED) return
         with(_loginState.value) {
             if (username.isEmpty() || password.isEmpty()) return@with
+            // NEXORA: drop the password from UI state as soon as it is handed to
+            // the native client (which RSA-encrypts it for Valve and wipes it).
+            _loginState.update { it.copy(password = "") }
             credentialLoginJob?.cancel()
             credentialLoginJob =
                 viewModelScope.launch {

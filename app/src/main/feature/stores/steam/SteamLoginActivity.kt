@@ -272,6 +272,12 @@ class SteamLoginActivity : FixedFontScaleComponentActivity() {
                 }
                 if (com.winlator.cmod.app.NexoraPolicy.STEAM_PASSWORD_LOGIN_ENABLED) {
                     CredentialForm(state, viewModel, passwordVisible, onTogglePassword, compact = true)
+                    Text(
+                        stringResource(R.string.nexora_steam_password_notice),
+                        color = TextSecondary,
+                        fontSize = 11.sp,
+                        lineHeight = 15.sp,
+                    )
                 } else {
                     // NEXORA: no password form; sign-in is QR-only via the official Steam app.
                     Text(
@@ -391,7 +397,12 @@ class SteamLoginActivity : FixedFontScaleComponentActivity() {
                     singleLine = true,
                     shape = RoundedCornerShape(12.dp),
                     colors = darkFieldColors(),
-                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                    // NEXORA: password keyboard, so the IME does not learn or suggest it.
+                    keyboardOptions =
+                        KeyboardOptions(
+                            keyboardType = androidx.compose.ui.text.input.KeyboardType.Password,
+                            imeAction = ImeAction.Done,
+                        ),
                     keyboardActions =
                         KeyboardActions(onDone = {
                             if (canSubmit) {

@@ -46,7 +46,11 @@ impl Default for AuthSessionResult {
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq)]
+// NEXORA: no derived Debug (it would print the password if ever logged) and
+// the password is wiped on drop, so early-return paths cannot leave it in
+// memory. Construct with explicit fields: struct-update syntax
+// (`..Default::default()`) cannot move out of a Drop type.
+#[derive(Clone, Eq, PartialEq)]
 pub struct CredentialsAuthConfig {
     pub username: String,
     pub password: String,
@@ -55,12 +59,33 @@ pub struct CredentialsAuthConfig {
     pub persistent_session: bool,
 }
 
+impl std::fmt::Debug for CredentialsAuthConfig {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("CredentialsAuthConfig")
+            .field("username", &self.username)
+            .field("password", &"<redacted>")
+            .field("device_friendly_name", &self.device_friendly_name)
+            .field("guard_data", &"<redacted>")
+            .field("persistent_session", &self.persistent_session)
+            .finish()
+    }
+}
+
+impl Drop for CredentialsAuthConfig {
+    fn drop(&mut self) {
+        secure_clear_string(&mut self.password);
+        secure_clear_string(&mut self.guard_data);
+    }
+}
+
+pub const DEVICE_FRIENDLY_NAME: &str = "NEXORA (Android)";
+
 impl Default for CredentialsAuthConfig {
     fn default() -> Self {
         Self {
             username: String::new(),
             password: String::new(),
-            device_friendly_name: "WN-Steam-Client".to_string(),
+            device_friendly_name: DEVICE_FRIENDLY_NAME.to_string(),
             guard_data: String::new(),
             persistent_session: true,
         }
@@ -75,7 +100,7 @@ pub struct QrAuthConfig {
 impl Default for QrAuthConfig {
     fn default() -> Self {
         Self {
-            device_friendly_name: "WN-Steam-Client".to_string(),
+            device_friendly_name: DEVICE_FRIENDLY_NAME.to_string(),
         }
     }
 }
@@ -346,12 +371,12 @@ mod tests {
     fn default_auth_configs_match_cpp_defaults() {
         assert_eq!(
             CredentialsAuthConfig::default().device_friendly_name,
-            "WN-Steam-Client"
+            DEVICE_FRIENDLY_NAME
         );
         assert!(CredentialsAuthConfig::default().persistent_session);
         assert_eq!(
             QrAuthConfig::default().device_friendly_name,
-            "WN-Steam-Client"
+            DEVICE_FRIENDLY_NAME
         );
     }
 
@@ -571,10 +596,9 @@ mod tests {
 
     #[test]
     fn request_builders_serialize_expected_identity_fields() {
-        let rsa_req = build_password_rsa_request(&CredentialsAuthConfig {
-            username: "user".into(),
-            ..Default::default()
-        });
+        let mut rsa_config = CredentialsAuthConfig::default();
+        rsa_config.username = "user".into();
+        let rsa_req = build_password_rsa_request(&rsa_config);
         assert_eq!(rsa_req.serialize(), {
             let mut out = Vec::new();
             Writer::new(&mut out).string_field(1, "user");
