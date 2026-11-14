@@ -1,0 +1,17 @@
+ClamAV 1.5.4/28183/Sat Nov 14 06:24:17 2026
+apk/target.apk: PUA.Win.Packer.Embedpe-3 FOUND
+x/assets/proton-9.0-arm64ec.txz.d/lib/wine/i386-windows/kernel32.dll: PUA.Win.Packer.Embedpe-3 FOUND
+x/assets/proton-9.0-arm64ec.txz.d/lib/wine/aarch64-windows/kernel32.dll: PUA.Win.Packer.Embedpe-3 FOUND
+x/assets/proton-9.0-arm64ec.txz: PUA.Win.Packer.Embedpe-3 FOUND
+
+----------- SCAN SUMMARY -----------
+Known viruses: 3642956
+Engine version: 1.5.4
+Scanned directories: 1287
+Scanned files: 14216
+Infected files: 4
+Data scanned: 3.78 GiB
+Data read: 3.17 GiB (ratio 1.19:1)
+Time: 841.772 sec (14 m 1 s)
+Start Date: 2026:11:14 13:34:50
+End Date:   2026:11:14 13:48:52
