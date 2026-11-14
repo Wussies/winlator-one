@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Decide the next tap for tools/emulator-smoke.sh from a uiautomator dump.
 
-Prints "tap-install X Y" for the clickable "Install System Files" button,
+usage: emulator-ui.py <ui.xml> [label]   (label defaults to "Install System Files")
+Prints "tap-install X Y" for the clickable element labelled <label>,
 "tap-dismiss X Y LABEL" for a known system dialog button (old-SDK warning,
 permission prompts), or "wait".
 """
@@ -9,7 +10,6 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 
-INSTALL = "install system files"
 # Only system dialogs that can cover the wizard; never app content.
 DISMISS = {"ok", "allow", "while using the app", "continue"}
 DISMISS_PACKAGES = ("android", "com.android.permissioncontroller", "com.google.android.permissioncontroller")
@@ -34,6 +34,7 @@ def main():
     except ET.ParseError:
         print("wait")
         return
+    INSTALL = (sys.argv[2] if len(sys.argv) > 2 else "Install System Files").strip().lower()
     parents = {c: p for p in root.iter() for c in p}
     nodes = list(root.iter("node"))
 

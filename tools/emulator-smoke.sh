@@ -101,10 +101,56 @@ except Exception as e:
 PY
 )
 log "evidence: system-files card now shows: $button"
-if [ "$result" = "INSTALLED" ]; then
-  log "RESULT: INSTALLED after $(( $(date +%s) - start ))s"
+if [ "$result" != "INSTALLED" ]; then
+  log "RESULT: system files $result"
+  tail -n 80 "$OUT/logcat-relevant.txt"
+  exit 1
+fi
+log "RESULT: system files INSTALLED"
+
+# ---- Phase 2: wizard -> Next -> Next -> "Install All Recommended" (pinned components) ----
+tap_label() {  # tap_label <label>  -> 0 when tapped
+  adb exec-out uiautomator dump /dev/tty 2>/dev/null | sed 's/UI hierchary dumped.*//' > "$OUT/ui.xml"
+  local action; action=$(python3 -I "$HERE/emulator-ui.py" "$OUT/ui.xml" "$1")
+  case "$action" in
+    tap-install\ *) set -- $action; adb shell input tap "$2" "$3"; return 0 ;;
+    tap-dismiss\ *) set -- $action; adb shell input tap "$2" "$3"; log "dismissed a dialog ($4)"; return 1 ;;
+  esac
+  return 1
+}
+sleep 3
+found=0
+for step in 1 2 3 4 5 6; do
+  if tap_label "Install All Recommended"; then found=1; log "tapped Install All Recommended"; break; fi
+  tap_label "Next" && log "tapped Next" || true
+  sleep 4
+done
+if [ "$found" = 0 ]; then
+  log "RESULT: components FAILED (Install All Recommended not reachable)"
+  python3 -I - "$OUT/ui.xml" <<'PY' | tee -a "$OUT/steps.txt"
+import sys, xml.etree.ElementTree as ET
+r = ET.fromstring(open(sys.argv[1], encoding="utf-8", errors="ignore").read().strip() or "<x/>")
+print("visible texts:", [n.get("text") for n in r.iter("node") if n.get("text")][:40])
+PY
+  exit 1
+fi
+cstart=$(date +%s)
+while :; do
+  if grep -qE "FATAL EXCEPTION|JNI DETECTED ERROR|Fatal signal [0-9]+|Abort message" "$OUT/logcat.txt"; then cres="CRASH"; break; fi
+  if grep -q "SetupWizardActivity: Install queue finished" "$OUT/logcat.txt"; then cres="FINISHED"; break; fi
+  [ $(( $(date +%s) - cstart )) -gt 1800 ] && { cres="TIMEOUT"; break; }
+  [ -z "$(adb shell pidof "$PKG" | tr -d '\r')" ] && { cres="PROCESS_DIED"; break; }
+  sleep 10
+done
+ok=$(grep -c "SetupWizardActivity: Component installed:" "$OUT/logcat.txt" || true)
+bad=$(grep -c "SetupWizardActivity: Component install failed:" "$OUT/logcat.txt" || true)
+log "evidence: components"
+grep -E "SetupWizardActivity: Component|NexoraComponentPins|Integrity check" "$OUT/logcat.txt" | sed 's/^/  /' | tee -a "$OUT/steps.txt"
+adb exec-out screencap -p > "$OUT/final-components.png" 2>/dev/null || true
+if [ "$cres" = "FINISHED" ] && [ "$ok" -gt 0 ] && [ "$bad" = 0 ]; then
+  log "RESULT: components INSTALLED ($ok) after $(( $(date +%s) - cstart ))s"
   exit 0
 fi
-log "RESULT: $result"
+log "RESULT: components $cres (installed $ok, failed $bad)"
 tail -n 80 "$OUT/logcat-relevant.txt"
 exit 1

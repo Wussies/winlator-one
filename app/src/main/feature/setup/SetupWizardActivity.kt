@@ -1489,6 +1489,11 @@ class SetupWizardActivity : FixedFontScaleFragmentActivity() {
                         }
                     queueCompleted += 1
                     if (profile != null) {
+                        Log.i("SetupWizardActivity", "Component installed: ${spec.verName}")
+                    } else {
+                        Log.e("SetupWizardActivity", "Component install failed: ${spec.verName}")
+                    }
+                    if (profile != null) {
                         queueStatus.remove(key)
                         if (spec.verName !in advancedInstalledSet) {
                             advancedInstalledSet.add(spec.verName)
@@ -1500,6 +1505,7 @@ class SetupWizardActivity : FixedFontScaleFragmentActivity() {
                 refreshAdvancedInstalledSet()
                 refreshWizardState()
             } finally {
+                Log.i("SetupWizardActivity", "Install queue finished")
                 updateTransferState(null)
                 queueWorkerRunning = false
                 queueTotal = 0
