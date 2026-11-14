@@ -55,7 +55,11 @@ import org.json.JSONObject
  */
 object LinuxClientInstaller {
     private const val TAG = "LinuxClientInstaller"
-    private const val RELEASE = "https://github.com/WinNative-Emu/Components/releases/download/Assets"
+    // NEXORA (SECURITY_AUDIT A-6): these come from NEXORA's own immutable mirror, checked
+    // against the SHA-256 pinned below, not from upstream's mutable "Assets" release whose
+    // checksums came from the same server. Upstream origin and audit: release
+    // nexora-components-3 and branch audit/results, folder linux-client.
+    private const val RELEASE = "https://github.com/Wussies/winlator-one/releases/download/nexora-components-3"
     private const val RUNTIME_ARCHIVE = "$RELEASE/linuxfs.tar.zst"
     private const val RUNTIME_INFO = "$RELEASE/linuxfs.json"
     private const val PROTON_ARCHIVE = "$RELEASE/proton-arm64.tar.zst"
@@ -67,9 +71,26 @@ object LinuxClientInstaller {
     private const val DRIVER_STAGING_DIR = "linux-driver.staging"
     private const val COMPOSITOR_DRIVER_ASSET = "WN-Turnip-1.16-p_Axxx.zip"
     private const val COMPOSITOR_DRIVER =
-        "https://github.com/nicholasx417/WinNative-Components/releases/download/WinNative-Turnip/$COMPOSITOR_DRIVER_ASSET"
+        "$RELEASE/$COMPOSITOR_DRIVER_ASSET"
     private const val COMPOSITOR_DRIVER_SHA256 = "146023e8cb402390d2792087f3af6569d24a95d490105cbf41be1a7dacee8957"
     private const val COMPOSITOR_DRIVER_SIZE = 2673455L
+    /**
+     * Pinned release metadata (what upstream's linuxfs.json / proton-arm64.json said when it
+     * was mirrored on 2026-11-14). There is no pinned Linux Turnip archive: upstream publishes
+     * no metadata for it, so that optional update is not offered.
+     */
+    private val PINNED_INFO: Map<String, String> =
+        mapOf(
+            "$RELEASE/linuxfs.json" to
+                """{"version":202609201900,"sha256":"95a8084480af7a7e837ec20ec3edc4b04d5e1394c29aee74dc296a961a0ad1d8","size":1046711584,"unpacked":4214667423}""",
+            // Upstream's version is a string ("experimental-11.0-20260910b-arm64"); it is recorded as 0.
+            "$RELEASE/proton-arm64.json" to
+                """{"version":0,"sha256":"f1bca1c789463f9ff396d47da9cff431aeb56ca8b21122f83729f87a7353e8b9","size":325153724,"unpacked":2066864465}""",
+        )
+
+    private fun pinnedInfo(infoUrl: String): JSONObject =
+        JSONObject(PINNED_INFO[infoUrl] ?: throw IOException("No pinned metadata for ${infoUrl.substringAfterLast('/')}"))
+
     private const val RUNTIME_VERSION_FILE = "etc/winnative/version"
     private const val PROTON_VERSION_FILE = "winnative-version"
 
@@ -305,7 +326,7 @@ object LinuxClientInstaller {
 
     /** 0 when the release cannot be read or, as before versions were published, names none. */
     private fun publishedVersion(infoUrl: String): Long =
-        runCatching { JSONObject(fetchText(infoUrl)).optLong("version", 0L) }
+        runCatching { pinnedInfo(infoUrl).optLong("version", 0L) }
             .getOrElse {
                 Log.d(TAG, "No published version at $infoUrl", it)
                 0L
@@ -438,7 +459,7 @@ object LinuxClientInstaller {
         installStage: Stage,
     ): Long {
         mutableState.value = State.Working(Stage.CONNECT, 0, 0)
-        val info = JSONObject(fetchText(infoUrl))
+        val info = pinnedInfo(infoUrl)
         val sha256 = info.getString("sha256")
         val size = info.getLong("size")
         val unpacked = info.getLong("unpacked")
