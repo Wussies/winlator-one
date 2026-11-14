@@ -1,0 +1,18 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v3.2 scheme (APK Signature Scheme v3.2): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+V2 Signer: certificate DN: CN=NEXORA debug, O=NEXORA
+V2 Signer: certificate SHA-256 digest: 598ee102b8d577d870c4ee2fcecc8f24522f4b92cd54e71398b8259d049e5212
+V2 Signer: certificate SHA-1 digest: 31b824e16cccb7eb3ba09310ff96ccd6dc1e6eab
+V2 Signer: certificate MD5 digest: bb562e8399a956b276237c94d5d28a8b
+V2 Signer: key algorithm: RSA
+V2 Signer: key size (bits): 3072
+V2 Signer: public key SHA-256 digest: 5c6c1ece9a18ee27b2dc4c05f166d7ef13da96430a6237a3449611b4361768b2
+V2 Signer: public key SHA-1 digest: f74fadcc1ee05e73d52069465891d62547b7ea26
+V2 Signer: public key MD5 digest: 5c3ffe4a1bdb5cb02f7018f224a3b316
