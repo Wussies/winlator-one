@@ -14,15 +14,17 @@
 |---|---|
 | Release-сборка APK в GitHub Actions (не debuggable, R8), пакет `io.github.wussies.nexora`, иконка и тема NEXORA | **Build Verified** |
 | Проверка APK: MobSF, ClamAV (0 срабатываний), APKiD | **Build Verified** (build.12) |
-| Установка системных файлов (Install System Files) | **Runtime Verified на эмуляторах** Android 11 и 15 (x86_64 + трансляция ARM64), build.17; не проверено на OnePlus 13 |
+| Установка системных файлов (Install System Files) | **Runtime Verified** на эмуляторах Android 11, 15, 16 (x86_64 + трансляция ARM64), build.19, автотест в CI; не проверено на OnePlus 13 |
+| Загрузка и установка рекомендуемых компонентов (Proton 11, DXVK, VKD3D, Box64, WOWBox64, FEX) из зеркала NEXORA с проверкой SHA-256 | **Runtime Verified** там же (10 из 10), build.19 |
+| Режимы управления: тачпад + клавиатура, сенсорные кнопки с редактором и профилями, виртуальный геймпад XInput, геймпад → клавиатура/мышь | Implemented (унаследовано от WinNative), не проверено |
 | Установка на Android 16 / запуск на OnePlus 13 | Implemented, не проверено на устройстве |
 | Вход в Steam: логин/пароль (только к серверам Valve) + Steam Guard, или QR | Implemented, не проверено |
 | Библиотека и загрузка Steam / Epic / GOG | Унаследовано от WinNative, не проверено |
 | Запуск игр, которым нужен клиент Steam / Steam DRM | Not Implemented (официальный клиент Steam — Этап 6) |
-| Компоненты Wine/Proton/DXVK/VKD3D/Box64/FEX | Build Verified: только закреплённые версии с проверкой SHA-256 |
+| Путь «Linux-клиент Steam»: linuxfs, ARM64 Proton, драйвер — из зеркала NEXORA с закреплёнными SHA-256 | Implemented (не собрано и не проверено) |
 | DLL Microsoft (DirectX, VC++ и др.) | Не поставляются; можно установить официальным установщиком Microsoft в контейнер |
 | Ретро-эмуляторы | Удалены |
-| Amazon Games, встроенный браузер, 4 режима управления, настройка под OnePlus 13 | Not Implemented (Этапы 7–10) |
+| Встроенный браузер, файлы через SAF, настройка под OnePlus 13 | Not Implemented |
 
 ## Скачать
 
