@@ -1,0 +1,15 @@
+ClamAV 1.5.4/28183/Sat Nov 14 06:24:17 2026
+LibClamAV Warning: Bytecode run timed out in interpreter after 2915000 opcodes
+LibClamAV Warning: Bytecode 'BC.Legacy.Exploit.Andr-2.{Extra_Field,Master_Key}' (id: 34) failed to run: Exceeded time limit
+
+----------- SCAN SUMMARY -----------
+Known viruses: 3642956
+Engine version: 1.5.4
+Scanned directories: 1251
+Scanned files: 12272
+Infected files: 0
+Data scanned: 2.82 GiB
+Data read: 2.20 GiB (ratio 1.28:1)
+Time: 304.227 sec (5 m 4 s)
+Start Date: 2026:11:14 13:54:08
+End Date:   2026:11:14 13:59:12
