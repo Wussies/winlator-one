@@ -24,7 +24,8 @@ Changes relative to the imported base WinNative-Emu/WinNative@72d145b (see PROVE
 - Username/password sign-in re-enabled, because QR sign-in needs a second screen. The password goes only to the native client, is RSA-encrypted with Valve's key, sent only to Steam's servers and wiped (also on error paths); it is not stored or logged; the password field uses the password keyboard; a notice explains this in the login screen. Steam Guard via app approval or code. QR remains available. Steam shows the device as "NEXORA (Android)".
 
 ### Build
-- proot loader offsets are read from the link map when the release toolchain strips the loader's symbol table.
+- proot loader linked with `-u pokedata_workaround`: release links use `--gc-sections`, which dropped the unreferenced stub proot jumps to.
+- First release-variant (non-debuggable, R8) build.
 
 ## 0.1.0-stage1 (unreleased, not tested on a device)
 
