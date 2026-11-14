@@ -17,6 +17,15 @@ Changes relative to the imported base WinNative-Emu/WinNative@72d145b (see PROVE
 - Original vector launcher icon (adaptive + monochrome/themed), Android 12+ splash screen, NEXORA colour tokens and base accent colours.
 - WinNative badge replaced; the upstream Support page (WinNative donations/Discord) hidden.
 
+### Removed
+- Retro console emulation deleted from the source tree (not just hidden): libretro frontend, PS2/ARMSX2, Dolphin, the "Gen1" 3D engine (love2d/SDL glue), RetroAchievements, cheats, the `libretrodroid.aar` download, Gradle modules `:armsx2` and `:dolphin`, `assets/retro`, the related Settings pages. `EMULATOR_CREDITS.md` kept as the historical credit record.
+
+### Steam sign-in (WN-7 revised)
+- Username/password sign-in re-enabled, because QR sign-in needs a second screen. The password goes only to the native client, is RSA-encrypted with Valve's key, sent only to Steam's servers and wiped (also on error paths); it is not stored or logged; the password field uses the password keyboard; a notice explains this in the login screen. Steam Guard via app approval or code. QR remains available. Steam shows the device as "NEXORA (Android)".
+
+### Build
+- proot loader offsets are read from the link map when the release toolchain strips the loader's symbol table.
+
 ## 0.1.0-stage1 (unreleased, not tested on a device)
 
 ### Removed (security quarantine, SECURITY_AUDIT.md)
