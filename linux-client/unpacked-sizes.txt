@@ -1,0 +1,3 @@
+4.2G	x/linuxfs
+2.0G	x/proton-arm64
+15M	x/turnip

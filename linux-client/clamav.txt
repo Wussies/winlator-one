@@ -1,0 +1,14 @@
+ClamAV 1.5.4/28183/Sat Nov 14 06:24:17 2026
+x/proton-arm64/files/lib/wine/aarch64-windows/kernel32.dll: PUA.Win.Packer.Embedpe-3 FOUND
+
+----------- SCAN SUMMARY -----------
+Known viruses: 3642956
+Engine version: 1.5.4
+Scanned directories: 6184
+Scanned files: 75179
+Infected files: 1
+Data scanned: 8.61 GiB
+Data read: 5.87 GiB (ratio 1.47:1)
+Time: 2786.477 sec (46 m 26 s)
+Start Date: 2026:11:14 14:49:17
+End Date:   2026:11:14 15:35:43
