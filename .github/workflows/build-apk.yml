@@ -72,6 +72,11 @@ jobs:
           path: ~/.nexora-debug-key
           key: nexora-debug-keystore-v1
 
+      - name: Add swap (R8 + native + Rust peak memory)
+        run: |
+          sudo fallocate -l 8G /mnt/nexora-swap && sudo chmod 600 /mnt/nexora-swap
+          sudo mkswap /mnt/nexora-swap >/dev/null && sudo swapon /mnt/nexora-swap && free -h
+
       - name: "Build (standard release, not debuggable, R8)"
         env:
           GRADLE_OPTS: -Xmx4g -XX:+UseG1GC
