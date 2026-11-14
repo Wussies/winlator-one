@@ -1,0 +1,149 @@
+# Scans a built NEXORA APK the way an on-device antivirus would see it:
+# MobSF static analysis, APKiD (packers/obfuscators/anti-analysis), ClamAV
+# (APK + every nested archive), manifest permissions, signing certificate and an
+# inventory of embedded Windows/Linux executables. Nothing is executed.
+name: APK security scan
+
+on:
+  push:
+    branches: [ 'audit/nexora-stage0' ]
+    paths: [ '.github/workflows/apk-scan.yml', 'audit/apk-scan-target.txt' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download APK
+        run: |
+          URL=$(grep -v '^#' audit/apk-scan-target.txt | head -n1)
+          mkdir -p apk report
+          curl -fL --retry 3 -o apk/target.apk "$URL"
+          sha256sum apk/target.apk | tee report/apk.sha256
+          echo "$URL" > report/source.txt
+      - name: Manifest, permissions, signature (aapt2 / apksigner)
+        run: |
+          BT=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -n1)
+          "$BT/aapt2" dump badging apk/target.apk > report/badging.txt || true
+          "$BT/aapt2" dump permissions apk/target.apk > report/permissions.txt || true
+          "$BT/aapt2" dump xmltree apk/target.apk --file AndroidManifest.xml > report/manifest-tree.txt || true
+          "$BT/apksigner" verify --verbose --print-certs apk/target.apk > report/signature.txt 2>&1 || true
+          head -5 report/badging.txt; cat report/permissions.txt; head -20 report/signature.txt
+      - name: Embedded executables inventory
+        run: |
+          pip install --quiet zstandard
+          python3 - <<'PY'
+          import zipfile, tarfile, io, zstandard, lzma, collections, hashlib
+          z = zipfile.ZipFile("apk/target.apk")
+          top = collections.Counter(); nested = collections.Counter(); pe_names = collections.Counter()
+          dex = []; so = []
+          def kind(b):
+              if b[:4] == b"\x7fELF": return "ELF"
+              if b[:2] == b"MZ": return "PE"
+              if b[:4] == b"dex\n": return "DEX"
+              return None
+          for info in z.infolist():
+              data = z.read(info.filename)
+              k = kind(data[:4])
+              if k: top[k] += 1
+              if k == "DEX": dex.append((info.filename, len(data)))
+              if info.filename.endswith(".so"): so.append((info.filename, len(data), hashlib.sha256(data).hexdigest()[:16]))
+              src = None
+              if data[:4] == b"\x28\xb5\x2f\xfd":
+                  src = zstandard.ZstdDecompressor().stream_reader(io.BytesIO(data))
+              elif data[:6] == b"\xfd7zXZ\x00":
+                  src = lzma.open(io.BytesIO(data))
+              if src is not None:
+                  try:
+                      t = tarfile.open(fileobj=src, mode="r|")
+                      for m in t:
+                          if not m.isfile(): continue
+                          head = t.extractfile(m).read(4)
+                          kk = kind(head)
+                          if kk:
+                              nested[(info.filename, kk)] += 1
+                              if kk == "PE" and m.name.lower().endswith(".exe"): pe_names[m.name.split("/")[-1]] += 1
+                  except Exception as e:
+                      nested[(info.filename, f"error:{e}"[:60])] += 1
+          L = ["# Embedded executables", "", f"Top-level in APK: {dict(top)}", "", "## DEX", *[f"- {n} {s/1e6:.1f} MB" for n, s in dex],
+               "", f"## Native libraries ({len(so)})", *[f"- {n} {s/1e6:.1f} MB `{h}`" for n, s, h in sorted(so)],
+               "", "## Inside compressed assets", "| archive | type | count |", "|---|---|---|",
+               *[f"| {a} | {k} | {c} |" for (a, k), c in sorted(nested.items())],
+               "", f"## Distinct .exe names inside assets ({len(pe_names)})", ", ".join(sorted(pe_names))]
+          open("report/embedded.md", "w").write("\n".join(L) + "\n")
+          print("\n".join(L[:12]))
+          PY
+      - name: APKiD
+        continue-on-error: true
+        run: |
+          pip install --quiet apkid
+          apkid -j apk/target.apk > report/apkid.json 2> report/apkid.err || true
+          python3 -c "
+          import json; d=json.load(open('report/apkid.json'))
+          for f in d.get('files',[]):
+              m=f.get('matches',{})
+              if m: print(f['filename'].split('!')[-1], m)
+          " | tee report/apkid.md
+      - name: ClamAV (APK and nested content)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq clamav > /dev/null
+          sudo systemctl stop clamav-freshclam 2>/dev/null || true
+          sudo freshclam --quiet || sudo freshclam
+          mkdir -p x && cd x && unzip -q ../apk/target.apk && cd ..
+          for f in $(find x -name '*.tzst'); do d="$f.d"; mkdir -p "$d"; tar --zstd -xf "$f" -C "$d" --no-same-owner 2>/dev/null || true; done
+          for f in $(find x -name '*.txz' -o -name '*.tar.xz'); do d="$f.d"; mkdir -p "$d"; tar -xJf "$f" -C "$d" --no-same-owner 2>/dev/null || true; done
+          clamscan --version > report/clamav.txt
+          clamscan -r -i --detect-pua=yes --max-filesize=600M --max-scansize=4000M apk x >> report/clamav.txt 2>&1 || true
+          tail -n 14 report/clamav.txt
+      - name: MobSF static analysis
+        continue-on-error: true
+        run: |
+          KEY=$(python3 -c "import secrets;print(secrets.token_hex(32))")
+          docker run -d --name mobsf -p 8000:8000 -e MOBSF_API_KEY=$KEY opensecurity/mobile-security-framework-mobsf:latest
+          for i in $(seq 1 60); do curl -s -o /dev/null http://localhost:8000/api/v1/scans -H "Authorization: $KEY" && break; sleep 5; done
+          UP=$(curl -s -F "file=@apk/target.apk" http://localhost:8000/api/v1/upload -H "Authorization: $KEY")
+          echo "$UP" | head -c 300; echo
+          HASH=$(echo "$UP" | python3 -c "import sys,json;print(json.load(sys.stdin)['hash'])")
+          curl -s -m 6000 -X POST --data "hash=$HASH" http://localhost:8000/api/v1/scan -H "Authorization: $KEY" > /dev/null
+          curl -s -X POST --data "hash=$HASH" http://localhost:8000/api/v1/report_json -H "Authorization: $KEY" > report/mobsf.json
+          curl -s -X POST --data "hash=$HASH" http://localhost:8000/api/v1/scorecard -H "Authorization: $KEY" > report/mobsf-scorecard.json
+          python3 - <<'PY'
+          import json
+          d = json.load(open("report/mobsf.json"))
+          L = ["# MobSF static analysis", ""]
+          sc = {}
+          try: sc = json.load(open("report/mobsf-scorecard.json"))
+          except Exception: pass
+          L.append(f"Security score: {sc.get('security_score')}, trackers: {sc.get('trackers')}")
+          for sev in ("high", "warning", "info", "secure", "hotspot"):
+              items = sc.get(sev, [])
+              if items:
+                  L.append(f"\n## Scorecard — {sev} ({len(items)})")
+                  L += [f"- {i.get('title')}: {str(i.get('description',''))[:220]}" for i in items[:60]]
+          L.append("\n## Dangerous permissions")
+          for p, v in (d.get("permissions") or {}).items():
+              if v.get("status") == "dangerous": L.append(f"- {p}: {v.get('description')}")
+          L.append("\n## Manifest analysis (high/warning)")
+          for m in (d.get("manifest_analysis") or {}).get("manifest_findings", []):
+              if m.get("severity") in ("high", "warning"): L.append(f"- [{m.get('severity')}] {m.get('title','')[:200]}")
+          L.append("\n## Trackers"); L.append(str(d.get("trackers", {}).get("detected_trackers")))
+          L.append("\n## APKiD (MobSF)"); L.append(json.dumps(d.get("apkid", {}))[:3000])
+          L.append("\n## Domains contacted by code (malware-domain check)")
+          for dom, v in list((d.get("domains") or {}).items())[:150]:
+              L.append(f"- {dom}: bad={v.get('bad')}")
+          open("report/mobsf.md", "w").write("\n".join(L) + "\n")
+          print("\n".join(L[:40]))
+          PY
+          gzip -9 report/mobsf.json
+      - name: Store report on audit/results
+        if: always()
+        run: |
+          git clone -q --depth 1 -b audit/results "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" results
+          D="results/apk-scan/$(basename $(cat report/source.txt) .apk)"; mkdir -p "$D" && cp -r report/* "$D/"
+          cd results && git config user.name "github-actions[bot]" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -q -m "APK scan (run ${{ github.run_id }})" && git push -q origin audit/results
