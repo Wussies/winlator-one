@@ -213,3 +213,23 @@ QR-вход Steam требует второго экрана: на одном т
 AkelPad (`notepad.exe`, BSD), cnc-ddraw (MIT), d8vk (zlib), ddraw-4.21/11.8 (Wine, LGPL), zink (Mesa, MIT).
 Остаётся (Этап 5b): готовые `assets/winnative/*.exe` и `wnsteam/bionic/*.exe` — собрать из исходников в CI;
 cnc-ddraw/d8vk/zink — закрепить к официальным релизам по SHA-256.
+
+
+## Повторная проверка APK `nexora-0.2.0-stage4-build.10` (release, 44d6a07)
+
+Отчёт: ветка `audit/results`, `apk-scan/NEXORA-0.2.0-stage4-build10-44d6a07/`.
+
+| Показатель | build.5 (debug) | build.10 (release) |
+|---|---|---|
+| debuggable | да | **нет** |
+| MobSF security score | 33 | **41** |
+| Трекеры | 0 | 0 |
+| Опасные разрешения | WRITE_SECURE_SETTINGS, REQUEST_INSTALL_PACKAGES, SYSTEM_ALERT_WINDOW, INSTALL_SHORTCUT | **удалены** |
+| Экспортированная `XServerDisplayActivity` | да | **нет** |
+| ClamAV (с PUA) | 2 срабатывания | 4 строки, все — `PUA.Win.Packer.Embedpe-3` на `kernel32.dll` Wine внутри `proton-9.0-arm64ec.txz` (ложное: эвристика «PE внутри PE»). Этот архив не используется кодом и удалён в 9ffeff8 |
+
+Осталось из MobSF «high»: StrandHogg 2.0 (уязвимость ОС, исправлена в Android 10+, на OnePlus 13 не применима;
+сообщается из-за targetSdk 28, который нужен для запуска Wine), ECB/CBC в библиотеках (BouncyCastle/Steam-протокол
+Valve — режимы задаёт протокол). APKiD «DexGuard» — ложное по имени файла; «anti_hook: syscalls» — прямые
+системные вызовы proot/Wine-хелперов, это их нормальная работа, а не защита от анализа.
+`RECORD_AUDIO` запрашивается только во время игры, если игра открывает микрофон.

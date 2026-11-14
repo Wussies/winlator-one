@@ -6,10 +6,9 @@
 # Nothing from the archives is executed.
 name: Stage 1 bootstrap
 
+# Completed in Stage 1 (backup tag and nexora-components-1 exist); manual only
+# now, so later edits of tools/components.lock do not re-run it.
 on:
-  push:
-    branches: [ 'nexora/main' ]
-    paths: [ '.github/workflows/stage1-bootstrap.yml', 'tools/components.lock' ]
   workflow_dispatch:
 
 permissions:
