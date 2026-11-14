@@ -2065,7 +2065,6 @@ internal fun UnifiedActivity.TopBar(
 private data class ShortcutScanResult(
     val shortcuts: List<Shortcut>,
     val customApps: List<SteamApp>,
-    val badges: Map<Int, String>,
     val storagePaths: Map<Int, String>,
 )
 
@@ -2100,7 +2099,7 @@ internal fun UnifiedActivity.LibraryCarousel(
     var localLibraryRefreshKey by remember { mutableIntStateOf(0) }
     var shortcutsLoaded by remember { mutableStateOf(false) }
     var pullRefreshing by remember { mutableStateOf(false) }
-    LaunchedEffect(shortcutRefreshKey, localLibraryRefreshKey, com.winlator.cmod.feature.retro.RetroBoxart.artVersion.value) {
+    LaunchedEffect(shortcutRefreshKey, localLibraryRefreshKey) {
         shortcutsLoaded = false
 
         // Pull-to-refresh only: rescan disk so a manually moved game is picked up without faking a re-download.
@@ -2114,13 +2113,11 @@ internal fun UnifiedActivity.LibraryCarousel(
         val shortcutScanResult =
             runCatching {
                 withContext(Dispatchers.IO) {
-                    runCatching { com.winlator.cmod.feature.retro.RetroRomScanner.scanConfiguredFolder(context) }
                     val cm = ContainerManager(context)
                     cm.upgradeShortcuts {
                         localLibraryRefreshKey++
                     }
                     val allShortcuts = cm.loadShortcuts()
-                    val badges = HashMap<Int, String>()
                     val storagePaths = HashMap<Int, String>()
                     val apps =
                         allShortcuts
@@ -2143,13 +2140,6 @@ internal fun UnifiedActivity.LibraryCarousel(
                                     }
                                 val customId = -(identity.hashCode().and(0x7FFFFFFF) + 1)
 
-                                com.winlator.cmod.feature.retro.RetroSystems
-                                    .fromId(
-                                        shortcut.getExtra(
-                                            com.winlator.cmod.feature.retro.RetroShortcuts.KEY_SYSTEM,
-                                        ),
-                                    )?.let { badges[customId] = it.id }
-
                                 val gameDir =
                                     shortcut.getExtra(
                                         "game_install_path",
@@ -2159,10 +2149,6 @@ internal fun UnifiedActivity.LibraryCarousel(
                                     sequenceOf(
                                         gameDir,
                                         shortcut.getExtra("custom_exe", ""),
-                                        shortcut.getExtra(
-                                            com.winlator.cmod.feature.retro.RetroShortcuts.KEY_ROM,
-                                            "",
-                                        ),
                                     ).firstOrNull { it.isNotBlank() }
                                 if (storagePath != null) storagePaths[customId] = storagePath
 
@@ -2182,7 +2168,7 @@ internal fun UnifiedActivity.LibraryCarousel(
                                 )
                             }
 
-                    ShortcutScanResult(allShortcuts, apps, badges, storagePaths)
+                    ShortcutScanResult(allShortcuts, apps, storagePaths)
                 }
             }.getOrNull()
 
@@ -2190,7 +2176,6 @@ internal fun UnifiedActivity.LibraryCarousel(
             cachedShortcuts = shortcutScanResult.shortcuts
             customApps = shortcutScanResult.customApps
             customStoragePathByAppId = shortcutScanResult.storagePaths
-            retroLibrarySystemIds.value = shortcutScanResult.badges
         }
 
         shortcutsLoaded = true

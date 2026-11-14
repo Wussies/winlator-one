@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -15,24 +14,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-internal val retroLibrarySystemIds = mutableStateOf<Map<Int, String>>(emptyMap())
-
 internal fun libraryBadgeLabel(
-    appId: Int,
+    @Suppress("UNUSED_PARAMETER") appId: Int,
     isCustom: Boolean,
-): String? {
-    val systemId = retroLibrarySystemIds.value[appId]
-    if (systemId != null) {
-        return com.winlator.cmod.feature.retro.RetroSystems
-            .fromId(systemId)
-            ?.badgeLabel
-            ?: systemId
-    }
-    return if (isCustom) "PC" else null
-}
+): String? = if (isCustom) "PC" else null
 
 @Composable
-internal fun RetroConsoleRibbon(
+internal fun LibraryBadgeRibbon(
     label: String,
     modifier: Modifier = Modifier,
 ) {

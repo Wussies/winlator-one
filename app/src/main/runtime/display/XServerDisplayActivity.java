@@ -2214,13 +2214,6 @@ public class XServerDisplayActivity extends FixedFontScaleAppCompatActivity
             shortcut = new Shortcut(container, new File(shortcutPath));
         }
 
-        if (shortcut != null
-                && com.winlator.cmod.feature.retro.RetroShortcuts.isRetroShortcut(shortcut)) {
-            com.winlator.cmod.feature.retro.RetroShortcuts.launch(this, shortcut);
-            finish();
-            return;
-        }
-
         // When a game starts, sync the per-game setting into the global PrefManager so that
         // background services (like SteamService) use the correct value for the current session.
         if (shortcut != null) {

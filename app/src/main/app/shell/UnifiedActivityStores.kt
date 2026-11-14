@@ -537,7 +537,7 @@ internal fun UnifiedActivity.GameCapsule(
                 ) {
                     ArtContent(Modifier.fillMaxSize())
                     libraryBadgeLabel(app.id, isCustom)?.let { badge ->
-                        RetroConsoleRibbon(badge, Modifier.align(Alignment.CenterStart))
+                        LibraryBadgeRibbon(badge, Modifier.align(Alignment.CenterStart))
                     }
                 }
 
@@ -587,7 +587,7 @@ internal fun UnifiedActivity.GameCapsule(
             ) {
                 ArtContent(Modifier.fillMaxSize())
                 libraryBadgeLabel(app.id, isCustom)?.let { badge ->
-                    RetroConsoleRibbon(badge, Modifier.align(Alignment.CenterStart))
+                    LibraryBadgeRibbon(badge, Modifier.align(Alignment.CenterStart))
                 }
             }
 

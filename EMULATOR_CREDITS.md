@@ -1,5 +1,12 @@
 # Emulator & Library Credits
 
+> **NEXORA note (Stage 4).** The retro-console features described below were
+> removed from NEXORA's source tree and are **not shipped** in NEXORA builds.
+> This file is kept unchanged below as the historical credit record of the
+> WinNative code base NEXORA was derived from; the authors and licences listed
+> here remain credited. Components NEXORA does ship are listed in
+> [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
 WinNative's retro-console features are built on open-source emulators and libraries.
 This project is distributed under the **GNU General Public License v3.0** (see [LICENSE](LICENSE)).
 In compliance with the GPL and the other licenses below, the corresponding source code

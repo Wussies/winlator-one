@@ -5,7 +5,6 @@ import android.os.Environment
 import android.util.Log
 import com.winlator.cmod.app.db.PluviaDatabase
 import com.winlator.cmod.feature.library.LinuxApps
-import com.winlator.cmod.feature.retro.RetroShortcuts
 import com.winlator.cmod.feature.shortcuts.LibraryShortcutUtils
 import com.winlator.cmod.feature.stores.epic.data.EpicGame
 import com.winlator.cmod.feature.stores.steam.enums.AppType
@@ -134,7 +133,6 @@ object LinuxSteamShortcuts {
 
     private fun isCandidate(shortcut: Shortcut): Boolean =
         !LinuxApps.isLinuxShortcut(shortcut) &&
-            !RetroShortcuts.isRetroShortcut(shortcut) &&
             LibraryShortcutUtils.inferGameSource(shortcut).let { it == "CUSTOM" || it == "GOG" || it == "EPIC" }
 
     private fun game(context: Context, shortcut: Shortcut): Game? {

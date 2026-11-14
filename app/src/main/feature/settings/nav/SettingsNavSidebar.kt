@@ -100,7 +100,6 @@ enum class NavSection {
     ACCOUNTS,
     SYSTEM,
     TOOLS,
-    CREDITS,
     HELP,
 }
 
@@ -123,10 +122,8 @@ enum class SettingsNavItem(
     COMPONENTS(R.id.main_menu_contents, Icons.Outlined.Extension, R.string.settings_content_components, NavSection.SYSTEM),
     DRIVERS(R.id.main_menu_adrenotools_gpu_drivers, Icons.Outlined.Memory, R.string.settings_drivers_title, NavSection.SYSTEM),
     INPUT_CONTROLS(R.id.main_menu_input_controls, Icons.Outlined.SportsEsports, R.string.common_ui_input_controls, NavSection.SYSTEM),
-    RETRO(R.id.main_menu_retro, Icons.Outlined.VideogameAsset, R.string.settings_retro_title, NavSection.SYSTEM),
     OTHER(R.id.main_menu_other, Icons.Outlined.Widgets, R.string.common_ui_other, NavSection.SYSTEM),
     DEBUG(R.id.main_menu_advanced, Icons.Outlined.BugReport, R.string.settings_debug_title, NavSection.TOOLS),
-    CREDITS(R.id.main_menu_credits, Icons.Outlined.Info, R.string.retro_scr_tab_credits, NavSection.CREDITS),
     SUPPORT(R.id.main_menu_support, Icons.Outlined.HelpOutline, R.string.settings_support_title, NavSection.HELP),
     ABOUT(R.id.main_menu_about, Icons.Outlined.Info, R.string.common_ui_about, NavSection.HELP),
     ;
@@ -138,7 +135,6 @@ enum class SettingsNavItem(
 
 private val sectionedNavItems: Map<NavSection, List<SettingsNavItem>> =
     SettingsNavItem.entries
-        .filter { it != SettingsNavItem.RETRO || com.winlator.cmod.app.NexoraPolicy.RETRO_CONSOLES_ENABLED } // NEXORA
         // NEXORA: the upstream Support page links to WinNative's donations and Discord.
         .filter { it != SettingsNavItem.SUPPORT }
         .groupBy { it.section }

@@ -795,7 +795,6 @@ internal fun UnifiedActivity.AddCustomGameDialog(
     var selectedExePath by remember { mutableStateOf<String?>(null) }
     var gameName by remember { mutableStateOf("") }
     var gameFolder by remember { mutableStateOf<String?>(null) }
-    var retroSystem by remember { mutableStateOf<com.winlator.cmod.feature.retro.RetroSystem?>(null) }
     var linuxApp by remember { mutableStateOf(false) }
     var itemType by remember { mutableStateOf(LibraryItemType.GAME) }
     var isAdding by remember { mutableStateOf(false) }
@@ -842,18 +841,14 @@ internal fun UnifiedActivity.AddCustomGameDialog(
     }
     val addEnabled =
         selectedExePath != null && gameName.isNotBlank() && !isAdding &&
-            (retroSystem != null || linuxApp || gameFolder != null)
+            (linuxApp || gameFolder != null)
     val doAdd: () -> Unit = {
         isAdding = true
-        val chosenRetro = retroSystem
         val chosenType = itemType
         val name = gameName.trim()
         scope.launch(Dispatchers.IO) {
             val added =
                 when {
-                    chosenRetro != null ->
-                        com.winlator.cmod.feature.retro.RetroShortcuts
-                            .create(context, name, selectedExePath!!, chosenRetro)
                     linuxApp -> LinuxApps.create(context, name, selectedExePath!!, chosenType)
                     else -> {
                         addCustomGame(context, name, selectedExePath!!, gameFolder!!, type = chosenType)
@@ -881,11 +876,10 @@ internal fun UnifiedActivity.AddCustomGameDialog(
     }
 
     fun selectExecutable(path: String) {
-        val detectedRetro = com.winlator.cmod.feature.retro.RetroSystems.detectForFile(path)
         val file = java.io.File(path)
         val launchable = file.extension.lowercase() in DirectoryPickerDialog.ExecutableExtensions
-        val linux = detectedRetro == null && !launchable && LinuxApps.isLinuxExecutable(file)
-        if (!file.isFile || (!launchable && !linux && detectedRetro == null)) {
+        val linux = !launchable && LinuxApps.isLinuxExecutable(file)
+        if (!file.isFile || (!launchable && !linux)) {
             com.winlator.cmod.shared.ui.toast.WinToast.show(
                 context,
                 R.string.common_ui_select_valid_executable,
@@ -895,25 +889,15 @@ internal fun UnifiedActivity.AddCustomGameDialog(
         }
 
         selectedExePath = path
-        retroSystem = detectedRetro
         linuxApp = linux
         gameFolder =
-            if (detectedRetro != null || linux) {
+            if (linux) {
                 file.parent
             } else {
                 LibraryShortcutUtils.detectCustomGameFolder(path)
             }
         if (gameName.isBlank()) {
-            gameName =
-                if (detectedRetro != null) {
-                    java.io
-                        .File(path)
-                        .nameWithoutExtension
-                        .replace("_", " ")
-                        .replace("-", " ")
-                } else {
-                    LibraryShortcutUtils.suggestCustomGameName(path)
-                }
+            gameName = LibraryShortcutUtils.suggestCustomGameName(path)
         }
     }
 
@@ -976,8 +960,7 @@ internal fun UnifiedActivity.AddCustomGameDialog(
                                                             ).absolutePath,
                                                 title = getString(R.string.common_ui_select_executable),
                                                 allowedExtensions = DirectoryPickerDialog.ExecutableExtensions +
-                                                    LinuxApps.Extensions +
-                                                    com.winlator.cmod.feature.retro.RetroSystems.allExtensions,
+                                                    LinuxApps.Extensions,
                                                 dimAmount = 0.5f,
                                                 preserveBackdropBlur = true,
                                                 extraRoots = driveRoots(includeInternal = true),
@@ -1064,102 +1047,36 @@ internal fun UnifiedActivity.AddCustomGameDialog(
 
                             Spacer(Modifier.height(8.dp))
 
-                            if (retroSystem == null) {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                ) {
-                                    Text(
-                                        stringResource(R.string.library_games_type),
-                                        color = TextSecondary,
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Text(
+                                    stringResource(R.string.library_games_type),
+                                    color = TextSecondary,
+                                    fontSize = 11.sp,
+                                    modifier = Modifier.weight(1f),
+                                )
+                                LibraryItemType.entries.forEach { candidate ->
+                                    Spacer(Modifier.width(6.dp))
+                                    DrawerFilterButton(
+                                        label =
+                                            stringResource(
+                                                when (candidate) {
+                                                    LibraryItemType.GAME -> R.string.library_games_type_game
+                                                    LibraryItemType.APPLICATION -> R.string.library_games_type_app
+                                                },
+                                            ),
+                                        checked = itemType == candidate,
                                         fontSize = 11.sp,
-                                        modifier = Modifier.weight(1f),
-                                    )
-                                    LibraryItemType.entries.forEach { candidate ->
-                                        Spacer(Modifier.width(6.dp))
-                                        DrawerFilterButton(
-                                            label =
-                                                stringResource(
-                                                    when (candidate) {
-                                                        LibraryItemType.GAME -> R.string.library_games_type_game
-                                                        LibraryItemType.APPLICATION -> R.string.library_games_type_app
-                                                    },
-                                                ),
-                                            checked = itemType == candidate,
-                                            fontSize = 11.sp,
-                                        ) { itemType = candidate }
-                                    }
+                                    ) { itemType = candidate }
                                 }
-
-                                Spacer(Modifier.height(8.dp))
                             }
 
-                            if (retroSystem != null) {
-                                val activeRetroSystem = retroSystem
-                                var consoleMenuOpen by remember { mutableStateOf(false) }
-                                Box {
-                                    Row(
-                                        modifier =
-                                            Modifier
-                                                .fillMaxWidth()
-                                                .clip(RoundedCornerShape(10.dp))
-                                                .background(Color.White.copy(alpha = 0.05f))
-                                                .paneNavItem(
-                                                    cornerRadius = 10.dp,
-                                                    tapToSelect = true,
-                                                    onActivate = { consoleMenuOpen = true },
-                                                ).clickable { consoleMenuOpen = true }
-                                                .padding(horizontal = 10.dp, vertical = 8.dp),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                    ) {
-                                        Icon(
-                                            Icons.Outlined.SportsEsports,
-                                            contentDescription = null,
-                                            tint = StatusOnline.copy(alpha = 0.7f),
-                                            modifier = Modifier.size(14.dp),
-                                        )
-                                        Spacer(Modifier.width(6.dp))
-                                        Column(Modifier.weight(1f)) {
-                                            Text("Console", color = TextSecondary, fontSize = 9.sp)
-                                            Text(
-                                                activeRetroSystem?.displayName ?: "",
-                                                color = TextPrimary,
-                                                fontSize = 10.sp,
-                                                maxLines = 1,
-                                                overflow = TextOverflow.Ellipsis,
-                                            )
-                                        }
-                                        Icon(
-                                            Icons.Outlined.Edit,
-                                            contentDescription = stringResource(R.string.common_ui_change),
-                                            tint = Accent,
-                                            modifier = Modifier.size(14.dp),
-                                        )
-                                    }
-                                    DropdownMenu(
-                                        expanded = consoleMenuOpen,
-                                        onDismissRequest = { consoleMenuOpen = false },
-                                        containerColor = Color(0xFF1C232E),
-                                    ) {
-                                        com.winlator.cmod.feature.retro.RetroSystems.ALL.forEach { candidate ->
-                                            DropdownMenuItem(
-                                                text = {
-                                                    Text(
-                                                        candidate.displayName,
-                                                        color =
-                                                            if (candidate.id == activeRetroSystem?.id) Accent else TextPrimary,
-                                                        fontSize = 12.sp,
-                                                    )
-                                                },
-                                                onClick = {
-                                                    retroSystem = candidate
-                                                    consoleMenuOpen = false
-                                                },
-                                            )
-                                        }
-                                    }
-                                }
-                            } else if (!linuxApp) {
+                            Spacer(Modifier.height(8.dp))
+                        
+
+                            if (!linuxApp) {
                             // Game folder — single compact row
                             Row(
                                 modifier =
