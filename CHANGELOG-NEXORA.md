@@ -7,6 +7,7 @@ Changes relative to the imported base WinNative-Emu/WinNative@72d145b (see PROVE
 ### Removed (licensing, SECURITY_AUDIT A-9)
 - Microsoft DLLs no longer shipped: DirectX (d3dx9/10/11, d3dcompiler), XAudio/XACT, DirectMusic, DirectPlay, DirectShow, DirectSound, Windows Media decoders, Visual C++ 2010 runtime.
 - nGlide and its configurator, dgVoodoo control panel, the Dd7To9 ddraw wrapper (contained a renamed Microsoft binary), Microsoft/Bitstream bitmap fonts in the container template.
+- `proton-9.0-arm64ec.txz` (64 MB) is no longer packaged: no code reads it (the Wine list it would be installed from is empty, as upstream). It was the source of the only ClamAV detections (`PUA.Win.Packer.Embedpe`, Wine's kernel32.dll). Wine/Proton come from the verified component downloads.
 
 ### Changed
 - Windows components default to Wine's builtin DLLs. "Native (Windows)" uses Microsoft's DLLs only when the user installed them in the container with Microsoft's official redistributable; the container settings explain this.
