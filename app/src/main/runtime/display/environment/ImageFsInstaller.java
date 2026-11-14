@@ -48,6 +48,89 @@ public abstract class ImageFsInstaller {
     void onProgress(int percent);
 
     void onFinished(boolean success);
+
+    /** NEXORA: called before onFinished(false) with the reason, so the UI can say what to do. */
+    default void onFailure(Failure failure, String detail) {}
+  }
+
+  /** Why an installation failed. */
+  public enum Failure {
+    /** Another installation is already running; nothing was changed. */
+    ALREADY_RUNNING,
+    /** Not enough free space; detail = bytes needed. */
+    INSUFFICIENT_STORAGE,
+    /** The system archive is missing from the APK. */
+    MISSING_ARCHIVE,
+    /** An archive could not be extracted (damaged APK, I/O error). */
+    EXTRACTION_FAILED,
+    /** Unexpected error; detail = exception class. */
+    UNEXPECTED,
+  }
+
+  private static final java.util.concurrent.atomic.AtomicBoolean INSTALLING =
+      new java.util.concurrent.atomic.AtomicBoolean(false);
+  /** Free space kept in reserve on top of the estimated install size. */
+  private static final long STORAGE_RESERVE_BYTES = 300L * 1024 * 1024;
+
+  public static boolean isInstalling() {
+    return INSTALLING.get();
+  }
+
+  private static void fail(ProgressListener listener, Failure failure, String detail) {
+    Log.e("ImageFsInstaller", "Install failed: " + failure + (detail != null ? " (" + detail + ")" : ""));
+    if (listener == null) return;
+    try {
+      listener.onFailure(failure, detail);
+    } finally {
+      listener.onFinished(false);
+    }
+  }
+
+  private static boolean hasImageFsArchive(Context context) {
+    return FileUtils.getSize(context, IMAGEFS_ARCHIVE) > 0 || listImageFsShards(context).length > 0;
+  }
+
+  /** Size of what clearRootDir() will delete (everything except home/), symlinks not followed. */
+  private static long reclaimableBytes(File rootDir) {
+    long total = 0L;
+    File[] files = rootDir.listFiles();
+    if (files == null) return 0L;
+    for (File file : files) {
+      if (file.isDirectory() && file.getName().equals("home")) continue;
+      total += treeBytes(file);
+    }
+    return total;
+  }
+
+  private static long treeBytes(File file) {
+    if (FileUtils.isSymlink(file)) return 0L;
+    if (file.isFile()) return file.length();
+    long total = 0L;
+    File[] children = file.listFiles();
+    if (children != null) for (File child : children) total += treeBytes(child);
+    return total;
+  }
+
+  private static long freeBytes(File dir) {
+    File probe = dir;
+    while (probe != null && !probe.exists()) probe = probe.getParentFile();
+    if (probe == null) return -1L;
+    try {
+      return new android.os.StatFs(probe.getAbsolutePath()).getAvailableBytes();
+    } catch (Exception e) {
+      Log.w("ImageFsInstaller", "StatFs failed for " + probe, e);
+      return -1L;
+    }
+  }
+
+  /** Runs a post-install task; an Error or Exception marks the install failed instead of killing the app. */
+  private static void runGuarded(AtomicBoolean success, String what, Runnable task) {
+    try {
+      task.run();
+    } catch (Throwable t) {
+      Log.e("ImageFsInstaller", what + " failed", t);
+      success.set(false);
+    }
   }
 
   private static void resetContainerImgVersions(Context context) {
@@ -235,33 +318,63 @@ public abstract class ImageFsInstaller {
 
   public static void installFromAssets(
       final android.app.Activity activity, final ProgressListener listener) {
+    // NEXORA: one installation at a time (setup wizard and Settings both start it).
+    if (!INSTALLING.compareAndSet(false, true)) {
+      Log.w("ImageFsInstaller", "Install already running; ignoring second request");
+      if (listener != null) listener.onFailure(Failure.ALREADY_RUNNING, null);
+      return;
+    }
     AppUtils.keepScreenOn(activity);
     ImageFs imageFs = ImageFs.find(activity);
     File rootDir = imageFs.getRootDir();
-    InstallProgressTracker progressTracker =
-        new InstallProgressTracker(estimateInstallWorkBytes(activity, true), listener);
-
-    SettingsConfig.resetEmulatorsVersion(activity);
+    final long workBytes = estimateInstallWorkBytes(activity, true);
+    InstallProgressTracker progressTracker = new InstallProgressTracker(workBytes, listener);
 
     Executors.newSingleThreadExecutor()
         .execute(
             () -> {
-              progressTracker.start();
-              clearRootDir(rootDir);
+              boolean success = false;
+              try {
+                if (!hasImageFsArchive(activity)) {
+                  fail(listener, Failure.MISSING_ARCHIVE, IMAGEFS_ARCHIVE);
+                  return;
+                }
+                // Space check before anything is deleted or written. The old
+                // installation (except home/) is replaced, so its size counts as free.
+                long needed = workBytes + STORAGE_RESERVE_BYTES;
+                long free = freeBytes(rootDir);
+                long reclaimable = rootDir.isDirectory() ? reclaimableBytes(rootDir) : 0L;
+                if (free >= 0 && free + Math.max(0L, reclaimable) < needed) {
+                  fail(listener, Failure.INSUFFICIENT_STORAGE, String.valueOf(needed - free));
+                  return;
+                }
 
-              boolean success =
-                  extractImageFs(activity, rootDir, progressTracker.asExtractListener());
+                SettingsConfig.resetEmulatorsVersion(activity);
+                progressTracker.start();
+                // Removes the version file first, so an interrupted install is never
+                // mistaken for a complete one; a re-run starts from a clean tree.
+                clearRootDir(rootDir);
 
-              if (success) {
+                if (!extractImageFs(activity, rootDir, progressTracker.asExtractListener())) {
+                  fail(listener, Failure.EXTRACTION_FAILED, IMAGEFS_ARCHIVE);
+                  return;
+                }
+
                 ExecutorService pool = Executors.newFixedThreadPool(3);
                 CountDownLatch latch = new CountDownLatch(3);
                 AtomicBoolean postInstallSuccess = new AtomicBoolean(true);
                 pool.execute(
                     () -> {
                       try {
-                        postInstallSuccess.compareAndSet(
-                            true,
-                            installWineFromAssetsAsync(activity, progressTracker.asExtractListener()));
+                        runGuarded(
+                            postInstallSuccess,
+                            "Wine install",
+                            () -> {
+                              if (!installWineFromAssetsAsync(
+                                  activity, progressTracker.asExtractListener())) {
+                                postInstallSuccess.set(false);
+                              }
+                            });
                       } finally {
                         latch.countDown();
                       }
@@ -269,7 +382,7 @@ public abstract class ImageFsInstaller {
                 pool.execute(
                     () -> {
                       try {
-                        installDriversFromAssets(activity);
+                        runGuarded(postInstallSuccess, "Driver install", () -> installDriversFromAssets(activity));
                       } finally {
                         progressTracker.addWork(DRIVER_INSTALL_PROGRESS_BYTES);
                         latch.countDown();
@@ -278,30 +391,47 @@ public abstract class ImageFsInstaller {
                 pool.execute(
                     () -> {
                       try {
-                        installGuestExtras(activity, rootDir, progressTracker.asExtractListener());
+                        runGuarded(
+                            postInstallSuccess,
+                            "Guest extras",
+                            () -> installGuestExtras(activity, rootDir, progressTracker.asExtractListener()));
                       } finally {
                         latch.countDown();
                       }
                     });
                 try {
                   latch.await();
-                } catch (InterruptedException ignored) {
+                } catch (InterruptedException e) {
+                  Thread.currentThread().interrupt();
+                  postInstallSuccess.set(false);
                 }
                 pool.shutdown();
-                success = postInstallSuccess.get();
-                if (success) {
-                  clearSteamDllMarkers(activity);
-                  imageFs.createImgVersionFile(LATEST_VERSION);
-                  resetContainerImgVersions(activity);
-                  progressTracker.addWork(FINALIZE_PROGRESS_BYTES);
-                  progressTracker.finish();
+                if (!postInstallSuccess.get()) {
+                  fail(listener, Failure.EXTRACTION_FAILED, "post-install");
+                  return;
                 }
-              } else {
-                activity.runOnUiThread(
-                    () -> WinToast.show(activity, R.string.setup_wizard_unable_to_install_system_files));
+                clearSteamDllMarkers(activity);
+                imageFs.createImgVersionFile(LATEST_VERSION);
+                resetContainerImgVersions(activity);
+                progressTracker.addWork(FINALIZE_PROGRESS_BYTES);
+                progressTracker.finish();
+                success = true;
+                Log.i("ImageFsInstaller", "ImageFS " + LATEST_VERSION + " installed");
+                if (listener != null) listener.onFinished(true);
+              } catch (Throwable t) {
+                Log.e("ImageFsInstaller", "Unexpected install error", t);
+                fail(listener, Failure.UNEXPECTED, t.getClass().getSimpleName());
+              } finally {
+                if (!success) {
+                  // Do not leave a half-extracted tree (up to ~1 GB) behind.
+                  try {
+                    clearRootDir(rootDir);
+                  } catch (Throwable cleanup) {
+                    Log.w("ImageFsInstaller", "Cleanup after failed install failed", cleanup);
+                  }
+                }
+                INSTALLING.set(false);
               }
-
-              if (listener != null) listener.onFinished(success);
             });
   }
 

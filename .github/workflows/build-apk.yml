@@ -108,21 +108,80 @@ jobs:
           ls -lh dist >> "$GITHUB_STEP_SUMMARY"
           echo "Signing: ${{ steps.key.outputs.mode }}" >> "$GITHUB_STEP_SUMMARY"
 
+      - name: "JNI check: every Java member native code looks up is in the dex"
+        run: |
+          pip install --quiet androguard==4.1.4
+          python3 -I tools/check-jni-dex.py "dist/${{ steps.apk.outputs.name }}" app/src/main/cpp app/src/main
+
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.apk.outputs.name }}
           path: dist/*
           retention-days: 30
 
+    outputs:
+      apk_name: ${{ steps.apk.outputs.name }}
+      signing: ${{ steps.key.outputs.mode }}
+
+  emulator-install-test:
+    # Presses "Install System Files" in the setup wizard on an Android emulator
+    # (x86_64 image with ARM64 translation) and waits for the real result.
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [30, 35]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: tools
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.apk_name }}
+          path: dist
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: Install system files on the emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: google_apis
+          arch: x86_64
+          ram-size: 4096M
+          disk-size: 8G
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          disable-animations: true
+          script: bash tools/emulator-smoke.sh "dist/${{ needs.build.outputs.apk_name }}" smoke-out
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: emulator-install-api${{ matrix.api-level }}
+          path: smoke-out/
+          retention-days: 30
+
+  publish:
+    needs: [build, emulator-install-test]
+    if: always() && needs.build.result == 'success' && github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.apk_name }}
+          path: dist
       - name: Publish pre-release
-        if: github.event_name == 'push'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: nexora-0.3.0-stage5-build.${{ github.run_number }}
           target_commitish: ${{ github.sha }}
-          name: NEXORA 0.2.0 Stage 4 (build ${{ github.run_number }})
+          name: NEXORA 0.3.0 Stage 5 (build ${{ github.run_number }})
           body: |
-            Automatic build of `${{ github.sha }}` (${{ github.ref_name }}).
-            Stage 4 base (release build) — NOT tested on a device. Signing: ${{ steps.key.outputs.mode }}.
+            Automatic build of `${{ github.sha }}` (${{ github.ref_name }}). Signing: ${{ needs.build.outputs.signing }}.
+            Emulator test "Install System Files" (Android 11 and 15, x86_64 + ARM64 translation): **${{ needs.emulator-install-test.result }}**.
+            NOT tested on a OnePlus 13.
           files: dist/*
           prerelease: true

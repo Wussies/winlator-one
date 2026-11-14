@@ -433,13 +433,29 @@ public:
     JavaExtractListener(JNIEnv* env, jobject listener) : env_(env), listener_(listener) {
         if (!listener_) return;
         jclass listener_cls = env_->FindClass("com/winlator/cmod/shared/util/OnExtractFileListener");
-        on_extract_ =
-            env_->GetMethodID(listener_cls, "onExtractFile", "(Ljava/io/File;J)Ljava/io/File;");
-        on_progress_ =
-            env_->GetMethodID(listener_cls, "onExtractFileProgress", "(Ljava/io/File;J)V");
-        maps_files_method_ = env_->GetMethodID(listener_cls, "mapsExtractedFiles", "()Z");
-        byte_progress_method_ = env_->GetMethodID(listener_cls, "reportsExtractedBytesOnly", "()Z");
-        on_bytes_progress_ = env_->GetMethodID(listener_cls, "onExtractedBytes", "(J)V");
+        if (!listener_cls) {
+            // NEXORA: never return to JNI calls with an exception pending.
+            env_->ExceptionClear();
+            __android_log_print(ANDROID_LOG_ERROR, "NativeContentIO",
+                                "OnExtractFileListener class not found; listener disabled");
+            return;
+        }
+        // A missing method (e.g. stripped by R8) must not leave NoSuchMethodError
+        // pending: every later JNI call would then abort the process.
+        auto method = [this, listener_cls](const char* name, const char* sig) -> jmethodID {
+            jmethodID id = env_->GetMethodID(listener_cls, name, sig);
+            if (!id) {
+                env_->ExceptionClear();
+                __android_log_print(ANDROID_LOG_ERROR, "NativeContentIO",
+                                    "OnExtractFileListener.%s%s missing", name, sig);
+            }
+            return id;
+        };
+        on_extract_ = method("onExtractFile", "(Ljava/io/File;J)Ljava/io/File;");
+        on_progress_ = method("onExtractFileProgress", "(Ljava/io/File;J)V");
+        maps_files_method_ = method("mapsExtractedFiles", "()Z");
+        byte_progress_method_ = method("reportsExtractedBytesOnly", "()Z");
+        on_bytes_progress_ = method("onExtractedBytes", "(J)V");
 
         if (maps_files_method_) {
             maps_files_ = env_->CallBooleanMethod(listener_, maps_files_method_) == JNI_TRUE;
@@ -853,6 +869,10 @@ Java_com_winlator_cmod_shared_io_NativeContentIO_nativeDownloadFile(
     if (listener) {
         jclass cls = env->GetObjectClass(listener);
         ctx.on_progress = env->GetMethodID(cls, "onProgress", "(JJ)V");
+        if (!ctx.on_progress) {
+            env->ExceptionClear();  // NEXORA: download without progress instead of aborting
+            NATIVE_LOGE("DownloadListener.onProgress(JJ)V missing");
+        }
         if (ctx.on_progress) {
             env->CallVoidMethod(listener, ctx.on_progress, static_cast<jlong>(0), static_cast<jlong>(-1));
         }

@@ -5,4 +5,9 @@
     <string name="nexora_remote_catalogs_disabled">Онлайн-каталоги компонентов отключены, пока у NEXORA нет подписанного каталога. Файл компонента можно импортировать с устройства.</string>
     <string name="nexora_steam_password_notice">Пароль шифруется открытым ключом Steam и отправляется только на серверы Valve. NEXORA его не хранит и не записывает в журналы; после входа сохраняется только токен сессии Steam, в зашифрованном виде на этом устройстве. Steam Guard: подтвердите вход в приложении Steam или введите код. Также можно войти по QR-коду с другого устройства.</string>
     <string name="nexora_wincomponents_native_info">NEXORA не содержит DLL Microsoft. «Встроенный (Wine)» — собственная реализация Wine. «Родной (Windows)» использует DLL Microsoft только после того, как вы установите их в этот контейнер официальным установщиком Microsoft (например, DirectX End-User Runtime или Visual C++ 2010 Redistributable с microsoft.com); без них Wine использует встроенную DLL. Возврат на «Встроенный» заменяет эти DLL версиями Wine.</string>
+    <string name="nexora_imagefs_already_running">Системные файлы уже устанавливаются. Дождитесь завершения.</string>
+    <string name="nexora_imagefs_no_space">Недостаточно свободного места. Освободите не меньше %1$s и повторите.</string>
+    <string name="nexora_imagefs_missing_archive">В этом APK нет системных файлов. Переустановите NEXORA из официального релиза.</string>
+    <string name="nexora_imagefs_extract_failed">Не удалось распаковать системные файлы (APK может быть повреждён или произошла ошибка хранилища). Частично распакованные файлы удалены. Повторите; если ошибка повторится, переустановите NEXORA.</string>
+    <string name="nexora_imagefs_unexpected">Установка системных файлов не удалась (%1$s). Частично распакованные файлы удалены. Повторите попытку.</string>
 </resources>

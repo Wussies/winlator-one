@@ -5,4 +5,9 @@
     <string name="nexora_remote_catalogs_disabled">Online component catalogs are disabled until NEXORA has a signed catalog. You can still import a component file from your device.</string>
     <string name="nexora_steam_password_notice">Your password is encrypted with Steam\'s public key and sent only to Valve\'s servers. NEXORA does not store or log it; after sign-in only Steam\'s session token is kept, encrypted on this device. Steam Guard: approve in the Steam app or enter the code. You can also sign in with the QR code from another device.</string>
     <string name="nexora_wincomponents_native_info">NEXORA does not include Microsoft\'s DLLs. "Builtin (Wine)" uses Wine\'s own implementation. "Native (Windows)" uses Microsoft\'s DLLs only after you install them in this container with Microsoft\'s official installer (for example the DirectX End-User Runtime or the Visual C++ 2010 Redistributable from microsoft.com); without them Wine uses its builtin DLL. Switching back to Builtin replaces those DLLs with Wine\'s.</string>
+    <string name="nexora_imagefs_already_running">System files are already being installed. Wait for it to finish.</string>
+    <string name="nexora_imagefs_no_space">Not enough free storage. Free up at least %1$s and try again.</string>
+    <string name="nexora_imagefs_missing_archive">The system files are missing from this APK. Reinstall NEXORA from the official release.</string>
+    <string name="nexora_imagefs_extract_failed">The system files could not be unpacked (the APK may be damaged or storage failed). Nothing partial was kept. Try again; if it fails again, reinstall NEXORA.</string>
+    <string name="nexora_imagefs_unexpected">Installing system files failed (%1$s). Nothing partial was kept. Try again.</string>
 </resources>

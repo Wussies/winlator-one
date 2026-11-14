@@ -315,6 +315,22 @@ class OtherSettingsFragment : Fragment() {
         ImageFsInstaller.installFromAssets(
             act,
             object : ImageFsInstaller.ProgressListener {
+                override fun onFailure(
+                    failure: ImageFsInstaller.Failure,
+                    detail: String?,
+                ) {
+                    val message =
+                        com.winlator.cmod.runtime.display.environment.ImageFsInstallMessages
+                            .describe(act, failure, detail)
+                    main.post {
+                        com.winlator.cmod.shared.ui.toast.WinToast.show(
+                            act,
+                            message,
+                            android.widget.Toast.LENGTH_LONG,
+                        )
+                    }
+                }
+
                 override fun onProgress(percent: Int) {
                     main.post {
                         uiState = uiState.copy(imagefsInstallProgress = percent.coerceIn(0, 100))

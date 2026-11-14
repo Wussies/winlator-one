@@ -1050,9 +1050,25 @@ class SetupWizardActivity : FixedFontScaleFragmentActivity() {
         ImageFsInstaller.installFromAssets(
             this,
             object : ImageFsInstaller.ProgressListener {
+                private var failureMessage: String? = null
+
                 override fun onProgress(percent: Int) {
                     runOnUiThread {
                         imageFsProgress.intValue = percent.coerceIn(0, 100)
+                    }
+                }
+
+                override fun onFailure(
+                    failure: ImageFsInstaller.Failure,
+                    detail: String?,
+                ) {
+                    val message =
+                        com.winlator.cmod.runtime.display.environment.ImageFsInstallMessages
+                            .describe(this@SetupWizardActivity, failure, detail)
+                    failureMessage = message
+                    // ALREADY_RUNNING is not followed by onFinished: the running install reports.
+                    if (failure == ImageFsInstaller.Failure.ALREADY_RUNNING) {
+                        runOnUiThread { wizardError.value = message }
                     }
                 }
 
@@ -1070,7 +1086,10 @@ class SetupWizardActivity : FixedFontScaleFragmentActivity() {
                             )
                         } else {
                             imageFsInstalling.value = false
-                            wizardError.value = "ImageFS install failed. Check available storage and try again."
+                            imageFsProgress.intValue = 0
+                            wizardError.value =
+                                failureMessage
+                                    ?: getString(R.string.nexora_imagefs_extract_failed)
                         }
                         com.winlator.cmod.runtime.system.SessionKeepAliveService.stopDownload(
                             applicationContext,

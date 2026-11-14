@@ -111,3 +111,24 @@
 # does not have. ComponentInstaller only loads plain Maps, so that code path
 # is never used; silence R8's missing-class error for it.
 -dontwarn java.beans.**
+
+# ---------------------------------------------------------------------------
+# NEXORA: keep the app's own classes and members unrenamed and unstripped.
+#
+# The native libraries (libwinlator, libwnwayland, libwnsteam, ...) look up
+# Java classes, methods and fields by name (FindClass / GetMethodID /
+# GetFieldID). The upstream rules covered only part of them, so the first
+# R8 release builds (nexora-0.2.0-stage4-build.10 and later) shipped without
+# e.g. OnExtractFileListener.onExtractFileProgress/mapsExtractedFiles/
+# reportsExtractedBytesOnly/onExtractedBytes. The native extractor's
+# GetMethodID then failed with a pending NoSuchMethodError and the process
+# aborted on "Install system files". The same scan of the shipped dex found
+# missing Wayland compositor callbacks and Vulkan loader helpers.
+#
+# Keeping com.winlator.cmod.** whole is deliberate: app code also uses
+# reflection and string class names, and R8 renaming it buys nothing for an
+# open-source GPL app. Libraries are still shrunk. CI checks every build with
+# tools/check-jni-dex.py so a missing JNI target fails the build.
+-keep class com.winlator.cmod.** { *; }
+-keep interface com.winlator.cmod.** { *; }
+-keep class org.winnative.** { *; }
