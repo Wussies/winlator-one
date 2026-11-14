@@ -1,2 +1,2 @@
 # APK to scan (one URL)
-https://github.com/Wussies/winlator-one/releases/download/nexora-0.2.0-stage4-build.10/NEXORA-0.2.0-stage4-build10-44d6a07.apk
+https://github.com/Wussies/winlator-one/releases/download/nexora-0.3.0-stage5-build.12/NEXORA-0.3.0-stage5-build12-9ffeff8.apk
